@@ -27,13 +27,13 @@ public:
 
 private:
 	void raw_send(std::string& content);
+
 	std::deque<std::string> send_queue;
 	bool stop_server{false};
 	std::smatch match_;
 	std::mutex mutex_;
 	asio::streambuf buffer_;
 	asio::ip::tcp::socket socket_;
-	std::thread t1;
 	std::string nick_;
 	std::string user_;
 };

@@ -31,12 +31,13 @@ void connection::read_handler(const asio::error_code& ec, size_t length)
 {
 	if (!ec)
 	{
-		lock_guard<mutex> lock(mutex_);
-		istream is(&buffer_);
 		string result_line;
-		getline(is, result_line);
-		cout << result_line << endl;
-
+		{
+			lock_guard<mutex> lock(mutex_); // prevent iterator invalidation because of two concurrent reads
+			istream is(&buffer_);
+			getline(is, result_line);
+			cout << result_line << endl;
+		}
 		if (regex_search(result_line, match_, regex("PING (:[0-9A-Za-z.]*)")))
 		{
 			string reply{"PONG "};
