@@ -22,7 +22,7 @@ namespace irc_lib
 	class connection : public std::enable_shared_from_this<connection>
 	{
 	public:
-		connection(asio::io_service& io_service_, std::string nick, std::string user);
+		connection(asio::io_service& io_service_, std::string nick, std::string user, bot_read_handler_t rh);
 		void read_handler(const asio::error_code& ec, size_t length);
 		void do_read();
 		void reg_with_server();
@@ -34,7 +34,6 @@ namespace irc_lib
 		void raw_send(std::string& content);
 
 		std::deque<std::string> send_queue;
-		bot_read_handler_t bot_read_handler_; // accepts a bot's read handler 
 		bool stop_server{false};
 		std::smatch match_;
 		std::mutex mutex_;
@@ -42,5 +41,6 @@ namespace irc_lib
 		asio::ip::tcp::socket socket_;
 		std::string nick_;
 		std::string user_;
+		bot_read_handler_t bot_read_handler_; // accepts a bot's read handler 
 	};
 } // end of ns irc_lib

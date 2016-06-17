@@ -2,6 +2,7 @@
 #include <asio.hpp>
 #include <iostream>
 #include "Connection.hpp"
+#include "bot.hpp"
 
 using namespace std;
 using asio::ip::tcp;
@@ -12,14 +13,14 @@ int main()
 	{
 		string cmdLine;
 		asio::io_service io_service_;
-		irc_lib::connection con(io_service_, "altbot", "altbot altbot altbot :altbot" );
+		bot bot(io_service_);
 		io_service_.run();
 	}
 
 	catch (const exception& e)
 	{
 		cout << e.what() << endl;
-		getchar ( );
+		getchar();
 	}
 
 	return 0;

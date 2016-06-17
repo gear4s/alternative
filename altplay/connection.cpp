@@ -7,7 +7,7 @@ using asio::ip::tcp;
 
 namespace irc_lib
 {
-	connection::connection(asio::io_service& io_service_, string nick, string host): socket_{io_service_}, nick_{nick}, user_{host}
+	connection::connection(asio::io_service& io_service_, string nick, string host, bot_read_handler_t rh) : socket_{io_service_}, nick_{nick}, user_{host}, bot_read_handler_ {rh}
 	{
 		tcp::resolver resolver{io_service_};
 		tcp::resolver::query query{"irc.gamesurge.net", "6667"};
@@ -37,23 +37,14 @@ namespace irc_lib
 				lock_guard<mutex> lock(mutex_); // prevent iterator invalidation because of two concurrent reads
 				istream is(&buffer_);
 				getline(is, result_line);
-				cout << result_line << endl;
 			}
 			if (regex_search(result_line, match_, regex("PING (:[0-9A-Za-z.]*)")))
 			{
 				string reply{"PONG "};
 				reply.append(match_[1]);
-				cout << reply << endl;
 				raw_send(reply);
 			}
-
-#ifdef DEBUG_ON
-			else if (regex_search(result_line, match_, regex(":Marentis!alex@Marentis.agent.support PRIVMSG altbot :([0-9A-Za-z. :#]*)")))
-			{
-				string reply{match_[1]};
-				send_queue.push_back(reply);
-			}
-#endif
+			else bot_read_handler_(result_line);
 		}
 		do_write();
 	}
