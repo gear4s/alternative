@@ -1,0 +1,17 @@
+*.suo
+altplay.VC.db
+*.user
+altplay/altplay.vcxproj.filters
+*.log
+altplay/Debug/altplay.tlog/CL.command.1.tlog
+*.tlog
+*.obj
+*.ipdb
+x64/Release/altplay.pdb
+*.pdb
+altplay/Debug/vc140.idb
+*.exe
+*.iobj
+altplay/altplay.vcxproj
+*.ilk
+*.opendb
