@@ -13,9 +13,6 @@ namespace irc_lib
 		tcp::resolver::query query{"irc.gamesurge.net", "6667"};
 		auto iter = resolver.resolve(query);
 		connect(socket_, iter);
-#ifdef DEBUG_ON
-		cout << "connected " << endl;
-#endif
 		do_read();
 	}
 
@@ -57,6 +54,7 @@ namespace irc_lib
 
 	void connection::do_write()
 	{
+		lock_guard<mutex> lock(mutex_);
 		if (!send_queue.empty())
 		{
 			raw_send(send_queue.front());
