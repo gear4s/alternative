@@ -3,7 +3,7 @@
 
 using namespace std;
 using namespace asio;
-using asio::ip::tcp;
+using ip::tcp;
 
 namespace irc_lib
 {
@@ -23,7 +23,8 @@ namespace irc_lib
 		write(socket_, buffer(content));
 	}
 
-	// asynchronous default do_read handler with a ping/pong implementation
+
+	//asynchronous read handler, passes strings to the bot_read_handler_ (entry point for any bot)
 	void connection::read_handler(const asio::error_code& ec, size_t length)
 	{
 		if (!ec)
@@ -45,7 +46,6 @@ namespace irc_lib
 		do_write();
 	}
 
-	// generic do_read function, planned to accept various do_read handlers, provided by a bot
 	void connection::do_read()
 	{
 		async_read_until(socket_, buffer_, "\r\n", std::bind(&connection::read_handler, this, std::placeholders::_1, std::placeholders::_2));
@@ -63,7 +63,7 @@ namespace irc_lib
 		do_read();
 	}
 
-	void connection::addMessage(std::string& message)
+	void connection::add_message(std::string& message)
 	{
 		lock_guard<mutex> lock(mutex_);
 		send_queue.push_back(message);

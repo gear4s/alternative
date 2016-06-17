@@ -1,4 +1,5 @@
 #include "bot.hpp"
+#include <iostream>
 using namespace std;
 
 bot::bot(asio::io_service& io_service_): con {io_service_, bind(&bot::read_handler, this, placeholders::_1)}
@@ -14,7 +15,7 @@ void bot::read_handler(const string& str)
 	if (regex_search(str, match, regex(":Marentis!alex@Marentis.agent.support PRIVMSG altbot :([A-Za-z0-9. #:/]*)")))
 	{
 		string reply{match[1]};
-		con.addMessage(reply);
+		con.add_message(reply);
 	}
 
 	cout << str << endl;
@@ -25,6 +26,6 @@ void bot::reg_with_server()
 {
 	string nick = "NICK " + nick_;
 	string user = "USER " + user_;
-	con.addMessage(user);
-	con.addMessage(nick);
+	con.add_message(user);
+	con.add_message(nick);
 }

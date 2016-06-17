@@ -26,7 +26,7 @@ namespace irc_lib
 		void read_handler(const asio::error_code& ec, size_t length);
 		void do_read();
 		void do_write();
-		void addMessage(std::string& message);
+		void add_message(std::string& message);
 
 	private:
 		void raw_send(std::string& content);
