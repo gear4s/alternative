@@ -7,7 +7,7 @@ using asio::ip::tcp;
 
 namespace irc_lib
 {
-	connection::connection(asio::io_service& io_service_, string nick, string host, bot_read_handler_t rh) : socket_{io_service_}, nick_{nick}, user_{host}, bot_read_handler_ {rh}
+	connection::connection(asio::io_service& io_service_, bot_read_handler_t rh) : socket_{io_service_}, bot_read_handler_ {rh}
 	{
 		tcp::resolver resolver{io_service_};
 		tcp::resolver::query query{"irc.gamesurge.net", "6667"};
@@ -16,7 +16,6 @@ namespace irc_lib
 #ifdef DEBUG_ON
 		cout << "connected " << endl;
 #endif
-		reg_with_server();
 		do_read();
 	}
 
@@ -52,28 +51,9 @@ namespace irc_lib
 	// generic do_read function, planned to accept various do_read handlers, provided by a bot
 	void connection::do_read()
 	{
-		if (stop_server)
-		{
-			return;
-		}
 		async_read_until(socket_, buffer_, "\r\n", std::bind(&connection::read_handler, this, std::placeholders::_1, std::placeholders::_2));
 	}
 
-	// TO DO: add error handling, like when a certain nick is taken already and similar issues.
-	void connection::reg_with_server()
-	{
-		string nick = "NICK " + nick_;
-		string user = "USER " + user_;
-		raw_send(user);
-		this_thread::sleep_for(chrono::milliseconds(100));
-		raw_send(nick);
-	}
-
-	// stop the bot
-	void connection::stop()
-	{
-		this->stop_server = true;
-	}
 
 	void connection::do_write()
 	{
