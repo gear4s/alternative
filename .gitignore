@@ -14,3 +14,4 @@ altplay/Debug/vc140.idb
 *.iobj
 altplay/altplay.vcxproj
 *.ilk
+*.opendb

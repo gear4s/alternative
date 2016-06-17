@@ -12,7 +12,7 @@ int main()
 	{
 		string cmdLine;
 		asio::io_service io_service_;
-		connection con(io_service_, "altbot", "altbot altbot altbot :altbot" );
+		irc_lib::connection con(io_service_, "altbot", "altbot altbot altbot :altbot" );
 		io_service_.run();
 	}
 

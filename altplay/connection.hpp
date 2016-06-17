@@ -14,26 +14,33 @@ Further plans:
 3) bots will utilize this connection to add functionality
 */
 
-class connection : public std::enable_shared_from_this<connection>
+namespace irc_lib
 {
-public:
-	connection(asio::io_service& io_service_, std::string nick, std::string user);
-	void read_handler(const asio::error_code& ec, size_t length);
-	void do_read();
-	void reg_with_server();
-	void stop();
-	void do_write();
-	void addMessage(std::string& message);
+	// register a bot's read handler as type bot_read_handler_t (std::function<void(const std::string&>)
+	using bot_read_handler_t = std::function<void (const std::string&)>;
 
-private:
-	void raw_send(std::string& content);
+	class connection : public std::enable_shared_from_this<connection>
+	{
+	public:
+		connection(asio::io_service& io_service_, std::string nick, std::string user);
+		void read_handler(const asio::error_code& ec, size_t length);
+		void do_read();
+		void reg_with_server();
+		void stop();
+		void do_write();
+		void addMessage(std::string& message);
 
-	std::deque<std::string> send_queue;
-	bool stop_server{false};
-	std::smatch match_;
-	std::mutex mutex_;
-	asio::streambuf buffer_;
-	asio::ip::tcp::socket socket_;
-	std::string nick_;
-	std::string user_;
-};
+	private:
+		void raw_send(std::string& content);
+
+		std::deque<std::string> send_queue;
+		bot_read_handler_t bot_read_handler_; // accepts a bot's read handler 
+		bool stop_server{false};
+		std::smatch match_;
+		std::mutex mutex_;
+		asio::streambuf buffer_;
+		asio::ip::tcp::socket socket_;
+		std::string nick_;
+		std::string user_;
+	};
+} // end of ns irc_lib
