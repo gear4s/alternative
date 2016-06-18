@@ -5,24 +5,24 @@
 
 using namespace std;
 
-bot::bot(asio::io_service& io_service_): con_ {io_service_, bind(&bot::read_handler, this, placeholders::_1)}
+bot::bot(asio::io_service &io_service_) : con_{io_service_, bind( &bot::read_handler, this, placeholders::_1 )}
 {
-	nick_ = "altbot";
-	user_ = "altbot altbot altbot :altbot";
-	reg_with_server();
+    nick_ = "altbot";
+    user_ = "altbot altbot altbot :altbot";
+    reg_with_server( );
 }
 
-void bot::read_handler(const string& str)
+void bot::read_handler(const string &str)
 {
-	irc_lib::message_struct msg = parser_.handle_input(str);
-	cout << msg.nick << ": " << msg.message << endl;
+    irc_lib::message_struct msg = parser_.handle_input( str );
+    cout << msg.nick << ": " << msg.message << endl;
 }
 
 // TO DO: add error handling, like when a certain nick is taken already and similar issues.
-void bot::reg_with_server()
+void bot::reg_with_server( )
 {
-	string nick = "NICK " + nick_;
-	string user = "USER " + user_;
-	con_.add_message(user);
-	con_.add_message(nick);
+    string nick = "NICK " + nick_;
+    string user = "USER " + user_;
+    con_.add_message( user );
+    con_.add_message( nick );
 }

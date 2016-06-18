@@ -16,26 +16,26 @@ Further plans:
 
 namespace irc_lib
 {
-	// register a bot's read handler as type bot_read_handler_t (std::function<void(const std::string&>)
-	using bot_read_handler_t = std::function<void (const std::string&)>;
+    // register a bot's read handler as type bot_read_handler_t (std::function<void(const std::string&>)
+    using bot_read_handler_t = std::function< void(const std::string &) >;
 
-	class connection : public std::enable_shared_from_this<connection>
-	{
-	public:
-		connection(asio::io_service& io_service_, bot_read_handler_t rh);
-		void read_handler(const asio::error_code& ec, size_t length);
-		void do_read();
-		void do_write();
-		void add_message(std::string& message);
+    class connection: public std::enable_shared_from_this< connection >
+    {
+    public:
+        connection(asio::io_service &io_service_, bot_read_handler_t rh);
+        void read_handler(const asio::error_code &ec, size_t length);
+        void do_read( );
+        void do_write( );
+        void add_message(std::string &message);
 
-	private:
-		void raw_send(std::string& content);
+    private:
+        void raw_send(std::string &content);
 
-		std::deque<std::string> send_queue;
-		std::smatch match_;
-		std::mutex mutex_;
-		asio::streambuf buffer_;
-		asio::ip::tcp::socket socket_;
-		bot_read_handler_t bot_read_handler_; // accepts a bot's read handler 
-	};
+        std::deque< std::string > send_queue;
+        std::smatch match_;
+        std::mutex mutex_;
+        asio::streambuf buffer_;
+        asio::ip::tcp::socket socket_;
+        bot_read_handler_t bot_read_handler_; // accepts a bot's read handler
+    };
 } // end of ns irc_lib
