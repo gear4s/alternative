@@ -3,7 +3,7 @@
 irc_lib::message_struct irc_lib::parser::handle_input(const std::string& str)
 {
 	current_state_ = START;
-	std::string nick, host, ident, message, servermessage;
+	std::string nick, host, ident, message;
 
 	for (auto iter = str.begin(); iter != str.end(); ++iter)
 	{
@@ -17,7 +17,7 @@ irc_lib::message_struct irc_lib::parser::handle_input(const std::string& str)
 			break;
 		case SERVERMESSAGE:
 			if (*iter == '\n') current_state_ = DONE_SERVER;
-			servermessage.push_back(*iter);
+			nick.push_back(*iter);
 			break;
 		case MESSAGE:
 			if (*iter == '\n') current_state_ = DONE_CLIENT;
@@ -45,7 +45,7 @@ irc_lib::message_struct irc_lib::parser::handle_input(const std::string& str)
 		msg.nick = "SERVER";
 		msg.ident = "NULL";
 		msg.hostmask = "NULL";
-		msg.message = servermessage;
+		msg.message = nick;
 	}
 
 	else
