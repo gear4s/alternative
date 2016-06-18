@@ -1,7 +1,7 @@
 #include <regex>
 #include "parser.hpp"
 
-irc_lib::message_struct irc_lib::parser::handle_input(const std::string& str)
+irc_lib::message_struct irc_lib::parser::handle_input(const std::string& str) const
 {
 	bool is_server_message{false};
 	std::string nick{"null"}, ident{"null"}, message{"null"}, hostmask{"null"}, command{"null"}, argument{"null"};
