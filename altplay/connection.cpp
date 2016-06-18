@@ -26,7 +26,7 @@ namespace irc_lib
 
 
     //asynchronous read handler, passes strings to the bot_read_handler_ (entry point for any bot)
-    void connection::read_handler(const asio::error_code &ec, size_t length)
+    void connection::read_handler(const asio::error_code &ec, size_t /*length*/)
     {
         if ( !ec ) {
             string result_line;

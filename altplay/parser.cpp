@@ -30,6 +30,10 @@ irc_lib::message_struct irc_lib::parser::handle_input(const std::string &str) co
         nick = "NOTICE AUTH";
         message = match[1];
     }
+    else {
+        throw std::runtime_error( "unable to parse, please provide the developers" \
+                                     "with the server message that caused this." );
+    }
 
     message_struct msg;
 
