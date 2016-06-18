@@ -3,21 +3,24 @@
 irc_lib::message_struct irc_lib::parser::handle_input(const std::string& str)
 {
 	current_state_ = START;
-	std::string nick, host, ident, message;
+	std::string nick, host, ident, message, servermessage;
 
 	for (auto iter = str.begin(); iter != str.end(); ++iter)
 	{
 		switch (current_state_)
 		{
 		case START:
-			if (*iter == '.') current_state_ = SERVERMESSAGE;
-			else if ( *iter == ':' ) break; // skip the first ':'
-			else if ( *iter == '!' ) current_state_ = IDENT;
-			else nick.push_back ( *iter );
+			if (*iter == '.') current_state_ = SERVERNAME;
+			else if (*iter == ':') break; // skip the first ':'
+			else if (*iter == '!') current_state_ = IDENT;
+			else nick.push_back(*iter);
+			break;
+		case SERVERNAME:
+			if (*iter == ' ') current_state_ = SERVERMESSAGE;
 			break;
 		case SERVERMESSAGE:
 			if (*iter == '\n') current_state_ = DONE_SERVER;
-			nick.push_back(*iter);
+			servermessage.push_back(*iter);
 			break;
 		case MESSAGE:
 			if (*iter == '\n') current_state_ = DONE_CLIENT;
@@ -42,15 +45,17 @@ irc_lib::message_struct irc_lib::parser::handle_input(const std::string& str)
 
 	if (current_state_ == SERVERMESSAGE)
 	{
-		msg.nick = "SERVER";
+		msg.nick = nick;
+		msg.is_server_message = true;
 		msg.ident = "NULL";
 		msg.hostmask = "NULL";
-		msg.message = nick;
+		msg.message = servermessage;
 	}
 
 	else
 	{
 		msg.nick = nick;
+		msg.is_server_message = false;
 		msg.ident = ident;
 		msg.hostmask = host;
 		msg.message = message;

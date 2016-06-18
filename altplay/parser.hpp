@@ -12,7 +12,7 @@ namespace irc_lib
 		message_struct handle_input(const std::string& str);
 
 	private:
-		enum parser_states { START, SERVERMESSAGE, MESSAGE, HOST, IDENT, DONE_CLIENT, DONE_SERVER, PARSE_ERROR };
+		enum parser_states { START, SERVERMESSAGE, SERVERNAME, MESSAGE, HOST, IDENT, DONE_CLIENT, DONE_SERVER, PARSE_ERROR };
 		parser_states current_state_{START};
 	};
 } // end of ns irc_lib
