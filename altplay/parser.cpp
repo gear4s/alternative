@@ -1,65 +1,45 @@
+#include <regex>
 #include "parser.hpp"
 
 irc_lib::message_struct irc_lib::parser::handle_input(const std::string& str)
 {
-	current_state_ = START;
-	std::string nick, host, ident, message, servermessage;
+	bool is_server_message{false};
+	std::string nick{"null"}, ident{"null"}, message{"null"}, hostmask{"null"}, command{"null"}, argument{"null"};
+	std::smatch match;
+	std::regex client_regex{":(.*)!(.*)@([0-9.A-Za-z]*) ([A-Za-z]*) ([a-zA-Z0-9]*) :(.*)"}, server_regex{":[A-Za-z.0-9 ]*:(.*)"}, notice_regex{"NOTICE AUTH :(.*)"};
 
-	for (auto iter = str.begin(); iter != str.end(); ++iter)
+	if (std::regex_search(str, match, notice_regex))
 	{
-		switch (current_state_)
-		{
-		case START:
-			if (*iter == '.') current_state_ = SERVERNAME;
-			else if (*iter == ':') break; // skip the first ':'
-			else if (*iter == '!') current_state_ = IDENT;
-			else nick.push_back(*iter);
-			break;
-		case SERVERNAME:
-			if (*iter == ' ') current_state_ = SERVERMESSAGE;
-			break;
-		case SERVERMESSAGE:
-			if (*iter == '\n') current_state_ = DONE_SERVER;
-			servermessage.push_back(*iter);
-			break;
-		case MESSAGE:
-			if (*iter == '\n') current_state_ = DONE_CLIENT;
-			else message.push_back(*iter);
-			break;
-		case HOST:
-			if (*iter == ' ') current_state_ = MESSAGE;
-			else host.push_back(*iter);
-			break;
-		case IDENT:
-			if (*iter == '@') current_state_ = HOST;
-			else ident.push_back(*iter);
-			break;
-		case PARSE_ERROR:
-			// TO DO: implement, agree upon error codes before!
-			break;
-		default:
-			break;
-		}
+		is_server_message = true;
+		nick = "NOTICE AUTH";
+		message = match[1];
 	}
+
+	else if (std::regex_search(str, match, server_regex))
+	{
+		is_server_message = true;
+		nick = "SERVER";
+		message = match[1];
+	}
+	else if (std::regex_search(str, match, client_regex))
+	{
+		nick = match[1];
+		ident = match[2];
+		hostmask = match[3];
+		command = match[4];
+		argument = match[5];
+		message = match[6];
+	}
+
 	message_struct msg;
 
-	if (current_state_ == SERVERMESSAGE)
-	{
-		msg.nick = nick;
-		msg.is_server_message = true;
-		msg.ident = "NULL";
-		msg.hostmask = "NULL";
-		msg.message = servermessage;
-	}
-
-	else
-	{
-		msg.nick = nick;
-		msg.is_server_message = false;
-		msg.ident = ident;
-		msg.hostmask = host;
-		msg.message = message;
-	}
+	msg.nick = nick;
+	msg.hostmask = hostmask;
+	msg.ident = ident;
+	msg.message = message;
+	msg.command = command;
+	msg.argument = argument;
+	msg.is_server_message = is_server_message;
 
 	return msg;
 }

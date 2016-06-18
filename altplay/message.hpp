@@ -5,7 +5,7 @@ namespace irc_lib
 {
 	struct message_struct
 	{
-		std::string nick, hostmask, ident, message;
+		std::string nick, hostmask, ident, message, argument, command;
 		bool is_server_message;
 	};
 }

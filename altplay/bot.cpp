@@ -15,7 +15,8 @@ bot::bot(asio::io_service& io_service_): con_ {io_service_, bind(&bot::read_hand
 void bot::read_handler(const string& str)
 {
 	irc_lib::message_struct msg = parser_.handle_input(str);
-	cout << msg.nick << ": " << msg.message << endl;
+	//cout << msg.nick << ": " << msg.message << endl;
+	cout << str << endl;
 }
 
 // TO DO: add error handling, like when a certain nick is taken already and similar issues.
