@@ -8,14 +8,8 @@ irc_lib::message_struct irc_lib::parser::handle_input(const std::string& str) co
 	std::smatch match;
 	std::regex client_regex{":(.*)!(.*)@([0-9.A-Za-z]*) ([A-Za-z]*) ([a-zA-Z0-9]*) :(.*)"}, server_regex{":[A-Za-z.0-9 ]* (.*)"}, notice_regex{"NOTICE AUTH :(.*)"};
 
-	if (std::regex_search(str, match, notice_regex))
-	{
-		is_server_message = true;
-		nick = "NOTICE AUTH";
-		message = match[1];
-	}
 
-	else if (std::regex_search(str, match, server_regex))
+	if (std::regex_search(str, match, server_regex))
 	{
 		is_server_message = true;
 		nick = "SERVER";
@@ -29,6 +23,12 @@ irc_lib::message_struct irc_lib::parser::handle_input(const std::string& str) co
 		command = match[4];
 		argument = match[5];
 		message = match[6];
+	}
+	else if (std::regex_search(str, match, notice_regex))
+	{
+		is_server_message = true;
+		nick = "NOTICE AUTH";
+		message = match[1];
 	}
 
 	message_struct msg;
