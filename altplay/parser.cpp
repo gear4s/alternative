@@ -6,7 +6,7 @@ irc_lib::message_struct irc_lib::parser::handle_input(const std::string& str)
 	bool is_server_message{false};
 	std::string nick{"null"}, ident{"null"}, message{"null"}, hostmask{"null"}, command{"null"}, argument{"null"};
 	std::smatch match;
-	std::regex client_regex{":(.*)!(.*)@([0-9.A-Za-z]*) ([A-Za-z]*) ([a-zA-Z0-9]*) :(.*)"}, server_regex{":[A-Za-z.0-9 ]*:(.*)"}, notice_regex{"NOTICE AUTH :(.*)"};
+	std::regex client_regex{":(.*)!(.*)@([0-9.A-Za-z]*) ([A-Za-z]*) ([a-zA-Z0-9]*) :(.*)"}, server_regex{":[A-Za-z.0-9 ]* (.*)"}, notice_regex{"NOTICE AUTH :(.*)"};
 
 	if (std::regex_search(str, match, notice_regex))
 	{
