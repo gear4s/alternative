@@ -1,6 +1,7 @@
 #pragma once
 #include <asio.hpp>
 #include "connection.hpp"
+#include "parser.hpp"
 
 class bot
 {
@@ -12,7 +13,7 @@ public:
 	void reg_with_server ( );
 
 private:
-	irc_lib::connection con;
-	std::string nick_;
-	std::string user_;
+	irc_lib::connection con_;
+	irc_lib::parser parser_;
+	std::string nick_, user_;
 };

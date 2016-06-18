@@ -1,8 +1,11 @@
-#include "bot.hpp"
 #include <iostream>
+#include "bot.hpp"
+#include "parser.hpp"
+#include "message.hpp"
+
 using namespace std;
 
-bot::bot(asio::io_service& io_service_): con {io_service_, bind(&bot::read_handler, this, placeholders::_1)}
+bot::bot(asio::io_service& io_service_): con_ {io_service_, bind(&bot::read_handler, this, placeholders::_1)}
 {
 	nick_ = "altbot";
 	user_ = "altbot altbot altbot :altbot";
@@ -11,14 +14,8 @@ bot::bot(asio::io_service& io_service_): con {io_service_, bind(&bot::read_handl
 
 void bot::read_handler(const string& str)
 {
-	smatch match;
-	if (regex_search(str, match, regex(":Marentis!alex@Marentis.agent.support PRIVMSG altbot :([A-Za-z0-9. #:/]*)")))
-	{
-		string reply{match[1]};
-		con.add_message(reply);
-	}
-
-	cout << str << endl;
+	irc_lib::message_struct msg = parser_.handle_input(str);
+	cout << msg.nick << ": " << msg.message << "[ " << msg.hostmask << " ]" << endl;
 }
 
 // TO DO: add error handling, like when a certain nick is taken already and similar issues.
@@ -26,6 +23,6 @@ void bot::reg_with_server()
 {
 	string nick = "NICK " + nick_;
 	string user = "USER " + user_;
-	con.add_message(user);
-	con.add_message(nick);
+	con_.add_message(user);
+	con_.add_message(nick);
 }
