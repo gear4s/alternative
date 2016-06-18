@@ -10,7 +10,6 @@ irc_lib::message_struct irc_lib::parser::handle_input(const std::string& str) co
 		server_regex{":([A-Za-z.0-9]*) ([0-9A-Za-z]*) ([A-Za-z0-9]*) ([A-Za-z0-9 =@,+()#&:]*)"},
 		notice_regex{"NOTICE AUTH :(.*)"};
 
-
 	if (std::regex_search(str, match, client_regex))
 	{
 		nick = match[1];
