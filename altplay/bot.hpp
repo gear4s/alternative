@@ -2,6 +2,7 @@
 #include <asio.hpp>
 #include "connection.hpp"
 #include "parser.hpp"
+#include "logger.hpp"
 
 namespace altplay
 {
@@ -17,6 +18,7 @@ namespace altplay
 	private:
 		altplay::connection con_;
 		altplay::parser parser_;
+		altplay::logger logger_;
 		std::string nick_, user_;
 	};
-} // end of ns irc_lib
+} // end of ns altplay

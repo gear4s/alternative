@@ -69,4 +69,4 @@ namespace altplay
         lock_guard< mutex > lock( mutex_ );
         send_queue.push_back( message );
     }
-} // end of ns irc_lib
+} // end of ns altplay

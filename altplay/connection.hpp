@@ -38,4 +38,4 @@ namespace altplay
         asio::ip::tcp::socket socket_;
         bot_read_handler_t bot_read_handler_; // accepts a bot's read handler
     };
-} // end of ns irc_lib
+} // end of ns altplay

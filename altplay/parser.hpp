@@ -13,4 +13,4 @@ namespace altplay
 		// returns true when channel names match, case insensitive
 		bool compare_channel_names(std::string channel1, std::string channel2);
 	};
-} // end of ns irc_lib
+} // end of ns altplay
