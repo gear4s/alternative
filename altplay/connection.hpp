@@ -3,7 +3,6 @@
 #include <mutex>
 #include <regex>
 #include <deque>
-#define DEBUG_ON
 
 /*
 A basic connection to an irc server with a keep alive implementation included.
@@ -23,13 +22,14 @@ namespace altplay
     {
     public:
         connection(asio::io_service &io_service_, bot_read_handler_t rh);
-        void read_handler(const asio::error_code &ec, size_t length);
-        void do_read( );
-        void do_write( );
         void add_message(std::string &message);
-
-    private:
-        void raw_send(std::string &content);
+    
+	private:
+        
+		void raw_send(std::string &content);
+		void do_read ( );
+		void do_write ( );
+		void read_handler ( const asio::error_code &ec, size_t length );
 
         std::deque< std::string > send_queue;
         std::smatch match_;

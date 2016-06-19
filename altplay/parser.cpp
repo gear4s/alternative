@@ -6,7 +6,7 @@ altplay::message_struct altplay::parser::handle_input(const std::string& str) co
 	bool is_server_message{false};
 	std::string nick{"null"}, ident{"null"}, message{"null"}, hostmask{"null"}, command{"null"}, argument{"null"};
 	std::smatch match;
-	std::regex client_regex{":(.*)!(.*)@([0-9.A-Za-z]*) ([A-Za-z]*) ([a-zA-Z0-9#&.]*) [:+-]{0,1}(.*)"},
+	std::regex client_regex{":(.*)!(.*)@([0-9.A-Za-z]*) ([A-Za-z]*) ([a-zA-Z0-9#&. +-]*)[ :]{1,2}(.*)"},
 		server_regex{":([A-Za-z.0-9]*) ([0-9A-Za-z]*) ([A-Za-z0-9]*) ([A-Za-z0-9 =@,+()#&:]*)"},
 		notice_regex{"NOTICE AUTH :(.*)"};
 
