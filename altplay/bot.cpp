@@ -22,10 +22,9 @@ void altplay::bot::read_handler(const string& str)
 		if (msg.nick.compare("Marentis") == 0)
 		{
 			con_.add_message(msg.message);
-			cout << msg.nick << " " << msg.command << " " << msg.message << endl;
 		}
 #endif
-		cout << msg.nick << " " << msg.command << " " << msg.message << endl;
+		cout << str << endl;
 	}
 	catch (const std::exception& e)
 	{

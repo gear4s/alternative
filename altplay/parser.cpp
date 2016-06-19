@@ -1,9 +1,9 @@
 #include <regex>
 #include "parser.hpp"
+#include <iostream>
 
 altplay::message_struct altplay::parser::handle_input(const std::string& str) const
 {
-	bool is_server_message{false};
 	std::smatch match;
 	message_struct msg;
 
@@ -18,15 +18,16 @@ altplay::message_struct altplay::parser::handle_input(const std::string& str) co
 			msg.nick = match[1];
 			msg.ident = match[2];
 			msg.hostmask = match[3];
-		}
-		if (std::regex_search(msg.params, match, std::regex{"([A-Za-z0-9\\[\\].#&!]*) :(.*)"}))
-		{
-			msg.target = match[1];
-			msg.message = match[2];
+			
+			if (std::regex_search(msg.params, match, std::regex{"([A-Za-z0-9\\[\\].#&!]*) :{0,1}(.*)"}))
+			{
+				msg.target = match[1];
+				msg.message = match[2];
+			}
 		}
 		else
 		{
-			is_server_message = true;
+			msg.is_server_message = true;
 			msg.nick = msg.prefix;
 		}
 	}
@@ -35,9 +36,6 @@ altplay::message_struct altplay::parser::handle_input(const std::string& str) co
 		throw std::runtime_error("unable to parse, please provide the developers"
 			" with the server message that caused this.");
 	}
-
-	msg.is_server_message = is_server_message;
-
 	return msg;
 }
 
