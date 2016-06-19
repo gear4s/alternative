@@ -16,7 +16,7 @@ void bot::read_handler(const string &str)
 {
     try {
         irc_lib::message_struct msg = parser_.handle_input( str );
-        cout << msg.nick << ": " << msg.message << endl;
+        cout << msg.nick << ": " << msg.command << " " << msg.argument << endl;
     } catch ( const std::exception &e ) {
         cerr << e.what( ) << endl;
     }

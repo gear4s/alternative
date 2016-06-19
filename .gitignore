@@ -16,3 +16,4 @@ altplay/altplay.vcxproj
 *.ilk
 *.opendb
 *.idb
+altplay/.idea/**
