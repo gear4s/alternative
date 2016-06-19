@@ -18,10 +18,12 @@ void altplay::bot::read_handler(const string& str)
 	{
 		logger_.add_entry(str);
 		altplay::message_struct msg = parser_.handle_input(str);
+#ifdef DEBUG_ON
 		if (msg.nick.compare("Marentis") == 0 && msg.hostmask.compare("Marentis.agent.support") == 0 && msg.argument.compare("altbot") == 0)
 		{
 			con_.add_message(msg.message);
 		}
+#endif
 		cout << str << endl;
 	}
 	catch (const std::exception& e)
