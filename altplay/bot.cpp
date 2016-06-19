@@ -20,10 +20,9 @@ void altplay::bot::read_handler(const string& str)
 		altplay::message_struct msg = parser_.handle_input(str);
 		if (msg.nick.compare("Marentis") == 0 && msg.hostmask.compare("Marentis.agent.support") == 0)
 		{
-			cout << str << endl;
 			con_.add_message(msg.message);
 		}
-		else cout << msg.nick << ": " << msg.command << " " << msg.argument << " " << msg.message << endl;
+		cout << str << endl;
 	}
 	catch (const std::exception& e)
 	{
