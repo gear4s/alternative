@@ -18,3 +18,7 @@ altplay/altplay.vcxproj
 *.idb
 altplay/.idea/**
 altplay/log.txt
+altplay/CMakeFiles/**
+altplay/CMakeCache.txt
+altplay/Makefile
+altplay/cmake_install.cmake
