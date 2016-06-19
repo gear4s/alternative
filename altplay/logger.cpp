@@ -4,13 +4,29 @@
 altplay::logger::logger(std::string path)
 {
 #ifdef DEBUG_ON
-	this->file_.rdbuf()->pubsetbuf(0, 0);
+  // can't remember which debug functions
+  // are used for files
+  // will do research laters
 #endif
-	this->file_.open(path, std::ios::app | std::ios::in | std::ios::out);
-	if (!file_.is_open()) throw std::runtime_error("logger was unable to open the provided file.");
+	this->f = fopen("file.txt", "w");
+  if (this->f == NULL) {
+      throw std::runtime_error("logger was unable to open the provided file.")
+  }
 }
 
-void altplay::logger::add_entry(const std::string& str)
+// get current date/time, format is YYYY-MM-DD.HH:mm:ss
+const std::string currentDateTime() {
+    time_t     now = time(0);
+    struct tm  tstruct;
+    char       buf[80];
+    tstruct = *localtime(&now);
+    
+    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
+
+    return buf;
+}
+void altplay::logger::add_entry(const std::string& str, LOG_LIST err)
 {
-	file_ << str.data() << std::endl;
+  string const LOG_NAME[] = {"NORMAL", "SCRIPT", "CORE"};
+	fprintf(this->f, " [ %s %s ] : %s\n", LOG_NAME[err], currentDateTime(), text);
 }
