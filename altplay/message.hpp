@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-namespace irc_lib
+namespace altplay
 {
     struct message_struct
     {

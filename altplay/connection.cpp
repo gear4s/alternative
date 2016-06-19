@@ -5,7 +5,7 @@ using namespace std;
 using namespace asio;
 using ip::tcp;
 
-namespace irc_lib
+namespace altplay
 {
     connection::connection(asio::io_service &io_service_, bot_read_handler_t rh) : socket_{io_service_},
                                                                                    bot_read_handler_{rh}

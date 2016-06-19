@@ -14,7 +14,7 @@ Further plans:
 3) bots will utilize this connection to add functionality
 */
 
-namespace irc_lib
+namespace altplay
 {
     // register a bot's read handler as type bot_read_handler_t (std::function<void(const std::string&>)
     using bot_read_handler_t = std::function< void(const std::string &) >;

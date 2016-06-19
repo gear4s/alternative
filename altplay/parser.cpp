@@ -1,7 +1,7 @@
 #include <regex>
 #include "parser.hpp"
 
-irc_lib::message_struct irc_lib::parser::handle_input(const std::string& str) const
+altplay::message_struct altplay::parser::handle_input(const std::string& str) const
 {
 	bool is_server_message{false};
 	std::string nick{"null"}, ident{"null"}, message{"null"}, hostmask{"null"}, command{"null"}, argument{"null"};
@@ -52,14 +52,14 @@ irc_lib::message_struct irc_lib::parser::handle_input(const std::string& str) co
 	return msg;
 }
 
-bool irc_lib::parser::compare_nicks(std::string nick1, std::string nick2)
+bool altplay::parser::compare_nicks(std::string nick1, std::string nick2)
 {
 	std::transform(nick1.begin(), nick1.end(), nick1.begin(), ::tolower);
 	std::transform(nick2.begin(), nick2.end(), nick2.begin(), ::tolower);
 	return (nick1.compare(nick2) == 0) ? true : false;
 }
 
-bool irc_lib::parser::compare_channel_names(std::string channel1, std::string channel2)
+bool altplay::parser::compare_channel_names(std::string channel1, std::string channel2)
 {
 	std::transform(channel1.begin(), channel1.end(), channel1.begin(), ::tolower);
 	std::transform(channel2.begin(), channel2.end(), channel2.begin(), ::tolower);

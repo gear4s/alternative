@@ -1,7 +1,7 @@
 #pragma once
 #include "message.hpp"
 
-namespace irc_lib
+namespace altplay
 {
 	class parser
 	{
