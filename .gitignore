@@ -17,3 +17,4 @@ altplay/altplay.vcxproj
 *.opendb
 *.idb
 altplay/.idea/**
+altplay/log.txt
