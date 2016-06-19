@@ -14,7 +14,9 @@ set(SOURCE_FILES
         main.cpp
         message.hpp
         parser.cpp
-        parser.hpp)
+        parser.hpp
+        logger.cpp
+        logger.hpp)
 
 add_executable(altplay ${SOURCE_FILES})
 target_link_libraries(altplay pthread)
