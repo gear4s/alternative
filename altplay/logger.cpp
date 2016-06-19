@@ -9,5 +9,5 @@ altplay::logger::logger(std::string path)
 
 void altplay::logger::add_entry(const std::string& str)
 {
-	file_ << str.data() << std::endl;
+	file_ << str.data();
 }
