@@ -4,34 +4,31 @@
 altplay::message_struct altplay::parser::handle_input(const std::string& str) const
 {
 	bool is_server_message{false};
-	std::string nick{"null"}, ident{"null"}, message{"null"}, hostmask{"null"}, command{"null"}, argument{"null"};
 	std::smatch match;
-	std::regex client_regex{":(.*)!(.*)@([0-9.A-Za-z]*) ([A-Za-z]*) ([a-zA-Z0-9#&. +-]*)[ :]{1,2}(.*)"},
-		server_regex{":([A-Za-z.0-9]*) ([0-9A-Za-z]*) ([A-Za-z0-9]*) ([A-Za-z0-9 =@,+()#&:]*)"},
-		notice_regex{"NOTICE AUTH :(.*)"};
+	message_struct msg;
 
-	if (std::regex_search(str, match, client_regex))
+	if (std::regex_search(str, match, std::regex(":([A-Za-z0-9!.~@\\[\\]-]*)\\s([A-Za-z0-9]*)\\s(.*)")))
 	{
-		nick = match[1];
-		ident = match[2];
-		hostmask = match[3];
-		command = match[4];
-		argument = match[5];
-		message = match[6];
-	}
-	else if (std::regex_search(str, match, server_regex))
-	{
-		is_server_message = true;
-		nick = match[1];
-		command = match[2];
-		argument = match[3];
-		message = match[4];
-	}
-	else if (std::regex_search(str, match, notice_regex))
-	{
-		is_server_message = true;
-		nick = "NOTICE AUTH";
-		message = match[1];
+		msg.prefix = match[1];
+		msg.command = match[2];
+		msg.params = match[3];
+
+		if (std::regex_search(msg.prefix, match, std::regex("([A-Za-z0-9\\[\\]]*)!([A-Za-z0-9~]*)@([A-Za-z0-9.]*)")))
+		{
+			msg.nick = match[1];
+			msg.ident = match[2];
+			msg.hostmask = match[3];
+		}
+		if (std::regex_search(msg.params, match, std::regex{"([A-Za-z0-9\\[\\].#&!]*) :(.*)"}))
+		{
+			msg.target = match[1];
+			msg.message = match[2];
+		}
+		else
+		{
+			is_server_message = true;
+			msg.nick = msg.prefix;
+		}
 	}
 	else
 	{
@@ -39,14 +36,6 @@ altplay::message_struct altplay::parser::handle_input(const std::string& str) co
 			" with the server message that caused this.");
 	}
 
-	message_struct msg;
-
-	msg.nick = nick;
-	msg.hostmask = hostmask;
-	msg.ident = ident;
-	msg.message = message;
-	msg.command = command;
-	msg.argument = argument;
 	msg.is_server_message = is_server_message;
 
 	return msg;
