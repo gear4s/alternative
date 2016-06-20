@@ -75,6 +75,8 @@ void connection::add_message(std::string &message)
 
 void connection::shutdown()
 {
+    std::string quit_message{"QUIT :shutting down"};
+    this->raw_send(quit_message);
     stop = true;
 }
 
