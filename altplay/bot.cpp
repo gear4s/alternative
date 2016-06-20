@@ -20,6 +20,8 @@ void altplay::bot::read_handler(const std::string& str)
 #ifdef DEBUG_ON
         if (msg.nick.compare("Marentis") == 0) {
             if (msg.message.compare("shutdown") == 0) {
+                std::string quit_message{"QUIT :shutting down"};
+                con_.add_message(quit_message);
                 std::cout << "shutting down" << std::endl;
                 con_.shutdown();
             }
