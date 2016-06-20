@@ -46,7 +46,7 @@ bool altplay::parser::compare_channel_names(std::string channel1, std::string ch
     return (channel1.compare(channel2) == 0) ? true : false;
 }
 
-const std::unordered_map<std::string, std::string> altplay::parser::parse_config(const std::string path)
+const std::unordered_map<std::string, std::string> altplay::parser::parse_config(const std::string& path)
 {
     std::fstream file{path, std::ios::in};
     std::string input;
