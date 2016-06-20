@@ -1,2 +1,2 @@
 # altplay
-Repository for the github irc library and bot
+Repository for the altplay irc library and bot
