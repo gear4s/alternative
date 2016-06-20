@@ -3,9 +3,6 @@
 #include <unordered_map>
 #include "parser.hpp"
 
-using namespace std;
-using namespace asio;
-using ip::tcp;
 
 namespace altplay
 {
@@ -13,18 +10,18 @@ namespace altplay
                                                                                    bot_read_handler_{rh}
     {
 		std::unordered_map<std::string, std::string> config_map{parser::parse_config("config.conf")};
-        tcp::resolver resolver{io_service_};
-        tcp::resolver::query query{config_map.at("server_address"),config_map.at("server_port")};
+	    asio::ip::tcp::resolver resolver{io_service_};
+	    asio::ip::tcp::resolver::query query{config_map.at("server_address"),config_map.at("server_port")};
         auto iter = resolver.resolve( query );
         connect( socket_, iter );
         do_read( );
     }
 
     // send raw data to the server
-    void connection::raw_send(string &content)
+    void connection::raw_send(std::string &content)
     {
         content.append( "\r\n" );
-        write( socket_, buffer( content ) );
+        write( socket_, asio::buffer( content ) );
     }
 
 
@@ -32,14 +29,14 @@ namespace altplay
     void connection::read_handler(const asio::error_code &ec, size_t /*length*/)
     {
         if ( !ec ) {
-            string result_line;
+	        std::string result_line;
             {
-                lock_guard< mutex > lock( mutex_ ); // prevent iterator invalidation because of two concurrent reads
-                istream is( &buffer_ );
+	            std::lock_guard<std::mutex > lock( mutex_ ); // prevent iterator invalidation because of two concurrent reads
+	            std::istream is( &buffer_ );
                 getline( is, result_line );
             }
-            if ( regex_search( result_line, match_, regex( "PING (:[0-9A-Za-z.]*)" ) ) ) {
-                string reply{"PONG "};
+            if ( regex_search( result_line, match_, std::regex( "PING (:[0-9A-Za-z.]*)" ) ) ) {
+	            std::string reply{"PONG "};
                 reply.append( match_[1] );
                 raw_send( reply );
             }
@@ -59,7 +56,7 @@ namespace altplay
 
     void connection::do_write( )
     {
-        lock_guard< mutex > lock( mutex_ );
+	    std::lock_guard<std::mutex > lock( mutex_ );
         if ( !send_queue.empty( ) ) {
             raw_send( send_queue.front( ) );
             send_queue.pop_front( );
@@ -69,7 +66,7 @@ namespace altplay
 
     void connection::add_message(std::string &message)
     {
-        lock_guard< mutex > lock( mutex_ );
+	    std::lock_guard<std::mutex > lock( mutex_ );
         send_queue.push_back( message );
     }
 } // end of ns altplay

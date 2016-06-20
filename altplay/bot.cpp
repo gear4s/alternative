@@ -3,9 +3,8 @@
 #include "parser.hpp"
 #include "message.hpp"
 
-using namespace std;
 
-altplay::bot::bot(asio::io_service& io_service_) : con_ {io_service_, bind(&bot::read_handler, this, placeholders::_1)}, logger_ {"log.txt"}
+altplay::bot::bot(asio::io_service& io_service_) : con_ {io_service_, bind(&bot::read_handler, this, std::placeholders::_1)}, logger_ {"log.txt"}
 {
 	std::unordered_map<std::string, std::string> config_map{parser::parse_config("config.conf")};
 	nick_ = config_map.at("bot_nick");
@@ -13,7 +12,7 @@ altplay::bot::bot(asio::io_service& io_service_) : con_ {io_service_, bind(&bot:
 	reg_with_server();
 }
 
-void altplay::bot::read_handler(const string& str)
+void altplay::bot::read_handler(const std::string& str)
 {
 	try
 	{
@@ -25,12 +24,12 @@ void altplay::bot::read_handler(const string& str)
 			con_.add_message(msg.message);
 		}
 #endif
-		cout << str << endl;
+		std::cout << str << std::endl;
 	}
 	catch (const std::exception& e)
 	{
-		cerr << e.what() << endl;
-		cerr << str << endl;
+		std::cerr << e.what() << std::endl;
+		std::cerr << str << std::endl;
 		logger_.add_entry("ERROR: " + str);
 	}
 }
@@ -38,8 +37,8 @@ void altplay::bot::read_handler(const string& str)
 // TO DO: add error handling, like when a certain nick is taken already and similar issues.
 void altplay::bot::reg_with_server()
 {
-	string nick = "NICK " + nick_;
-	string user = "USER " + user_;
+	std::string nick = "NICK " + nick_;
+	std::string user = "USER " + user_;
 	con_.add_message(user);
 	con_.add_message(nick);
 }
