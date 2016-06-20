@@ -9,9 +9,9 @@ using asio::ip::tcp;
 int main( )
 {
     try {
-		std::setlocale ( LC_ALL, "en_US.UTF-8" );
+        std::setlocale ( LC_ALL, "en_US.UTF-8" );
         asio::io_service io_service_;
-	    altplay::bot bot( io_service_ );
+        altplay::bot bot( io_service_ );
         io_service_.run( );
     }
 

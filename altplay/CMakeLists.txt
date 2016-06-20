@@ -19,7 +19,7 @@ set(SOURCE_FILES
         logger.hpp)
 
 if(DEBUG_ON)
-add_definitions(-DDEBUG_ON)
+    add_definitions(-DDEBUG_ON)
 endif(DEBUG_ON)
 
 add_executable(altplay ${SOURCE_FILES})
