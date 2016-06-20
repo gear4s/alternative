@@ -18,12 +18,9 @@ altplay::message_struct altplay::parser::handle_input(const std::string& str) co
 			msg.nick = match[1];
 			msg.ident = match[2];
 			msg.hostmask = match[3];
-			
-			if (std::regex_search(msg.params, match, std::regex{"([A-Za-z0-9\\[\\].#&!]*) :{0,1}(.*)"}))
-			{
-				msg.target = match[1];
-				msg.message = match[2];
-			}
+			std::regex_search(msg.params, match, std::regex{"([A-Za-z0-9\\[\\].#&!]*) :{0,1}(.*)"});
+			msg.target = match[1];
+			msg.message = match[2];
 		}
 		else
 		{
