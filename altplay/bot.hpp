@@ -17,7 +17,6 @@ namespace altplay
 
 	private:
 		altplay::connection con_;
-		altplay::parser parser_;
 		altplay::logger logger_;
 		std::string nick_, user_;
 	};

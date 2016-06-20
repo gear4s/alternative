@@ -12,8 +12,7 @@ namespace altplay
     connection::connection(asio::io_service &io_service_, bot_read_handler_t rh) : socket_{io_service_},
                                                                                    bot_read_handler_{rh}
     {
-		parser parser_;
-		std::unordered_map<std::string, std::string> config_map{parser_.parse_config("config.conf")};
+		std::unordered_map<std::string, std::string> config_map{parser::parse_config("config.conf")};
         tcp::resolver resolver{io_service_};
         tcp::resolver::query query{config_map.at("server_address"),config_map.at("server_port")};
         auto iter = resolver.resolve( query );
