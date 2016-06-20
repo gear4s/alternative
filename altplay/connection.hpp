@@ -8,7 +8,7 @@
 A basic connection to an irc server with a keep alive implementation included.
 Designed with an asynchronous do_read handler
 Further plans:
-1) use function pointers for do_read handlers
+1) use callbacks for do_read handlers
 2) keep this class as simple as possible
 3) bots will utilize this connection to add functionality
 */
