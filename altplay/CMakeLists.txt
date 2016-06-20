@@ -18,5 +18,9 @@ set(SOURCE_FILES
         logger.cpp
         logger.hpp)
 
+if(DEBUG_ON)
+add_definitions(-DDEBUG_ON)
+endif(DEBUG_ON)
+
 add_executable(altplay ${SOURCE_FILES})
 target_link_libraries(altplay pthread)
