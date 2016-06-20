@@ -73,7 +73,7 @@ const std::unordered_map<std::string, std::string> altplay::parser::parse_config
 		}
 		else
 		{
-			throw std::runtime_error("Could not read config at line: " + line_number);
+			throw std::runtime_error("\nCould not read config at line: " + std::to_string(line_number));
 		}
 	}
 	return config_map;
