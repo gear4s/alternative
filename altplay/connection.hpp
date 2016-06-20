@@ -23,9 +23,9 @@ class connection: public std::enable_shared_from_this< connection >
 public:
     connection(asio::io_service &io_service_, bot_read_handler_t rh);
     void add_message(std::string &message);
+    void shutdown();
 
 private:
-
     void raw_send(std::string &content);
     void do_read ( );
     void do_write ( );
@@ -37,5 +37,6 @@ private:
     asio::streambuf buffer_;
     asio::ip::tcp::socket socket_;
     bot_read_handler_t bot_read_handler_; // accepts a bot's read handler
+    bool stop{false};
 };
 } // end of ns altplay

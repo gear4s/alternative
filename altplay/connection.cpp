@@ -46,6 +46,10 @@ void connection::read_handler(const asio::error_code &ec, size_t /*length*/)
 
 void connection::do_read( )
 {
+    if ( stop ) {
+        socket_.close();
+        return;
+    }
     async_read_until( socket_,
                       buffer_,
                       "\r\n",
@@ -68,4 +72,10 @@ void connection::add_message(std::string &message)
     std::lock_guard<std::mutex > lock( mutex_ );
     send_queue.push_back( message );
 }
+
+void connection::shutdown()
+{
+    stop = true;
+}
+
 } // end of ns altplay

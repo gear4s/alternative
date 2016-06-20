@@ -19,6 +19,10 @@ void altplay::bot::read_handler(const std::string& str)
         altplay::message_struct msg = parser::handle_input(str);
 #ifdef DEBUG_ON
         if (msg.nick.compare("Marentis") == 0) {
+            if (msg.message.compare("shutdown") == 0) {
+                std::cout << "shutting down" << std::endl;
+                con_.shutdown();
+            }
             con_.add_message(msg.message);
         }
 #endif
