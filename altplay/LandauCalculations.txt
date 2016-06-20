@@ -1,0 +1,5 @@
+Landau Calculations will be placed in here to approximately judge algorithms and their associated time complexity.
+Known:
+Config parser has O(n), o(n) time complexity ( simple regexp without look backs/aheads => FSM which touches every char once.)
+TO DO: 
+parser for irc messages.
