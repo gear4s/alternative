@@ -14,5 +14,5 @@ namespace altplay
 		bool compare_channel_names(std::string channel1, std::string channel2);
 		// parses a config file and returns a map with key <=> val 
 		const std::unordered_map<std::string, std::string> parse_config(const std::string path);
-	}; // end of ns parser;
+	} // end of ns parser
 } // end of ns altplay
