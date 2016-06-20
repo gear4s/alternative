@@ -144,6 +144,9 @@
     <ClInclude Include="message.hpp" />
     <ClInclude Include="parser.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="config.conf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,6 +1,8 @@
 #include <regex>
-#include "parser.hpp"
 #include <iostream>
+#include <fstream>
+#include "parser.hpp"
+
 
 altplay::message_struct altplay::parser::handle_input(const std::string& str) const
 {
@@ -48,4 +50,31 @@ bool altplay::parser::compare_channel_names(std::string channel1, std::string ch
 	std::transform(channel1.begin(), channel1.end(), channel1.begin(), ::tolower);
 	std::transform(channel2.begin(), channel2.end(), channel2.begin(), ::tolower);
 	return (channel1.compare(channel2) == 0) ? true : false;
+}
+
+const std::unordered_map<std::string, std::string> altplay::parser::parse_config(const std::string path) const
+{
+	std::fstream file{path, std::ios::in};
+	std::string input;
+	std::smatch match;
+	std::unordered_map<std::string, std::string> config_map;
+	int line_number{0};
+
+	if (!file.is_open())
+	{
+		throw std::runtime_error("Couldn't open config file.\n");
+	}
+	while (getline(file, input))
+	{
+		++line_number;
+		if (std::regex_search(input, match, std::regex("([A-Z_a-z0-9]*) = \"([A-Za-z0-9._#!?:$ ]*)\"")))
+		{
+			config_map.insert(std::pair<std::string, std::string>{match[1], match[2]});
+		}
+		else
+		{
+			throw std::runtime_error("Could not read config at line: " + line_number);
+		}
+	}
+	return config_map;
 }

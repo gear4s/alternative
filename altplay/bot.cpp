@@ -7,8 +7,9 @@ using namespace std;
 
 altplay::bot::bot(asio::io_service& io_service_) : con_ {io_service_, bind(&bot::read_handler, this, placeholders::_1)}, logger_ {"log.txt"}
 {
-	nick_ = "altbot";
-	user_ = "altbot altbot altbot :altbot";
+	std::unordered_map<std::string, std::string> config_map{parser_.parse_config("config.conf")};
+	nick_ = config_map.at("bot_nick");
+	user_ = config_map.at("bot_user");
 	reg_with_server();
 }
 
