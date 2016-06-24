@@ -86,7 +86,7 @@
       <Optimization>Custom</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ASIO_STANDALONE;_WIN32_WINNT=0x0A00;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>F:\asio-1.11.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>F:\asio-1.11.0\include;C:\Users\Alex\Documents\GitHub\jsoncpp\dist</AdditionalIncludeDirectories>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -96,7 +96,7 @@
       <Optimization>Custom</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ASIO_STANDALONE;_WIN32_WINNT=0x0A00;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>F:\asio-1.11.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>F:\asio-1.11.0\include;C:\Users\Alex\Documents\GitHub\jsoncpp\dist</AdditionalIncludeDirectories>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -108,7 +108,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ASIO_STANDALONE;_WIN32_WINNT=0x0A00;DEBUG_ON;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>F:\asio-1.11.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>F:\asio-1.11.0\include;C:\Users\Alex\Documents\GitHub\jsoncpp\dist</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -123,7 +123,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ASIO_STANDALONE;_WIN32_WINNT=0x0A00;DEBUG_ON;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>F:\asio-1.11.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>F:\asio-1.11.0\include;C:\Users\Alex\Documents\GitHub\jsoncpp\dist</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -136,6 +136,8 @@
     <ClCompile Include="logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />
+    <ClCompile Include="user.cpp" />
+    <ClCompile Include="user_handler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bot.hpp" />
@@ -143,6 +145,8 @@
     <ClInclude Include="logger.hpp" />
     <ClInclude Include="message.hpp" />
     <ClInclude Include="parser.hpp" />
+    <ClInclude Include="user.hpp" />
+    <ClInclude Include="user_handler.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config.conf" />
