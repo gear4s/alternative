@@ -1,12 +1,18 @@
 #pragma once
 #include <json/json.h>
 #include <fstream>
+#include <list>
+#include "user.hpp"
 
-class user_handler
+namespace altplay
 {
-public:
-	user_handler();
-	~user_handler();
-private:
-	std::fstream user_file_;
-};
+	class user_handler
+	{
+	public:
+		explicit user_handler ( );
+	private:
+		std::list<user> user_list_;
+		std::fstream user_file_;
+		Json::Reader json_;
+	};
+}

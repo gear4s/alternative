@@ -2,9 +2,5 @@
 
 
 
-user_handler::user_handler ( ) {
-	}
-
-
-user_handler::~user_handler ( ) {
+altplay::user_handler::user_handler ( ) {
 	}
