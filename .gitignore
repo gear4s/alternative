@@ -20,3 +20,4 @@ altplay/CMakeFiles/**
 altplay/CMakeCache.txt
 altplay/cmake_install.cmake
 altplay/altplay
+altplay/cppcheck.cppcheck
