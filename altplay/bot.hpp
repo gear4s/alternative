@@ -9,7 +9,7 @@ namespace altplay
 class bot
 {
 public:
-    bot(asio::io_service& io_service_);
+    explicit bot(asio::io_service& io_service_);
 
     // entry point for this bot, supplied to a connection as a callback
     void read_handler(const std::string& str);
