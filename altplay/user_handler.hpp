@@ -1,5 +1,4 @@
 #pragma once
-#include <json/json.h>
 #include <fstream>
 #include <list>
 #include "user.hpp"
@@ -13,6 +12,5 @@ namespace altplay
 	private:
 		std::list<user> user_list_;
 		std::fstream user_file_;
-		Json::Reader json_;
 	};
 }
