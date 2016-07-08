@@ -171,9 +171,9 @@
     <ClInclude Include="include\luaconf.h" />
     <ClInclude Include="include\lualib.h" />
     <ClInclude Include="logger.hpp" />
-    <ClInclude Include="luaglue.h" />
     <ClInclude Include="message.hpp" />
     <ClInclude Include="parser.hpp" />
+    <ClInclude Include="script\luaglue.h" />
     <ClInclude Include="script\script.h" />
     <ClInclude Include="user.hpp" />
     <ClInclude Include="user_handler.hpp" />
