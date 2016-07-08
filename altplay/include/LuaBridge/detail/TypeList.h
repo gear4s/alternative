@@ -48,9 +48,11 @@
 */
 typedef void None;
 
-template <typename Head, typename Tail = None>
+template <typename H, typename T = None>
 struct TypeList
 {
+    typedef H Head;
+    typedef T Tail;
 };
 
 /**
@@ -99,7 +101,7 @@ struct TypeListValues <TypeList <Head, Tail> >
 template <typename Head, typename Tail>
 struct TypeListValues <TypeList <Head&, Tail> >
 {
-  Head& hd;
+  Head hd;
   TypeListValues <Tail> tl;
 
   TypeListValues (Head& hd_, TypeListValues <Tail> const& tl_)
@@ -123,11 +125,10 @@ struct TypeListValues <TypeList <Head&, Tail> >
 template <typename Head, typename Tail>
 struct TypeListValues <TypeList <Head const&, Tail> >
 {
-  using HeadStorage = typename std::conditional<std::is_arithmetic<Head>::value, Head, Head const&>::type;
-  HeadStorage hd;
+  Head hd;
   TypeListValues <Tail> tl;
 
-  TypeListValues (HeadStorage hd_, const TypeListValues <Tail>& tl_)
+  TypeListValues (Head const& hd_, const TypeListValues <Tail>& tl_)
     : hd (hd_), tl (tl_)
   {
   }

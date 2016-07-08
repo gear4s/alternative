@@ -50,7 +50,7 @@ private:
 #if 0
   static int luaError (lua_State* L, std::string message)
   {
-    luabridge_assert (L, lua_isstring (L, lua_upvalueindex (1)));
+    assert (lua_isstring (L, lua_upvalueindex (1)));
     std::string s;
 
     // Get information on the caller's caller to format the message,
@@ -124,7 +124,7 @@ private:
     {
       int result = 0;
 
-      luabridge_assert (L, lua_isuserdata (L, 1));               // warn on security bypass
+      assert (lua_isuserdata (L, 1));               // warn on security bypass
       lua_getmetatable (L, 1);                      // get metatable for object
       for (;;)
       {
@@ -201,22 +201,6 @@ private:
         }
       }
 
-      lua_Number number;
-      if ((!result || lua_type (L, -1) == LUA_TNIL) && ({ int isnumber; number = lua_tonumberx (L, 2, &isnumber); isnumber; }))
-      {
-        lua_getfield (L, 1, "__arrayindex");
-        if (lua_type (L, -1) != LUA_TNIL)
-        {
-          lua_insert (L, 1);
-          lua_pushnumber (L, number);
-          lua_replace (L, 3);
-          lua_settop (L, 3);
-          lua_call (L, 2, 1);
-          return 1;
-        }
-        else lua_pop (L, 1);
-      }
-
       return result;
     }
 
@@ -244,7 +228,7 @@ private:
           if (!lua_isnil (L, -1))
           {
             // found it, call the setFunction.
-            luabridge_assert (L, lua_isfunction (L, -1));
+            assert (lua_isfunction (L, -1));
             lua_pushvalue (L, 1);
             lua_pushvalue (L, 3);
             lua_call (L, 2, 0);
@@ -259,21 +243,6 @@ private:
         rawgetfield (L, -1, "__parent");
         if (lua_isnil (L, -1))
         {
-          lua_Number number;
-          if (({ int isnumber; number = lua_tonumberx (L, 2, &isnumber); isnumber; }))
-          {
-            lua_getfield (L, 1, "__arraynewindex");
-            if (lua_type (L, -1) != LUA_TNIL)
-            {
-              lua_insert (L, 1);
-              lua_pushnumber (L, number);
-              lua_replace (L, 3);
-              lua_settop (L, 4);
-              lua_call (L, 3, 0);
-              return 0;
-            }
-            else lua_pop (L, 1);
-          }
           // Either the property or __parent must exist.
           result = luaL_error (L,
             "no member named '%s'", lua_tostring (L, 2));
@@ -486,7 +455,7 @@ private:
       m_stackSize = parent->m_stackSize + 3;
       parent->m_stackSize = 0;
 
-      luabridge_assert (L, lua_istable (L, -1));
+      assert (lua_istable (L, -1));
       rawgetfield (L, -1, name);
       
       if (lua_isnil (L, -1))
@@ -532,7 +501,7 @@ private:
       m_stackSize = parent->m_stackSize + 3;
       parent->m_stackSize = 0;
 
-      luabridge_assert (L, lua_istable (L, -1));
+      assert (lua_istable (L, -1));
 
       createConstTable (name);
       lua_pushcfunction (L, &CFunc::gcMetaMethod <T>);
@@ -545,11 +514,11 @@ private:
       createStaticTable (name);
 
       lua_rawgetp (L, LUA_REGISTRYINDEX, staticKey);
-      luabridge_assert (L, lua_istable (L, -1));
+      assert (lua_istable (L, -1));
       rawgetfield (L, -1, "__class");
-      luabridge_assert (L, lua_istable (L, -1));
+      assert (lua_istable (L, -1));
       rawgetfield (L, -1, "__const");
-      luabridge_assert (L, lua_istable (L, -1));
+      assert (lua_istable (L, -1));
 
       rawsetfield (L, -6, "__parent");
       rawsetfield (L, -4, "__parent");
@@ -579,17 +548,17 @@ private:
     template <class U>
     Class <T>& addStaticData (char const* name, U* pu, bool isWritable = true)
     {
-      luabridge_assert (L, lua_istable (L, -1));
+      assert (lua_istable (L, -1));
 
       rawgetfield (L, -1, "__propget");
-      luabridge_assert (L, lua_istable (L, -1));
+      assert (lua_istable (L, -1));
       lua_pushlightuserdata (L, pu);
       lua_pushcclosure (L, &CFunc::getVariable <U>, 1);
       rawsetfield (L, -2, name);
       lua_pop (L, 1);
 
       rawgetfield (L, -1, "__propset");
-      luabridge_assert (L, lua_istable (L, -1));
+      assert (lua_istable (L, -1));
       if (isWritable)
       {
         lua_pushlightuserdata (L, pu);
@@ -618,17 +587,17 @@ private:
       typedef U (*get_t)();
       typedef void (*set_t)(U);
       
-      luabridge_assert (L, lua_istable (L, -1));
+      assert (lua_istable (L, -1));
 
       rawgetfield (L, -1, "__propget");
-      luabridge_assert (L, lua_istable (L, -1));
+      assert (lua_istable (L, -1));
       new (lua_newuserdata (L, sizeof (get))) get_t (get);
       lua_pushcclosure (L, &CFunc::Call <U (*) (void)>::f, 1);
       rawsetfield (L, -2, name);
       lua_pop (L, 1);
 
       rawgetfield (L, -1, "__propset");
-      luabridge_assert (L, lua_istable (L, -1));
+      assert (lua_istable (L, -1));
       if (set != 0)
       {
         new (lua_newuserdata (L, sizeof (set))) set_t (set);
@@ -691,20 +660,13 @@ private:
         lua_pop (L, 2);
       }
 
+      if (isWritable)
       {
-        // Add to __propset in class table TODO const?
+        // Add to __propset in class table.
         rawgetfield (L, -2, "__propset");
-        luabridge_assert (L, lua_istable (L, -1));
-        if (isWritable)
-        {
-          new (lua_newuserdata (L, sizeof (mp_t))) mp_t (mp);
-          lua_pushcclosure (L, &CFunc::setProperty <T,U>, 1);
-        }
-        else
-        {
-            lua_pushstring (L, name);
-            lua_pushcclosure (L, &CFunc::readOnlyError, 1);
-        }
+        assert (lua_istable (L, -1));
+        new (lua_newuserdata (L, sizeof (mp_t))) mp_t (mp);
+        lua_pushcclosure (L, &CFunc::setProperty <T,U>, 1);
         rawsetfield (L, -2, name);
         lua_pop (L, 1);
       }
@@ -733,9 +695,9 @@ private:
       }
 
       {
-        // Add to __propset in class table TODO const?
+        // Add to __propset in class table.
         rawgetfield (L, -2, "__propset");
-        luabridge_assert (L, lua_istable (L, -1));
+        assert (lua_istable (L, -1));
         typedef void (T::* set_t) (TS);
         new (lua_newuserdata (L, sizeof (set_t))) set_t (set);
         lua_pushcclosure (L, &CFunc::CallMember <set_t>::f, 1);
@@ -760,13 +722,6 @@ private:
       rawsetfield (L, -4, name);
       rawsetfield (L, -2, name);
       lua_pop (L, 2);
-
-      // Add error thrower to __propset in class table TODO const?
-      rawgetfield (L, -2, "__propset");
-      lua_pushstring (L, name);
-      lua_pushcclosure (L, &CFunc::readOnlyError, 1);
-      rawsetfield (L, -2, name);
-      lua_pop (L, 1);
 
       return *this;
     }
@@ -798,21 +753,14 @@ private:
         lua_pop (L, 2);
       }
 
+      if (set != 0)
       {
-        // Add to __propset in class table TODO const?
+        // Add to __propset in class table.
         rawgetfield (L, -2, "__propset");
-        luabridge_assert (L, lua_istable (L, -1));
-        if (set != 0)
-        {
-          typedef void (*set_t) (T*, TS);
-          new (lua_newuserdata (L, sizeof (set_t))) set_t (set);
-          lua_pushcclosure (L, &CFunc::Call <set_t>::f, 1);
-        }
-        else
-        {
-          lua_pushstring (L, name);
-          lua_pushcclosure (L, &CFunc::readOnlyError, 1);
-        }
+        assert (lua_istable (L, -1));
+        typedef void (*set_t) (T*, TS);
+        new (lua_newuserdata (L, sizeof (set_t))) set_t (set);
+        lua_pushcclosure (L, &CFunc::Call <set_t>::f, 1);
         rawsetfield (L, -2, name);
         lua_pop (L, 1);
       }
@@ -821,7 +769,7 @@ private:
     }
 
     // read-only
-    template <class TG>
+    template <class TG, class TS>
     Class <T>& addProperty (char const* name, TG (*get) (T const*))
     {
       // Add to __propget in class and const tables.
@@ -835,13 +783,6 @@ private:
       rawsetfield (L, -2, name);
       lua_pop (L, 2);
 
-      // Add error thrower to __propset in class table TODO const?
-      rawgetfield (L, -2, "__propset");
-      lua_pushstring (L, name);
-      lua_pushcclosure (L, &CFunc::readOnlyError, 1);
-      rawsetfield (L, -2, name);
-      lua_pop (L, 1);
-
       return *this;
     }
 
@@ -849,12 +790,32 @@ private:
     /**
         Add or replace a member function.
     */
-    template <class MemFn>
-    Class <T>& addFunction (char const* name, MemFn mf)
+    template <class R, class MemFn>
+    Class <T>& addFunction (char const* name, R MemFn::*mf)
     {
-      CFunc::CallMemberFunctionHelper <MemFn, FuncTraits <MemFn>::isConstMemberFunction>::add (L, name, mf);
+      CFunc::CallMemberFunctionHelper <R MemFn::*, FuncTraits <R MemFn::*>::isConstMemberFunction>::add (L, name, mf);
       return *this;
     }
+
+    //--------------------------------------------------------------------------
+    /**
+        Add or replace a member function.
+    */
+    
+    template <class FP>
+    Class <T>& addFunction (char const* name, FP fp)
+    {
+      assert (lua_istable (L, -1));
+
+      new (lua_newuserdata (L, sizeof (fp))) FP (fp);
+      lua_pushcclosure (L, &CFunc::Call <FP>::f, 1);
+      rawsetfield (L, -3, name); // class table
+      if(TypeTraits::isConst<typename FuncTraits<FP>::Params::Head>::value)
+        rawsetfield (L, -5, name); // const table
+
+      return *this;
+    }
+
 
     //--------------------------------------------------------------------------
     /**
@@ -863,7 +824,7 @@ private:
     Class <T>& addCFunction (char const* name, int (T::*mfp)(lua_State*))
     {
       typedef int (T::*MFP)(lua_State*);
-      luabridge_assert (L, lua_istable (L, -1));
+      assert (lua_istable (L, -1));
       new (lua_newuserdata (L, sizeof (mfp))) MFP (mfp);
       lua_pushcclosure (L, &CFunc::CallMemberCFunction <T>::f, 1);
       rawsetfield (L, -3, name); // class table
@@ -878,7 +839,7 @@ private:
     Class <T>& addCFunction (char const* name, int (T::*mfp)(lua_State*) const)
     {
       typedef int (T::*MFP)(lua_State*) const;
-      luabridge_assert (L, lua_istable (L, -1));
+      assert (lua_istable (L, -1));
       new (lua_newuserdata (L, sizeof (mfp))) MFP (mfp);
       lua_pushcclosure (L, &CFunc::CallConstMemberCFunction <T>::f, 1);
       lua_pushvalue (L, -1);
@@ -947,7 +908,7 @@ private:
     m_stackSize = parent->m_stackSize + 1;
     parent->m_stackSize = 0;
 
-    luabridge_assert (L, lua_istable (L, -1));
+    assert (lua_istable (L, -1));
     rawgetfield (L, -1, name);
     if (lua_isnil (L, -1))
     {
@@ -988,7 +949,7 @@ private:
     // It is not necessary or valid to call
     // endNamespace() for the global namespace!
     //
-    luabridge_assert (L, m_stackSize != 0);
+    assert (m_stackSize != 0);
   }
 
   //----------------------------------------------------------------------------
@@ -1064,17 +1025,17 @@ public:
   template <class T>
   Namespace& addVariable (char const* name, T* pt, bool isWritable = true)
   {
-    luabridge_assert (L, lua_istable (L, -1));
+    assert (lua_istable (L, -1));
 
     rawgetfield (L, -1, "__propget");
-    luabridge_assert (L, lua_istable (L, -1));
+    assert (lua_istable (L, -1));
     lua_pushlightuserdata (L, pt);
     lua_pushcclosure (L, &CFunc::getVariable <T>, 1);
     rawsetfield (L, -2, name);
     lua_pop (L, 1);
 
     rawgetfield (L, -1, "__propset");
-    luabridge_assert (L, lua_istable (L, -1));
+    assert (lua_istable (L, -1));
     if (isWritable)
     {
       lua_pushlightuserdata (L, pt);
@@ -1097,13 +1058,13 @@ public:
 
       If the set function is omitted or null, the property is read-only.
   */
-  template <class TG, class TS = TG>
+  template <class TG, class TS>
   Namespace& addProperty (char const* name, TG (*get) (), void (*set)(TS) = 0)
   {
-    luabridge_assert (L, lua_istable (L, -1));
+    assert (lua_istable (L, -1));
 
     rawgetfield (L, -1, "__propget");
-    luabridge_assert (L, lua_istable (L, -1));
+    assert (lua_istable (L, -1));
     typedef TG (*get_t) ();
     new (lua_newuserdata (L, sizeof (get_t))) get_t (get);
     lua_pushcclosure (L, &CFunc::Call <TG (*) (void)>::f, 1);
@@ -1111,7 +1072,7 @@ public:
     lua_pop (L, 1);
 
     rawgetfield (L, -1, "__propset");
-    luabridge_assert (L, lua_istable (L, -1));
+    assert (lua_istable (L, -1));
     if (set != 0)
     {
       typedef void (*set_t) (TS);
@@ -1136,7 +1097,7 @@ public:
   template <class FP>
   Namespace& addFunction (char const* name, FP const fp)
   {
-    luabridge_assert (L, lua_istable (L, -1));
+    assert (lua_istable (L, -1));
 
     new (lua_newuserdata (L, sizeof (fp))) FP (fp);
     lua_pushcclosure (L, &CFunc::Call <FP>::f, 1);

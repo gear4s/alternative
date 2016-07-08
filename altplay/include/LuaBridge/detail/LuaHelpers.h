@@ -30,54 +30,6 @@
 // These are for Lua versions prior to 5.2.0.
 //
 #if LUA_VERSION_NUM < 502
-inline lua_Number lua_tonumberx (lua_State* L, int idx, int* isnum)
-{
-  if (isnum) *isnum = 0;
-  if (lua_type (L, idx) == LUA_TNUMBER)
-  {
-    if (isnum) *isnum = 1;
-    return lua_tonumber (L, idx);
-  }
-  if (lua_type (L, idx) != LUA_TSTRING) return 0;
-  const char *str = lua_tostring (L, idx);
-  if (!strlen(str)) return 0;
-  char *endptr;
-  lua_Number value = (lua_Number) strtod (lua_tostring (L, idx), &endptr);
-  if (*endptr) return 0;
-  return value;
-}
-
-inline lua_Integer lua_tointegerx (lua_State* L, int idx, int* isnum)
-{
-  return lua_Integer (lua_tonumberx (L, idx, isnum));
-}
-
-#include <cstdint>
-using lua_Unsigned = uint32_t;
-
-inline lua_Unsigned lua_tounsignedx (lua_State* L, int idx, int* isnum)
-{
-  return lua_Unsigned (lua_tonumberx (L, idx, isnum));
-}
-
-inline void lua_pushunsigned(lua_State *L, lua_Unsigned n)
-{
-  lua_pushnumber (L, n);
-}
-
-inline lua_Unsigned luaL_checkunsigned (lua_State *L, int narg) {
-  int isnum;
-  lua_Unsigned d = lua_tounsignedx(L, narg, &isnum);
-  if (!isnum){
-    const char *msg = lua_pushfstring(L, "%s expected, got %s", lua_typename(L, LUA_TNUMBER), luaL_typename(L, narg));
-    return luaL_argerror(L, narg, msg);
-  }
-  return d;
-}
-
-#define lua_pushglobaltable(L) lua_pushvalue (L, LUA_GLOBALSINDEX)
-#define luaL_tolstring lua_tolstring
-
 inline int lua_absindex (lua_State* L, int idx)
 {
   if (idx > LUA_REGISTRYINDEX && idx < 0)
@@ -136,15 +88,12 @@ inline int get_length (lua_State* L, int idx)
 inline int get_length (lua_State* L, int idx)
 {
   lua_len (L, idx);
-  int len = int (luaL_checknumber (L, -1));
-  lua_pop (L, 1);
-  return len;
+  return int (luaL_checknumber (L, -1));
 }
 
 #endif
 
 #ifndef LUA_OK
-# define LUA_OK 0
 # define LUABRIDGE_LUA_OK 0
 #else
 # define LUABRIDGE_LUA_OK LUA_OK
@@ -154,7 +103,7 @@ inline int get_length (lua_State* L, int idx)
 */  
 inline void rawgetfield (lua_State* L, int index, char const* key)
 {
-  luabridge_assert (L, lua_istable (L, index));
+  assert (lua_istable (L, index));
   index = lua_absindex (L, index);
   lua_pushstring (L, key);
   lua_rawget (L, index);
@@ -164,7 +113,7 @@ inline void rawgetfield (lua_State* L, int index, char const* key)
 */  
 inline void rawsetfield (lua_State* L, int index, char const* key)
 {
-  luabridge_assert (L, lua_istable (L, index));
+  assert (lua_istable (L, index));
   index = lua_absindex (L, index);
   lua_pushstring (L, key);
   lua_insert (L, -2);
@@ -183,7 +132,7 @@ inline bool isfulluserdata (lua_State* L, int index)
     This can determine if two different lua_State objects really point
     to the same global state, such as when using coroutines.
 
-    @note This is used for luabridge_assertions.
+    @note This is used for assertions.
 */
 inline bool equalstates (lua_State* L1, lua_State* L2)
 {
