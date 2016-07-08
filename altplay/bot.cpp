@@ -2,10 +2,12 @@
 #include "bot.hpp"
 #include "parser.hpp"
 #include "message.hpp"
+#include "script/script.h"
 
 
 altplay::bot::bot(asio::io_service& io_service_) : con_ {io_service_, bind(&bot::read_handler, this, std::placeholders::_1)}, logger_ {"log.txt"}
 {
+	script::initScripts();
     std::unordered_map<std::string, std::string> config_map{parser::parse_config("config.conf")};
     nick_ = config_map.at("bot_nick");
     user_ = config_map.at("bot_user");
@@ -26,7 +28,10 @@ void altplay::bot::read_handler(const std::string& str)
             con_.add_message(msg.message);
         }
 #endif
+		script::lua::callhook(msg.command, msg);
         std::cout << str << std::endl;
+
+
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
         std::cerr << str << std::endl;

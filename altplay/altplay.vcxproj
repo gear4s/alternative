@@ -97,7 +97,7 @@
       <Optimization>Custom</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ASIO_STANDALONE;_WIN32_WINNT=0x0A00;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\dev\altplay\altplay\include;C:\asio-1.11.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)altplay;$(SolutionDir)altplay\include;C:\asio-1.11.0\include</AdditionalIncludeDirectories>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
@@ -133,7 +133,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>ASIO_STANDALONE;_WIN32_WINNT=0x0A00;DEBUG_ON;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>F:\asio-1.11.0\include;C:\Users\Alex\Documents\GitHub\jsoncpp\dist</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)altplay;$(SolutionDir)altplay\include;C:\asio-1.11.0\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -144,9 +144,10 @@
     <ClCompile Include="bot.cpp" />
     <ClCompile Include="connection.cpp" />
     <ClCompile Include="logger.cpp" />
-    <ClCompile Include="luaglue.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />
+    <ClCompile Include="script\luaglue.cpp" />
+    <ClCompile Include="script\script.cpp" />
     <ClCompile Include="user.cpp" />
     <ClCompile Include="user_handler.cpp" />
   </ItemGroup>
@@ -170,8 +171,10 @@
     <ClInclude Include="include\luaconf.h" />
     <ClInclude Include="include\lualib.h" />
     <ClInclude Include="logger.hpp" />
+    <ClInclude Include="luaglue.h" />
     <ClInclude Include="message.hpp" />
     <ClInclude Include="parser.hpp" />
+    <ClInclude Include="script\script.h" />
     <ClInclude Include="user.hpp" />
     <ClInclude Include="user_handler.hpp" />
   </ItemGroup>
