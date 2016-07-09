@@ -2,12 +2,13 @@
 #include "LuaBridge/LuaBridge.h"
 #include "message.hpp"
 #include <list>
+#include <tuple>
 
 namespace altplay {
 	namespace script {
 		namespace lua {
 			extern lua_State *L;
-			extern int init();
+			extern std::tuple<int, const char *> init();
 			extern void callhook(std::string, message_struct);
 
 			struct irchook

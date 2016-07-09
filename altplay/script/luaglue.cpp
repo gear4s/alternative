@@ -19,13 +19,22 @@ namespace altplay {
 				_hooks.push_back(hook);
 			}
 
-			int init() {
+			std::tuple<int, const char *> init() {
 				L = luaL_newstate();
 				luaL_openlibs(L);
 
 				getGlobalNamespace(L)
 					.beginClass<message_struct>("message_struct")
-					.addData("nick", &message_struct::nick)
+#define setProp(n,nn) addProperty(#n, &message_struct::nn)
+						.setProp("nick", getNick)
+						.setProp("hostmask", getHostmask)
+						.setProp("ident", getIdent)
+						.setProp("prefix", getPrefix)
+						.setProp("params", getParams)
+						.setProp("target", getTarget)
+						.setProp("message", getMessage)
+#undef setProp
+						.addData("servmsg", &message_struct::is_server_message)
 					.endClass()
 
 					.beginNamespace("bot")
@@ -33,13 +42,13 @@ namespace altplay {
 					.endNamespace();
 
 				if (!L) {
-					return 0;
+					return std::make_tuple(0, "");
 				}
 				if (luaL_loadfile(L, "script.lua")){
-					return 1;
+					return std::make_tuple(1, lua_tostring(L, -1));
 				}
 				lua_call(L, 0, 0);
-				return 2;
+				return std::make_tuple(2, "");
 			}
 			
 			void callhook(std::string command, message_struct message) {
