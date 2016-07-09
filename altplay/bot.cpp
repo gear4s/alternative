@@ -4,7 +4,6 @@
 #include "message.hpp"
 #include "script/script.h"
 
-
 altplay::bot::bot(asio::io_service& io_service_) : con_ {io_service_, bind(&bot::read_handler, this, std::placeholders::_1)}, logger_ {"log.txt"}
 {
 	script::initScripts();
