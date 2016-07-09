@@ -16,11 +16,26 @@ set(SOURCE_FILES
         parser.cpp
         parser.hpp
         logger.cpp
-        logger.hpp)
+        logger.hpp
+        user.cpp
+        user.hpp
+        user_handler.cpp
+        user_handler.hpp
+        ./script/luaglue.cpp
+        ./script/luaglue.h
+        ./script/script.cpp
+        ./script/script.h
+        ./include/lua.h
+        ./include/lua.hpp
+        ./include/luaconf.h
+        ./include/lualib.h
+        ./include/lauxlib.h
+        ./include/LuaBridge/LuaBridge.h)
 
 if(DEBUG_ON)
     add_definitions(-DDEBUG_ON)
 endif(DEBUG_ON)
 
+include_directories("$ENV{HOME}/coding/cpp/gsl/include")
 add_executable(altplay ${SOURCE_FILES})
 target_link_libraries(altplay pthread)
