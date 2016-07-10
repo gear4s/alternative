@@ -1,6 +1,6 @@
 #pragma once
-#include "../include/LuaBridge/LuaBridge.h"
-#include "../message.hpp"
+#include "LuaBridge/LuaBridge.h"
+#include "message.hpp"
 #include <list>
 #include <tuple>
 
