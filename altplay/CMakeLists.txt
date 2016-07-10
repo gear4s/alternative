@@ -36,6 +36,8 @@ if(DEBUG_ON)
     add_definitions(-DDEBUG_ON)
 endif(DEBUG_ON)
 
+add_definitions(-DASIO_STANDALONE)
+
 include_directories("$ENV{HOME}/coding/cpp/gsl/include")
 add_executable(altplay ${SOURCE_FILES})
 target_link_libraries(altplay pthread)
