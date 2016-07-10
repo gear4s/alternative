@@ -19,7 +19,7 @@ altplay::bot::bot(asio::io_service& io_service_) : con_ {io_service_, bind(&bot:
       if (setrlimit(RLIMIT_CORE, &limit)) printf("failed to set ulimit -c.");
     }
     prctl(PR_SET_DUMPABLE, 1);
-
+    
     auto noop = [](int) {};
     signal(SIGHUP, noop);
     signal(SIGUSR1, noop);
