@@ -27,9 +27,6 @@ altplay::message_struct altplay::parser::handle_input(const std::string& str)
         }
         
         
-    } else {
-        throw std::runtime_error("unable to parse, please provide the developers"
-                                 " with the server message that caused this.");
     }
     return msg;
 }

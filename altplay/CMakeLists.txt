@@ -42,4 +42,4 @@ add_definitions(-DASIO_STANDALONE -DMYSQLPP_MYSQL_HEADERS_BURIED)
 
 include_directories("$ENV{HOME}/coding/cpp/gsl/include")
 add_executable(altplay ${SOURCE_FILES})
-target_link_libraries(altplay pthread lua )
+target_link_libraries(altplay pthread lua mysqlpp)
