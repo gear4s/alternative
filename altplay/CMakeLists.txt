@@ -30,7 +30,7 @@ set(SOURCE_FILES
         ./include/luaconf.h
         ./include/lualib.h
         ./include/lauxlib.h
-        ./include/LuaBridge/LuaBridge.h)
+        ./include/LuaBridge/LuaBridge.h database_handler.cpp database_handler.hpp)
 
 include_directories(${altplay_SOURCE_DIR}/ ${altplay_SOURCE_DIR}/include)
 
@@ -38,8 +38,8 @@ if (DEBUG_ON)
     add_definitions(-DDEBUG_ON)
 endif (DEBUG_ON)
 
-add_definitions(-DASIO_STANDALONE)
+add_definitions(-DASIO_STANDALONE -DMYSQLPP_MYSQL_HEADERS_BURIED)
 
 include_directories("$ENV{HOME}/coding/cpp/gsl/include")
 add_executable(altplay ${SOURCE_FILES})
-target_link_libraries(altplay pthread lua)
+target_link_libraries(altplay pthread lua )
