@@ -6,6 +6,7 @@
 #define ALTPLAY_DATABASE_HANDLER_HPP
 
 #include <mysql++/mysql++.h>
+#include <regex>
 #include "parser.hpp"
 
 namespace altplay {
@@ -13,6 +14,7 @@ namespace altplay {
     public:
         database_handler();
 
+        std::string escape_string(const std::string& str);
     private:
         mysqlpp::Connection con_;
         int port_;
