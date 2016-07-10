@@ -1,5 +1,7 @@
 bot.hook("396", function(msg)
-  print("server message\n\n")
+  if msg.is_server_message then
+    print("server message\n\n")
+  end
 end)
 
 bot.hook("NOTICE", function(msg)

@@ -41,8 +41,8 @@ namespace altplay {
             .Data(params)
             .Data(target)
             .Data(message)
+            .Data(is_server_message)
 #undef setProp
-            .addData("servmsg", &message_struct::is_server_message)
           .endClass()
 
           .beginNamespace("bot")
