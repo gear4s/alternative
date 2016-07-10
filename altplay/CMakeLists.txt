@@ -4,7 +4,7 @@ project(altplay)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wextra -Wpedantic")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O2 -fomit-frame-pointer")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -O0 -g")
-set(CMAKE_CXX_FLAGS_MINSIZEREL  "${CMAKE_CXX_FLAGS} -Os -fomit-frame-pointer")
+set(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS} -Os -fomit-frame-pointer")
 
 set(SOURCE_FILES
         bot.cpp
@@ -32,9 +32,9 @@ set(SOURCE_FILES
         ./include/lauxlib.h
         ./include/LuaBridge/LuaBridge.h)
 
-if(DEBUG_ON)
+if (DEBUG_ON)
     add_definitions(-DDEBUG_ON)
-endif(DEBUG_ON)
+endif (DEBUG_ON)
 
 add_definitions(-DASIO_STANDALONE)
 
