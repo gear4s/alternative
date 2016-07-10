@@ -1,4 +1,9 @@
 #include <cstdint>
+#include <csignal>
+#ifndef _WIN32
+#include <sys/resource.h>
+#include <sys/prctl.h>
+#endif
 #include "luaglue.h"
 
 using namespace luabridge;
@@ -39,6 +44,10 @@ namespace altplay {
 
 					.beginNamespace("bot")
 						.addFunction("hook", &hook)
+            .addProperty("quit", +[] { return altplay::quit; }, +[](bool v) {
+              if (altplay::quit && !v) luaL_error(L, "Cannot abort a quit");
+              altplay::quit = v;
+            })
 					.endNamespace();
 
 				if (!L) {

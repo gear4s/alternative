@@ -4,9 +4,33 @@
 #include "message.hpp"
 #include "script/script.h"
 
+namespace altplay {
+  bool quit = false;
+}
+
 altplay::bot::bot(asio::io_service& io_service_) : con_ {io_service_, bind(&bot::read_handler, this, std::placeholders::_1)}, logger_ {"log.txt"}
 {
-	script::initScripts();
+  // clean exit of bot
+  #ifndef _WIN32
+    rlimit limit;
+    if (getrlimit(RLIMIT_CORE, &limit)) printf("failed to get ulimit -c.");
+    else {
+      limit.rlim_cur = limit.rlim_max;
+      if (setrlimit(RLIMIT_CORE, &limit)) printf("failed to set ulimit -c.");
+    }
+    prctl(PR_SET_DUMPABLE, 1);
+
+    auto noop = [](int) {};
+    signal(SIGHUP, noop);
+    signal(SIGUSR1, noop);
+    signal(SIGUSR2, noop);
+  #endif
+
+    auto quitter = [](int) { altplay::quit = true; };
+    signal(SIGTERM, quitter);
+    signal(SIGINT, quitter);
+
+	  script::initScripts();
     std::unordered_map<std::string, std::string> config_map{parser::parse_config("config.conf")};
     nick_ = config_map.at("bot_nick");
     user_ = config_map.at("bot_user");

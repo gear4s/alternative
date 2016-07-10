@@ -6,6 +6,7 @@
 
 namespace altplay
 {
+  extern bool quit;
 	class bot {
 	public:
 		explicit bot(asio::io_service& io_service_);
