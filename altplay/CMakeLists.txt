@@ -32,7 +32,7 @@ set(SOURCE_FILES
         ./include/lauxlib.h
         ./include/LuaBridge/LuaBridge.h)
 
-include_directories(${root_SOURCE_DIR}/ ${root_SOURCE_DIR}/include)
+include_directories(${altplay_SOURCE_DIR}/ ${altplay_SOURCE_DIR}/include)
 
 if (DEBUG_ON)
     add_definitions(-DDEBUG_ON)
