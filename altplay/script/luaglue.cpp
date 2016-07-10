@@ -25,21 +25,6 @@ namespace altplay {
       }
 
       std::tuple<int, const char *> init() {
-#ifndef _WIN32
-        rlimit limit;
-        if (getrlimit(RLIMIT_CORE, &limit)) printf("failed to get ulimit -c.");
-        else {
-          limit.rlim_cur = limit.rlim_max;
-          if (setrlimit(RLIMIT_CORE, &limit)) printf("failed to set ulimit -c.");
-        }
-        prctl(PR_SET_DUMPABLE, 1);
-
-        auto noop = [](int) {};
-        signal(SIGHUP, noop);
-        signal(SIGUSR1, noop);
-        signal(SIGUSR2, noop);
-#endif
-
         auto quitter = [](int) { altplay::quit = true; };
         signal(SIGTERM, quitter);
         signal(SIGINT, quitter);
@@ -48,14 +33,14 @@ namespace altplay {
 
         getGlobalNamespace(L)
           .beginClass<message_struct>("message_struct")
-#define setProp(n,nn) addProperty(#n, &message_struct::nn)
-            .setProp("nick", getNick)
-            .setProp("hostmask", getHostmask)
-            .setProp("ident", getIdent)
-            .setProp("prefix", getPrefix)
-            .setProp("params", getParams)
-            .setProp("target", getTarget)
-            .setProp("message", getMessage)
+#define Data(n) addData(#n, &message_struct::n)
+            .Data(nick)
+            .Data(hostmask)
+            .Data(ident)
+            .Data(prefix)
+            .Data(params)
+            .Data(target)
+            .Data(message)
 #undef setProp
             .addData("servmsg", &message_struct::is_server_message)
           .endClass()

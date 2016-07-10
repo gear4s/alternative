@@ -555,19 +555,16 @@ struct Stack <char const*>
 template <>
 struct Stack <std::string>
 {
-  static inline void push (lua_State* L, std::string const& str)
+  static inline void push(lua_State* L, std::string const& str)
   {
-    lua_pushstring (L, str.c_str ());
+    lua_pushlstring(L, str.c_str(), str.size());
   }
 
-  static inline std::string get (lua_State* L, int index)
+  static inline std::string get(lua_State* L, int index)
   {
-    return std::string (luaL_checkstring (L, index));
-  }
-  
-  static inline bool is_a (lua_State* L, int index)
-  {
-    return lua_isstring (L, index);
+    size_t len;
+    const char *str = luaL_checklstring(L, index, &len);
+    return std::string(str, len);
   }
 };
 
@@ -578,18 +575,15 @@ struct Stack <std::string>
 template <>
 struct Stack <std::string const&>
 {
-  static inline void push (lua_State* L, std::string const& str)
+  static inline void push(lua_State* L, std::string const& str)
   {
-    lua_pushstring (L, str.c_str());
+    lua_pushlstring(L, str.c_str(), str.size());
   }
 
-  static inline std::string get (lua_State* L, int index)
+  static inline std::string get(lua_State* L, int index)
   {
-    return std::string (luaL_checkstring (L, index));
-  }
-  
-  static inline bool is_a (lua_State* L, int index)
-  {
-    return lua_isstring (L, index);
+    size_t len;
+    const char *str = luaL_checklstring(L, index, &len);
+    return std::string(str, len);
   }
 };

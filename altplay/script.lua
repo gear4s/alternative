@@ -1,9 +1,9 @@
 bot.hook("396", function(msg)
-  if msg.servmsg then
-    print("server message\n\n")
-  else
-    print(msg.nick)
-  end
+  print("server message\n\n")
+end)
+
+bot.hook("NOTICE", function(msg)
+  print(msg.nick .. " at " .. msg.hostmask .. " says " .. msg.message)
   
   print((bot.quit and "t" or "f").."\n\n")
   bot.quit = true
