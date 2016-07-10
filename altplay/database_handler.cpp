@@ -30,3 +30,12 @@ altplay::database_handler::database_handler() {
     }
 
 }
+
+std::string altplay::database_handler::escape_string(const std::string& str) {
+    std::string result{"null"};
+    std::smatch match;
+    if(std::regex_search(str, match, std::regex{"[0-9A-Za-z._]{3,32}"})) {
+        result = match[0];
+    }
+    return result;
+}
