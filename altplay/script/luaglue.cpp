@@ -59,8 +59,8 @@ namespace altplay {
             .endNamespace()
           .endNamespace();
 #define addEnum(n)    lua_pushstring(L, #n); lua_pushnumber(L, n); lua_rawset(L, -3)
-          lua_getglobal(L, "irc");
-          lua_getfield(L, -1, "reply");
+        lua_getglobal(L, "irc");
+        lua_getfield(L, -1, "reply");
           addEnum(WELCOME); addEnum(YOURHOST); addEnum(CREATED); addEnum(MYINFO); addEnum(BOUNCE);
           addEnum(TRACELINK); addEnum(TRACECONNECTING); addEnum(TRACEHANDSHAKE); addEnum(TRACEUNKNOWN);
           addEnum(TRACEOPERATOR); addEnum(TRACEUSER); addEnum(TRACESERVER); addEnum(TRACESERVICE);
@@ -80,7 +80,7 @@ namespace altplay {
           addEnum(MOTD); addEnum(ENDOFINFO); addEnum(MOTDSTART); addEnum(ENDOFMOTD); addEnum(YOUREOPER);
           addEnum(REHASHING); addEnum(YOURESERVICE); addEnum(TIME); addEnum(USERSSTART); addEnum(USERS);
           addEnum(ENDOFUSERS); addEnum(NOUSERS);
-          lua_getfield(L, -2, "error");
+        lua_getfield(L, -2, "error");
           addEnum(NOSUCHNICK); addEnum(NOSUCHSERVER); addEnum(NOSUCHCHANNEL); addEnum(CANNOTSENDTOCHAN);
           addEnum(TOOMANYCHANNELS); addEnum(WASNOSUCHNICK); addEnum(TOOMANYTARGETS); addEnum(NOSUCHSERVICE);
           addEnum(NOORIGIN); addEnum(NORECIPIENT); addEnum(NOTEXTTOSEND); addEnum(NOTOPLEVEL);
