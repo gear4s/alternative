@@ -51,7 +51,10 @@ namespace altplay {
               if (altplay::quit && !v) luaL_error(L, "Cannot abort a quit");
               altplay::quit = v;
             })
-          .endNamespace();
+          .endNamespace()
+          .beginNamepsace("irc").endNamespace();
+#define addEnum(n)    lua_pushstring(L, #n); lua_pushnumber(L, n); lua_rawset(L, -3)
+          lua_getglobal(L, "irc");
 
         if (!L) {
           return std::make_tuple(0, "");

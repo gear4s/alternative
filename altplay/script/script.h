@@ -45,7 +45,7 @@ namespace altplay {
       INFO        = 371, MOTD,
       ENDOFINFO   = 374, MOTDSTART, ENDOFMOTD,
       YOUREOPER   = 381, REHASHING, YOURESERVICE,
-      IME         = 391, USERSSTART, USERS, ENDOFUSERS, NOUSERS
+      TIME         = 391, USERSSTART, USERS, ENDOFUSERS, NOUSERS
     };
 
     // IRC errors
