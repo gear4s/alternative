@@ -16,7 +16,7 @@ namespace altplay {
       {
         irchook(lua_State *L) : function(L) {};
 
-        std::string command;
+        auto command;
         luabridge::LuaRef function;
       };
       extern std::list<irchook> _hooks;
