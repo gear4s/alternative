@@ -24,7 +24,7 @@ namespace altplay {
         _hooks.push_back(hook);
       }
 
-      std::tuple<int, const char *> init() {
+      auto init() -> std::tuple<int, const char *> {
         auto quitter = [](int) { altplay::quit = true; };
         signal(SIGTERM, quitter);
         signal(SIGINT, quitter);
@@ -108,18 +108,6 @@ namespace altplay {
       }
 
       void callhook(std::string reply, message_struct message) {
-        if (_hooks.empty())
-          return;
-
-        for (std::list<irchook>::const_iterator itr = _hooks.begin(); itr != _hooks.end(); ++itr) {
-          if (itr->command == reply) {
-            (itr->function)(message);
-            break;
-          }
-        }
-      }
-
-      void callhook(int reply, message_struct message) {
         if (_hooks.empty())
           return;
 
