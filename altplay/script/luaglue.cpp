@@ -4,6 +4,8 @@
 #include <sys/resource.h>
 #include <sys/prctl.h>
 #endif
+#include "bot.hpp"
+#include "irctypes.h"
 #include "script.h"
 
 using namespace luabridge;

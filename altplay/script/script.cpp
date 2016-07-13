@@ -1,3 +1,4 @@
+#include "bot.hpp"
 #include "script.h"
 
 namespace altplay {

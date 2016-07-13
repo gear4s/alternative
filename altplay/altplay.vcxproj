@@ -144,6 +144,7 @@
     <ClCompile Include="bot.cpp" />
     <ClCompile Include="connection.cpp" />
     <ClCompile Include="logger.cpp" />
+    <ClCompile Include="luahook.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />
     <ClCompile Include="script\luaglue.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="include\LuaBridge\LuaBridge.h" />
     <ClInclude Include="include\luaconf.h" />
     <ClInclude Include="include\lualib.h" />
+    <ClInclude Include="irctypes.h" />
     <ClInclude Include="logger.hpp" />
     <ClInclude Include="message.hpp" />
     <ClInclude Include="parser.hpp" />

@@ -51,9 +51,8 @@ void altplay::bot::read_handler(const std::string& str)
             con_.add_message(msg.message);
         }
 #endif
-		script::lua::callhook(msg.command, msg);
+        script::lua::callhook(msg.command, msg);
         std::cout << str << std::endl;
-
 
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
