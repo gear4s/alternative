@@ -18,10 +18,7 @@ namespace altplay {
     private:
         mysqlpp::Connection con_;
         int port_;
-        std::string host_;
-        std::string user_;
-        std::string password_;
-        std::string database_;
+        std::string host_, user_, password_, database_;
     };
 }
 
