@@ -28,15 +28,13 @@ altplay::bot::bot(asio::io_service &io_service_) : con_{io_service_,
     }
     prctl(PR_SET_DUMPABLE, 1);
 
-    auto noop = [](int)
-    {};
+    auto noop = [](int) {};
     signal(SIGHUP, noop);
     signal(SIGUSR1, noop);
     signal(SIGUSR2, noop);
 #endif
 
-    auto quitter = [](int)
-    { altplay::quit = true; };
+    auto quitter = [](int){ altplay::quit = true; };
     signal(SIGTERM, quitter);
     signal(SIGINT, quitter);
 
