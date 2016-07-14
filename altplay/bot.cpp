@@ -1,4 +1,6 @@
 #include <iostream>
+#include <sys/prctl.h>
+#include <sys/resource.h>
 #include "bot.hpp"
 #include "parser.hpp"
 #include "message.hpp"
