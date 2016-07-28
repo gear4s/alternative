@@ -1,12 +1,7 @@
-#include <cstdint>
-#include <csignal>
-#ifndef _WIN32
-#include <sys/resource.h>
-#include <sys/prctl.h>
-#endif
 #include "bot.hpp"
 #include "irctypes.h"
 #include "script.h"
+#include <iostream>
 
 using namespace luabridge;
 namespace altplay {
@@ -25,6 +20,39 @@ namespace altplay {
         _hooks.push_back(hook);
       }
 
+      void hook(int command, LuaRef function) {
+        irchook hook(L);
+
+        hook.icommand = command;
+        hook.function = function;
+
+        _hooks.push_back(hook);
+      }
+
+      void callhook(std::string reply, message_struct message) {
+        if (_hooks.empty())
+          return;
+
+        for (std::list<irchook>::const_iterator itr = _hooks.begin(); itr != _hooks.end(); ++itr) {
+          if (itr->command == reply) {
+            (itr->function)(message);
+            break;
+          }
+        }
+      }
+
+      void callhook(int reply, message_struct message) {
+        if (_hooks.empty())
+          return;
+
+        for (std::list<irchook>::const_iterator itr = _hooks.begin(); itr != _hooks.end(); ++itr) {
+          if (itr->icommand == reply) {
+            (itr->function)(message);
+            break;
+          }
+        }
+      }
+
       auto init() -> std::tuple<int, const char *> {
         L = luaL_newstate();
         luaL_openlibs(L);
@@ -32,20 +60,34 @@ namespace altplay {
         getGlobalNamespace(L)
           .beginClass<message_struct>("message_struct")
 #define Data(n) addData(#n, &message_struct::n)
-          .Data(nick)
-          .Data(hostmask)
-          .Data(ident)
-          .Data(prefix)
-          .Data(params)
-          .Data(target)
-          .Data(message)
-          .Data(is_server_message)
+            .Data(nick)
+            .Data(hostmask)
+            .Data(ident)
+            .Data(prefix)
+            .Data(params)
+            .Data(target)
+            .Data(message)
+            .Data(is_server_message)
 #undef setProp
           .endClass()
 
           .beginNamespace("bot")
-          .addFunction("hook", &hook)
-          .addProperty("quit", +[] { return altplay::quit; }, +[](bool v) {
+            .addCFunction("hook", [](lua_State* L)  -> int  {
+              int top = lua_gettop(L);
+              if (top == 2) {
+                if (lua_isnumber(L, 1)) {
+                  printf("it's a %g\n", lua_tonumber(L, 1));
+                  hook(lua_tonumber(L, 1), LuaRef(L).fromStack(L, 2));
+                }
+                else if (lua_isstring(L, 1)) {
+                  printf("it's a %s\n", lua_tostring(L, 1));
+                  hook(lua_tostring(L, 1), LuaRef(L).fromStack(L, 2));
+                }
+                else luaL_error(L, "first argument for hook invalid; expected string or number.");
+              }
+              return 0;
+            })
+            .addProperty("quit", +[] { return altplay::quit; }, +[](bool v) {
               if (altplay::quit && !v) luaL_error(L, "Cannot abort a quit");
               altplay::quit = v;
             })
@@ -92,10 +134,6 @@ namespace altplay {
           addEnum(RESTRICTED); addEnum(UNIQOPPRIVSNEEDED); addEnum(NOOPERHOST); addEnum(UMODEUNKNOWNFLAG);
           addEnum(USERSDONTMATCH);
         lua_settable(L, -3);
-
-        lua_pushliteral(L, "hook");
-        lua_newtable(L);
-        lua_settable(L, -3);
         lua_setglobal(L, "irc");
 #undef addEnum
 
@@ -107,18 +145,6 @@ namespace altplay {
         }
         lua_call(L, 0, 0);
         return std::make_tuple(2, "");
-      }
-
-      void callhook(std::string reply, message_struct message) {
-        if (_hooks.empty())
-          return;
-
-        for (std::list<irchook>::const_iterator itr = _hooks.begin(); itr != _hooks.end(); ++itr) {
-          if (itr->command == reply) {
-            (itr->function)(message);
-            break;
-          }
-        }
       }
     }
   }

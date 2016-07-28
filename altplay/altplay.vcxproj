@@ -144,7 +144,6 @@
     <ClCompile Include="bot.cpp" />
     <ClCompile Include="connection.cpp" />
     <ClCompile Include="logger.cpp" />
-    <ClCompile Include="luahook.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />
     <ClCompile Include="script\luaglue.cpp" />
@@ -163,6 +162,7 @@
     <ClInclude Include="include\LuaBridge\detail\Constructor.h" />
     <ClInclude Include="include\LuaBridge\detail\FuncTraits.h" />
     <ClInclude Include="include\LuaBridge\detail\LuaHelpers.h" />
+    <ClInclude Include="include\LuaBridge\detail\LuaRef.h" />
     <ClInclude Include="include\LuaBridge\detail\Namespace.h" />
     <ClInclude Include="include\LuaBridge\detail\Stack.h" />
     <ClInclude Include="include\LuaBridge\detail\TypeList.h" />
