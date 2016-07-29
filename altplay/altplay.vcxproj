@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClCompile Include="bot.cpp" />
     <ClCompile Include="connection.cpp" />
+    <ClCompile Include="later.cpp" />
     <ClCompile Include="logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />
@@ -154,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="bot.hpp" />
     <ClInclude Include="connection.hpp" />
+    <ClInclude Include="later.h" />
     <ClInclude Include="include\lauxlib.h" />
     <ClInclude Include="include\lua.h" />
     <ClInclude Include="include\lua.hpp" />

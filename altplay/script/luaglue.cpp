@@ -1,10 +1,13 @@
 #include "bot.hpp"
 #include "irctypes.h"
 #include "script.h"
+#include "connection.hpp"
 #include <iostream>
 
 using namespace luabridge;
 namespace altplay {
+  extern  bot *botinstance;
+
   namespace script {
     namespace lua {
       lua_State *L;
@@ -84,6 +87,14 @@ namespace altplay {
                   hook(lua_tostring(L, 1), LuaRef(L).fromStack(L, 2));
                 }
                 else luaL_error(L, "first argument for hook invalid; expected string or number.");
+              }
+              return 0;
+            })
+            .addCFunction("send", [](lua_State *L) -> int {
+              if (lua_gettop(L) == 1) {
+                if (lua_isstring(L, 1)) {
+                  botinstance->send_raw(lua_tostring(L, 1));
+                }
               }
               return 0;
             })

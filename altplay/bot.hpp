@@ -6,7 +6,6 @@
 
 namespace altplay
 {
-  extern bool quit;
 	class bot {
 	public:
 		explicit bot(asio::io_service& io_service_);
@@ -15,9 +14,13 @@ namespace altplay
 		void read_handler(const std::string& str);
 		void reg_with_server();
 
+    void send_raw(std::string);
+
 	private:
 		altplay::connection con_;
 		altplay::logger logger_;
 		std::string nick_, user_;
 	};
+
+  extern bool quit;
 } // end of ns altplay

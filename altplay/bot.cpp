@@ -52,8 +52,14 @@ void altplay::bot::read_handler(const std::string &str)
 // TODO add error handling, like when a certain nick is taken already and similar issues.
 void altplay::bot::reg_with_server()
 {
-    std::string nick = "NICK " + nick_;
-    std::string user = "USER " + user_;
-    con_.add_message(user);
-    con_.add_message(nick);
+  std::string nick = "NICK " + nick_;
+  std::string user = "USER " + user_;
+  con_.add_message(user);
+  con_.add_message(nick);
+}
+
+// TODO add error handling, like when a certain nick is taken already and similar issues.
+void altplay::bot::send_raw(std::string str)
+{
+  con_.add_message(str);
 }
