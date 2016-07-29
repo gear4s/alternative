@@ -57,6 +57,26 @@ namespace altplay {
           luaL_error(L, "OOM when adding a new later");
           return 0;
         }
+
+        void clear() {
+          for (auto t : serv) delete t;
+          serv.clear();
+          if (currentlambda && !currentlambda->abs) currentlambda->delay = 0;
+        }
+
+        void cancel(latertoken& t) {
+          if (&t == &neverhappening) return;
+          if (&t == currentlambda) {
+            currentlambda->delay = 0;
+            return;
+          }
+          auto& list = t.abs ? abs : serv;
+          for (auto it = list.before_begin(), prev = (it++, list.before_begin()); it != list.end(); it++, prev++) if (&t == *it) {
+            list.erase_after(prev);
+            delete &t;
+            break;
+          }
+        }
       }
     }
   }
