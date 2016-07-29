@@ -6,6 +6,7 @@
 namespace altplay {
   namespace script {
     namespace lua {
+      extern lua_State *L;
       namespace later {
         struct latertoken {
           int lambdaindex;

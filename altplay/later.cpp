@@ -5,6 +5,34 @@ namespace altplay {
   namespace script {
     namespace lua {
       namespace later {
+        template<typename F, typename Err>
+        void lua_cppcall(const F& f, const Err& err) {
+          extern int stackdumperref;
+          lua_rawgeti(L, LUA_REGISTRYINDEX, stackdumperref);
+          int dumperpos = lua_gettop(L);
+          lua_pushcfunction(L, [](lua_State* L) {
+            try { (*(const F*)lua_touserdata(L, 1))(); return 0; }
+            catch (const std::exception& e) {
+              lua_pushfstring(L, "exception %s: %s", classname(e).c_str(), e.what());
+            }
+            catch (...) {
+#if defined(LUA_USE_LONGJMP) || defined(LUA_USE_ULONGJMP)
+              lua_pushstring(L, "C++ exception (not a std::exception)");
+#else
+              throw;
+#endif
+            }
+            return lua_error(L);
+          });
+          lua_pushlightuserdata(L, const_cast<F*>(&f));
+          int result = lua_pcall(L, 1, 0, dumperpos);
+          lua_remove(L, dumperpos);
+          if (result == LUA_OK) return;
+          std::string e = lua_tostring(L, -1);
+          lua_pop(L, 1);
+          err(e);
+        }
+
         unsigned int servermillis, curtime;
         unsigned int timeBase;
         auto enet_time_get(void) -> unsigned int
@@ -15,10 +43,6 @@ namespace altplay {
         void enet_time_set(unsigned int newTimeBase)
         {
           timeBase = (unsigned int)timeGetTime() - newTimeBase;
-        }
-
-        namespace lua {
-          extern lua_State *L;
         }
 
         latertoken::~latertoken() {
@@ -48,7 +72,7 @@ namespace altplay {
           int lambdaindex = luaL_ref(L, LUA_REGISTRYINDEX);
           latertoken* l = 0;
           try {
-            insert(l = new latertoken{ lambdaindex, abs, delay + (abs ? longtotalmillis : servermillis), delay * (unsigned long long)lua_toboolean(L, 3) }, abs ? later::abs : game);
+            insert(l = new latertoken{ lambdaindex, abs, delay + (abs ? longtotalmillis : servermillis), delay * (unsigned long long)lua_toboolean(L, 3) }, abs ? later::abs : serv);
             return l;
           }
           catch (...) {
