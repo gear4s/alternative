@@ -64,19 +64,19 @@ namespace altplay {
         getGlobalNamespace(L)
           .beginClass<message_struct>("message_struct")
 #define Data(n) addData(#n, &message_struct::n)
-            .Data(nick)
-            .Data(hostmask)
-            .Data(ident)
-            .Data(prefix)
-            .Data(params)
-            .Data(target)
-            .Data(message)
-            .Data(is_server_message)
+          .Data(nick)
+          .Data(hostmask)
+          .Data(ident)
+          .Data(prefix)
+          .Data(params)
+          .Data(target)
+          .Data(message)
+          .Data(is_server_message)
 #undef setProp
           .endClass()
 
           .beginNamespace("bot")
-            .addCFunction("hook", [](lua_State* L)  -> int  {
+            .addCFunction("hook", [](lua_State* L)  -> int {
               int top = lua_gettop(L);
               if (top == 2) {
                 if (lua_isnumber(L, 1)) {
@@ -107,6 +107,11 @@ namespace altplay {
               if (altplay::quit && !v) luaL_error(L, "Cannot abort a quit");
               altplay::quit = v;
             })
+
+            // bot control functions here
+            .addFunction("rename", +[](const char *newnick) {
+              botinstance->send_raw("NICK %s", newnick);
+            })
           .endNamespace();
 #define addEnum(n)    lua_pushliteral(L, #n); lua_pushnumber(L, n); lua_rawset(L, -3)
         lua_newtable(L);
@@ -130,7 +135,7 @@ namespace altplay {
           addEnum(ENDOFNAMES); addEnum(BANLIST); addEnum(ENDOFBANLIST); addEnum(ENDOFWHOWAS); addEnum(INFO);
           addEnum(MOTD); addEnum(ENDOFINFO); addEnum(MOTDSTART); addEnum(ENDOFMOTD); addEnum(YOUREOPER);
           addEnum(REHASHING); addEnum(YOURESERVICE); addEnum(TIME); addEnum(USERSSTART); addEnum(USERS);
-          addEnum(ENDOFUSERS); addEnum(NOUSERS);
+        addEnum(ENDOFUSERS); addEnum(NOUSERS);
         lua_settable(L, -3);
 
         lua_pushliteral(L, "error");

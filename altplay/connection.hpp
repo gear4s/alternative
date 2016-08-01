@@ -23,6 +23,7 @@ class connection: public std::enable_shared_from_this< connection >
 public:
     connection(asio::io_service &io_service_, bot_read_handler_t rh);
     void add_message(std::string &message);
+    void add_message(const char *message);
     void shutdown();
 
 private:

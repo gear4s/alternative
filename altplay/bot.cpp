@@ -1,4 +1,7 @@
 #include <iostream>
+#include <cstdarg>    // va_start, va_end, std::va_list
+#include <cstddef>    // std::size_t
+#include <vector>     // std::vector
 #include "bot.hpp"
 #include "parser.hpp"
 #include "message.hpp"
@@ -49,6 +52,13 @@ void altplay::bot::read_handler(const std::string &str)
     }
 }
 
+const char *altplay::bot::strformat(std::string str, va_list args) {
+  static char buf[512];
+  _vsnprintf(buf, sizeof(buf), str.c_str(), args);
+  buf[512 - 1] = 0;
+  return buf;
+}
+
 // TODO add error handling, like when a certain nick is taken already and similar issues.
 void altplay::bot::reg_with_server()
 {
@@ -59,7 +69,10 @@ void altplay::bot::reg_with_server()
 }
 
 // TODO add error handling, like when a certain nick is taken already and similar issues.
-void altplay::bot::send_raw(std::string str)
+void altplay::bot::send_raw(std::string str, ...)
 {
-  con_.add_message(str);
+  va_list args;
+  va_start(args, str);
+  con_.add_message(strformat(str, args));
+  va_end(args);
 }

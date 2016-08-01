@@ -69,8 +69,14 @@ void connection::do_write( )
 
 void connection::add_message(std::string &message)
 {
-    std::lock_guard<std::mutex > lock( mutex_ );
-    send_queue.push_back( message );
+  std::lock_guard<std::mutex > lock(mutex_);
+  send_queue.push_back(message);
+}
+
+void connection::add_message(const char *message)
+{
+  std::lock_guard<std::mutex > lock(mutex_);
+  send_queue.push_back(message);
 }
 
 void connection::shutdown()

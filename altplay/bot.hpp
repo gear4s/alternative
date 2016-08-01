@@ -12,9 +12,10 @@ namespace altplay
 
 		// entry point for this bot, supplied to a connection as a callback
 		void read_handler(const std::string& str);
-		void reg_with_server();
+    void reg_with_server();
 
-    void send_raw(std::string);
+    void send_raw(std::string, ...);
+    const char *strformat(std::string, va_list);
 
 	private:
 		altplay::connection con_;
