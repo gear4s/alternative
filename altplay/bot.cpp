@@ -1,7 +1,5 @@
 #include <iostream>
 #include <cstdarg>    // va_start, va_end, std::va_list
-#include <cstddef>    // std::size_t
-#include <vector>     // std::vector
 #include "bot.hpp"
 #include "parser.hpp"
 #include "message.hpp"
