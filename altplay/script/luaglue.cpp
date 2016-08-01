@@ -3,6 +3,7 @@
 #include "script.h"
 #include "connection.hpp"
 #include <iostream>
+#include "later.h"
 
 using namespace luabridge;
 namespace altplay {
@@ -98,6 +99,10 @@ namespace altplay {
               }
               return 0;
             })
+            .beginClass<later::latertoken>("latertoken")
+            .endClass()
+            .addFunction("later", +[](lua_State* L) { return later::newlater(L); })
+            .addFunction("cancel", later::cancel)
             .addProperty("quit", +[] { return altplay::quit; }, +[](bool v) {
               if (altplay::quit && !v) luaL_error(L, "Cannot abort a quit");
               altplay::quit = v;

@@ -1,13 +1,13 @@
-
 #include "later.h"
 
 namespace altplay {
   namespace script {
     namespace lua {
       namespace later {
+        int stackdumperref = LUA_NOREF;
+
         template<typename F, typename Err>
         void lua_cppcall(const F& f, const Err& err) {
-          extern int stackdumperref;
           lua_rawgeti(L, LUA_REGISTRYINDEX, stackdumperref);
           int dumperpos = lua_gettop(L);
           lua_pushcfunction(L, [](lua_State* L) {
@@ -35,12 +35,12 @@ namespace altplay {
 
         unsigned int servermillis, curtime;
         unsigned int timeBase;
-        auto enet_time_get(void) -> unsigned int
+        auto time_get(void) -> unsigned int
         {
           return (unsigned int)timeGetTime() - timeBase;
         }
 
-        void enet_time_set(unsigned int newTimeBase)
+        void time_set(unsigned int newTimeBase)
         {
           timeBase = (unsigned int)timeGetTime() - newTimeBase;
         }
@@ -49,8 +49,7 @@ namespace altplay {
           if (lambdaindex != LUA_NOREF) luaL_unref(lua::L, LUA_REGISTRYINDEX, lambdaindex);
         }
 
-        std::forward_list<latertoken*> abs, serv;
-        unsigned long long longtotalmillis = 0;
+        std::forward_list<latertoken*> serv;
         latertoken* currentlambda = 0;
 
         void insert(latertoken* t, std::forward_list<latertoken*>& list) {
@@ -63,7 +62,7 @@ namespace altplay {
         }
 
         static latertoken neverhappening{ LUA_NOREF };
-        auto newlater(lua_State* L, bool abs) -> latertoken* {
+        auto newlater(lua_State* L) -> latertoken* {
           auto fdelay = luaL_checknumber(L, 1);
           luaL_argcheck(L, fdelay > 0, 1, "invalid delay");
           if (std::isinf(fdelay)) return &neverhappening;
@@ -72,7 +71,7 @@ namespace altplay {
           int lambdaindex = luaL_ref(L, LUA_REGISTRYINDEX);
           latertoken* l = 0;
           try {
-            insert(l = new latertoken{ lambdaindex, abs, delay + (abs ? longtotalmillis : servermillis), delay * (unsigned long long)lua_toboolean(L, 3) }, abs ? later::abs : serv);
+            insert(l = new latertoken{ lambdaindex, delay + (servermillis), delay * (unsigned long long)lua_toboolean(L, 3) }, serv);
             return l;
           }
           catch (...) {
@@ -85,7 +84,7 @@ namespace altplay {
         void clear() {
           for (auto t : serv) delete t;
           serv.clear();
-          if (currentlambda && !currentlambda->abs) currentlambda->delay = 0;
+          if (currentlambda) currentlambda->delay = 0;
         }
 
         void cancel(latertoken& t) {
@@ -94,12 +93,42 @@ namespace altplay {
             currentlambda->delay = 0;
             return;
           }
-          auto& list = t.abs ? abs : serv;
+          auto& list = serv;
           for (auto it = list.before_begin(), prev = (it++, list.before_begin()); it != list.end(); it++, prev++) if (&t == *it) {
             list.erase_after(prev);
             delete &t;
             break;
           }
+        }
+
+        void check(unsigned long long now, std::forward_list<latertoken*>& list) {
+          while (!list.empty() && list.front()->when <= now) {
+            auto l = currentlambda = list.front();
+            list.pop_front();
+            lua_cppcall([l, &list] {
+              lua_rawgeti(L, LUA_REGISTRYINDEX, l->lambdaindex);
+              lua_call(L, 0, 0);
+              if (!l->delay) {
+                delete l;
+                return;
+              }
+              l->when += l->delay;
+              insert(l, list);
+            }, [l, &list](std::string& err) {
+              printf("One later resulted in an error%s: %s", l->delay ? " and has been cancelled" : "", err.c_str());
+              delete l;
+            });
+            currentlambda = 0;
+          }
+        }
+
+        void check() {
+          check(servermillis, serv);
+        }
+
+        void fini() {
+          for (auto& laterlist : { later::serv }) for (auto l : laterlist) delete l;
+          later::serv.clear();
         }
       }
     }
