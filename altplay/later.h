@@ -1,9 +1,13 @@
 #pragma once
 #include "LuaBridge/LuaBridge.h"
 #include <forward_list>
+
+#ifdef __WIN32
 #include <winsock2.h>
+#endif
 
 #ifdef __GNUG__
+#include <cmath>
 #include <cxxabi.h>
 #endif
 

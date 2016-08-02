@@ -9,6 +9,7 @@ bot.hook(396, function(msg)
       print("later server message\n\n")
     end)
     bot.send("NICK lua_tester")
+    bot.rename("lua_tester2")
   end
 end)
 

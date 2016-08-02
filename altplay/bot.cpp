@@ -5,6 +5,10 @@
 #include "message.hpp"
 #include "script/script.h"
 
+#ifndef __WIN32
+#define _vsnprintf vsnprintf
+#endif
+
 namespace altplay
 {
     bool quit = false;

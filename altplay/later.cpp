@@ -34,16 +34,6 @@ namespace altplay {
         }
 
         unsigned int servermillis, curtime;
-        unsigned int timeBase;
-        auto time_get(void) -> unsigned int
-        {
-          return (unsigned int)timeGetTime() - timeBase;
-        }
-
-        void time_set(unsigned int newTimeBase)
-        {
-          timeBase = (unsigned int)timeGetTime() - newTimeBase;
-        }
 
         latertoken::~latertoken() {
           if (lambdaindex != LUA_NOREF) luaL_unref(lua::L, LUA_REGISTRYINDEX, lambdaindex);
