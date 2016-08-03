@@ -13,10 +13,11 @@ namespace altplay {
   bot *botinstance;
 }
 
+bool quit = false;
 int main( )
 {
     std::thread tT([]() {
-      while (true) {
+      while (!quit) {
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
         altplay::script::lua::later::servermillis += 1;
         altplay::script::lua::later::check();
@@ -30,21 +31,18 @@ int main( )
         signals.async_wait(std::bind(&asio::io_service::stop, &io_service_));
         altplay::bot *bot = new altplay::bot( io_service_ );
         altplay::botinstance = bot;
-        io_service_.run( );
-    }
-
-    catch ( const exception &e ) {
+        io_service_.run();
+    } catch ( const exception &e ) {
         cout << e.what( ) << endl;
         getchar( );
     }
+    
+    quit = true;
 
     //detach threadTimer from main thread
-    if (tT.joinable())  {
+    if (tT.joinable())
       //main is blocked until tT is not finished
       tT.join();
-    } else {
-      cout << "tT is detached" << endl;
-    }
 
     return 0;
 }
