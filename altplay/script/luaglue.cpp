@@ -3,6 +3,7 @@
 #include "script.h"
 #include "connection.hpp"
 #include <iostream>
+#include <sstream>
 #include "later.h"
 
 using namespace luabridge;
@@ -111,6 +112,32 @@ namespace altplay {
             // bot control functions here
             .addFunction("rename", +[](const char *newnick) {
               botinstance->send_raw("NICK %s", newnick);
+            })
+          .endNamespace()
+          .beginNamespace("string")
+            // implement string.split in core
+            .addCFunction("split", +[](lua_State *L) -> int {
+              if(lua_gettop(L) == 2) {
+                const char *s = lua_tostring(L,1);
+                const char *token = lua_tostring(L, 2);
+                
+                int i = 0; 
+                lua_newtable(L);
+                char* pch = strtok(s, token);
+                lua_newtable(L);
+                lua_pushnumber(L,i);
+                lua_pushstring(L,pch);
+                lua_settable(L,-3);
+                while(pch != NULL) {i++;
+                  pch = strtok(NULL,token);
+                  lua_pushnumber(L,i);
+                  lua_pushstring(L,pch);
+                  lua_settable(L,-3);
+                  i++;
+                }
+                
+                return 1;
+              }
             })
           .endNamespace();
 #define addEnum(n)    lua_pushliteral(L, #n); lua_pushnumber(L, n); lua_rawset(L, -3)
