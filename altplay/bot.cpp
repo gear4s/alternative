@@ -9,11 +9,6 @@
 #define _vsnprintf vsnprintf
 #endif
 
-namespace altplay
-{
-    bool quit = false;
-}
-
 altplay::bot::bot(asio::io_service &io_service_) : con_{io_service_,
                                                         bind(&bot::read_handler, this, std::placeholders::_1)},
                                                    logger_{"log.txt"}
@@ -23,6 +18,10 @@ altplay::bot::bot(asio::io_service &io_service_) : con_{io_service_,
     nick_ = config_map.at("bot_nick");
     user_ = config_map.at("bot_user");
     reg_with_server();
+}
+
+void altplay::bot::quit() {
+  con_.shutdown();
 }
 
 void altplay::bot::read_handler(const std::string &str)

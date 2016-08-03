@@ -104,10 +104,6 @@ namespace altplay {
             .endClass()
             .addFunction("later", +[](lua_State* L) { return later::newlater(L); })
             .addFunction("cancel", later::cancel)
-            .addProperty("quit", +[] { return altplay::quit; }, +[](bool v) {
-              if (altplay::quit && !v) luaL_error(L, "Cannot abort a quit");
-              altplay::quit = v;
-            })
 
             // bot control functions here
             .addFunction("rename", +[](const char *newnick) {
