@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(altplay)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wextra -Wpedantic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wextra -Wpedantic -fpermissive")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O2 -fomit-frame-pointer")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -O0 -g")
 set(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS} -Os -fomit-frame-pointer")
@@ -15,6 +15,8 @@ set(SOURCE_FILES
         message.hpp
         parser.cpp
         parser.hpp
+        later.cpp
+        later.h
         logger.cpp
         logger.hpp
         user.cpp
@@ -23,6 +25,7 @@ set(SOURCE_FILES
         user_handler.hpp
         ./script/luaglue.cpp
         ./script/luaglue.h
+        ./script/luairccmd.cpp
         ./script/script.cpp
         ./script/script.h
         ./include/lua.h

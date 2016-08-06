@@ -1,17 +1,19 @@
-#include <cstdint>
-#include <csignal>
-#ifndef _WIN32
-#include <sys/resource.h>
-#include <sys/prctl.h>
-#endif
 #include "bot.hpp"
 #include "irctypes.h"
 #include "script.h"
+#include "connection.hpp"
+#include <iostream>
+#include <sstream>
+#include "later.h"
 
 using namespace luabridge;
 namespace altplay {
+  extern  bot *botinstance;
+
   namespace script {
     namespace lua {
+      extern void bindIrcToLua(lua_State *L);
+      
       lua_State *L;
 
       std::list<irchook> _hooks;
@@ -23,6 +25,39 @@ namespace altplay {
         hook.function = function;
 
         _hooks.push_back(hook);
+      }
+
+      void hook(int command, LuaRef function) {
+        irchook hook(L);
+
+        hook.icommand = command;
+        hook.function = function;
+
+        _hooks.push_back(hook);
+      }
+
+      void callhook(std::string reply, message_struct message) {
+        if (_hooks.empty())
+          return;
+
+        for (std::list<irchook>::const_iterator itr = _hooks.begin(); itr != _hooks.end(); ++itr) {
+          if (itr->command == reply) {
+            (itr->function)(message);
+            break;
+          }
+        }
+      }
+
+      void callhook(int reply, message_struct message) {
+        if (_hooks.empty())
+          return;
+
+        for (std::list<irchook>::const_iterator itr = _hooks.begin(); itr != _hooks.end(); ++itr) {
+          if (itr->icommand == reply) {
+            (itr->function)(message);
+            break;
+          }
+        }
       }
 
       auto init() -> std::tuple<int, const char *> {
@@ -44,12 +79,66 @@ namespace altplay {
           .endClass()
 
           .beginNamespace("bot")
-          .addFunction("hook", &hook)
-          .addProperty("quit", +[] { return altplay::quit; }, +[](bool v) {
-              if (altplay::quit && !v) luaL_error(L, "Cannot abort a quit");
-              altplay::quit = v;
+            .addCFunction("hook", [](lua_State* L)  -> int {
+              int top = lua_gettop(L);
+              if (top == 2) {
+                if (lua_isnumber(L, 1)) {
+                  printf("it's a %g\n", lua_tonumber(L, 1));
+                  hook(lua_tonumber(L, 1), LuaRef(L).fromStack(L, 2));
+                }
+                else if (lua_isstring(L, 1)) {
+                  printf("it's a %s\n", lua_tostring(L, 1));
+                  hook(lua_tostring(L, 1), LuaRef(L).fromStack(L, 2));
+                }
+                else luaL_error(L, "first argument for hook invalid; expected string or number.");
+              }
+              return 0;
+            })
+            .addCFunction("send", [](lua_State *L) -> int {
+              if (lua_gettop(L) == 1) {
+                if (lua_isstring(L, 1)) {
+                  botinstance->send_raw(lua_tostring(L, 1));
+                }
+              }
+              return 0;
+            })
+            .beginClass<later::latertoken>("latertoken")
+            .endClass()
+            .addFunction("later", +[](lua_State* L) { return later::newlater(L); })
+            .addFunction("cancel", later::cancel)
+
+            // bot control functions here
+            .addFunction("rename", +[](const char *newnick) {
+              botinstance->send_raw("NICK %s", newnick);
+            })
+          .endNamespace()
+          .beginNamespace("string")
+            // implement string.split in core
+            .addCFunction("split", +[](lua_State *L) -> int {
+              if(lua_gettop(L) == 2) {
+                const char *s = lua_tostring(L,1);
+                const char *token = lua_tostring(L, 2);
+                
+                int i = 0; 
+                lua_newtable(L);
+                char* pch = strtok(s, token);
+                lua_newtable(L);
+                lua_pushnumber(L,i);
+                lua_pushstring(L,pch);
+                lua_settable(L,-3);
+                while(pch != NULL) {i++;
+                  pch = strtok(NULL,token);
+                  lua_pushnumber(L,i);
+                  lua_pushstring(L,pch);
+                  lua_settable(L,-3);
+                  i++;
+                }
+                
+                return 1;
+              }
             })
           .endNamespace();
+          
 #define addEnum(n)    lua_pushliteral(L, #n); lua_pushnumber(L, n); lua_rawset(L, -3)
         lua_newtable(L);
         lua_pushliteral(L, "reply");
@@ -92,12 +181,10 @@ namespace altplay {
           addEnum(RESTRICTED); addEnum(UNIQOPPRIVSNEEDED); addEnum(NOOPERHOST); addEnum(UMODEUNKNOWNFLAG);
           addEnum(USERSDONTMATCH);
         lua_settable(L, -3);
-
-        lua_pushliteral(L, "hook");
-        lua_newtable(L);
-        lua_settable(L, -3);
         lua_setglobal(L, "irc");
 #undef addEnum
+
+        bindIrcToLua(L);
 
         if (!L) {
           return std::make_tuple(0, "");
@@ -107,18 +194,6 @@ namespace altplay {
         }
         lua_call(L, 0, 0);
         return std::make_tuple(2, "");
-      }
-
-      void callhook(std::string reply, message_struct message) {
-        if (_hooks.empty())
-          return;
-
-        for (std::list<irchook>::const_iterator itr = _hooks.begin(); itr != _hooks.end(); ++itr) {
-          if (itr->command == reply) {
-            (itr->function)(message);
-            break;
-          }
-        }
       }
     }
   }

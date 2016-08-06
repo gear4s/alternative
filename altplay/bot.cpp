@@ -1,48 +1,28 @@
 #include <iostream>
+#include <cstdarg>    // va_start, va_end, std::va_list
+#include <stdlib.h>
 #include "bot.hpp"
 #include "parser.hpp"
 #include "message.hpp"
 #include "script/script.h"
 
-#ifndef _WIN32
-#include <sys/prctl.h>
-#include <sys/resource.h>
+#ifndef __WIN32
+#define _vsnprintf vsnprintf
 #endif
-
-namespace altplay
-{
-    bool quit = false;
-}
 
 altplay::bot::bot(asio::io_service &io_service_) : con_{io_service_,
                                                         bind(&bot::read_handler, this, std::placeholders::_1)},
                                                    logger_{"log.txt"}
 {
-    // clean exit of bot
-#ifndef _WIN32
-    rlimit limit;
-    if ( getrlimit(RLIMIT_CORE, &limit) ) printf("failed to get ulimit -c.");
-    else {
-        limit.rlim_cur = limit.rlim_max;
-        if ( setrlimit(RLIMIT_CORE, &limit) ) printf("failed to set ulimit -c.");
-    }
-    prctl(PR_SET_DUMPABLE, 1);
-
-    auto noop = [](int) {};
-    signal(SIGHUP, noop);
-    signal(SIGUSR1, noop);
-    signal(SIGUSR2, noop);
-#endif
-
-    auto quitter = [](int){ altplay::quit = true; };
-    signal(SIGTERM, quitter);
-    signal(SIGINT, quitter);
-
     script::initScripts();
     std::unordered_map<std::string, std::string> config_map{parser::parse_config("config.conf")};
     nick_ = config_map.at("bot_nick");
     user_ = config_map.at("bot_user");
     reg_with_server();
+}
+
+void altplay::bot::quit() {
+  con_.shutdown();
 }
 
 void altplay::bot::read_handler(const std::string &str)
@@ -60,6 +40,13 @@ void altplay::bot::read_handler(const std::string &str)
         }
 //#endif
         script::lua::callhook(msg.command, msg);
+#endif
+        int t = std::atoi(msg.command.c_str());
+        if (t)
+          script::lua::callhook(t, msg);
+        else
+          script::lua::callhook(msg.command, msg);
+
         std::cout << str << std::endl;
       std::cout << msg.nick << std::endl;
 
@@ -70,11 +57,27 @@ void altplay::bot::read_handler(const std::string &str)
     }
 }
 
+const char *altplay::bot::strformat(std::string str, va_list args) {
+  static char buf[512];
+  _vsnprintf(buf, sizeof(buf), str.c_str(), args);
+  buf[512 - 1] = 0;
+  return buf;
+}
+
 // TODO add error handling, like when a certain nick is taken already and similar issues.
 void altplay::bot::reg_with_server()
 {
-    std::string nick = "NICK " + nick_;
-    std::string user = "USER " + user_;
-    con_.add_message(user);
-    con_.add_message(nick);
+  std::string nick = "NICK " + nick_;
+  std::string user = "USER " + user_;
+  con_.add_message(user);
+  con_.add_message(nick);
+}
+
+// TODO add error handling, like when a certain nick is taken already and similar issues.
+void altplay::bot::send_raw(std::string str, ...)
+{
+  va_list args;
+  va_start(args, str);
+  con_.add_message(strformat(str, args));
+  va_end(args);
 }

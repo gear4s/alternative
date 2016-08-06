@@ -103,7 +103,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>lua53.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>lua53.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>XCOPY "$(SolutionDir)"\lib\*.DLL "$(TargetDir)" /D /K /Y</Command>
@@ -143,8 +143,8 @@
   <ItemGroup>
     <ClCompile Include="bot.cpp" />
     <ClCompile Include="connection.cpp" />
+    <ClCompile Include="later.cpp" />
     <ClCompile Include="logger.cpp" />
-    <ClCompile Include="luahook.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />
     <ClCompile Include="script\luaglue.cpp" />
@@ -155,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="bot.hpp" />
     <ClInclude Include="connection.hpp" />
+    <ClInclude Include="later.h" />
     <ClInclude Include="include\lauxlib.h" />
     <ClInclude Include="include\lua.h" />
     <ClInclude Include="include\lua.hpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="include\LuaBridge\detail\Constructor.h" />
     <ClInclude Include="include\LuaBridge\detail\FuncTraits.h" />
     <ClInclude Include="include\LuaBridge\detail\LuaHelpers.h" />
+    <ClInclude Include="include\LuaBridge\detail\LuaRef.h" />
     <ClInclude Include="include\LuaBridge\detail\Namespace.h" />
     <ClInclude Include="include\LuaBridge\detail\Stack.h" />
     <ClInclude Include="include\LuaBridge\detail\TypeList.h" />
