@@ -40,7 +40,6 @@ void altplay::bot::read_handler(const std::string &str)
         }
 //#endif
         script::lua::callhook(msg.command, msg);
-#endif
         int t = std::atoi(msg.command.c_str());
         if (t)
           script::lua::callhook(t, msg);
