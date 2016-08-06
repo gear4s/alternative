@@ -4,17 +4,19 @@
 #include "parser.hpp"
 
 
-altplay::message_struct altplay::parser::handle_input(const std::string& str)
+altplay::message_struct altplay::parser::handle_input(const std::string &str)
 {
     std::smatch match;
     message_struct msg;
 
-    if (std::regex_search(str, match, std::regex(":([A-Za-z0-9!.~@\\[\\]-]*)\\s([A-Za-z0-9]*)\\s(.*)"))) {
+    if ( std::regex_search(str, match, std::regex(":(\\S*)\\s(\\S*)\\s(.*)")) ) {
         msg.prefix = match[1];
         msg.command = match[2];
         msg.params = match[3];
 
-        if (std::regex_search(msg.prefix, match, std::regex("([A-Za-z0-9\\[\\]]*)!([A-Za-z0-9~]*)@([A-Za-z0-9.]*)"))) {
+        if ( std::regex_search(msg.prefix,
+                               match,
+                               std::regex("([A-Za-z0-9\\[\\]]*)!([A-Za-z0-9~]*)@([A-Za-z0-9.]*)")) ) {
             msg.nick = match[1];
             msg.ident = match[2];
             msg.hostmask = match[3];
@@ -25,8 +27,7 @@ altplay::message_struct altplay::parser::handle_input(const std::string& str)
             msg.is_server_message = true;
             msg.nick = msg.prefix;
         }
-        
-        
+
     }
     return msg;
 }
@@ -45,7 +46,7 @@ bool altplay::parser::compare_channel_names(std::string channel1, std::string ch
     return (channel1.compare(channel2) == 0) ? true : false;
 }
 
-const std::unordered_map<std::string, std::string> altplay::parser::parse_config(const std::string& path)
+const std::unordered_map<std::string, std::string> altplay::parser::parse_config(const std::string &path)
 {
     std::fstream file{path, std::ios::in};
     std::string input;
@@ -53,12 +54,12 @@ const std::unordered_map<std::string, std::string> altplay::parser::parse_config
     std::unordered_map<std::string, std::string> config_map;
     int line_number{0};
 
-    if (!file.is_open()) {
+    if ( !file.is_open() ) {
         throw std::runtime_error("Couldn't open config file.\n");
     }
-    while (getline(file, input)) {
+    while ( getline(file, input) ) {
         ++line_number;
-        if (std::regex_search(input, match, std::regex("([A-Z_a-z0-9]*) = \"([A-Za-z0-9._#!?:$ ]*)\""))) {
+        if (std::regex_search(input, match, std::regex("([A-Z_a-z0-9]*) = \"([A-Za-z0-9._#!?:$-^ ]*)\""))) {
             config_map.insert(std::pair<std::string, std::string> {match[1], match[2]});
         } else {
             throw std::runtime_error("\nCould not read config at line: " + std::to_string(line_number));

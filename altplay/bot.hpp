@@ -19,5 +19,6 @@ namespace altplay
 		altplay::connection con_;
 		altplay::logger logger_;
 		std::string nick_, user_;
+        std::unordered_map<std::string, std::string> user_map_;
 	};
 } // end of ns altplay

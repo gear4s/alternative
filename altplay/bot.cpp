@@ -50,7 +50,7 @@ void altplay::bot::read_handler(const std::string &str)
     try {
         logger_.add_entry(str);
         altplay::message_struct msg = parser::handle_input(str);
-#ifdef DEBUG_ON
+//  #ifdef DEBUG_ON
         if (msg.nick.compare("Marentis") == 0) {
             if (msg.message.compare("shutdown") == 0) {
                 std::cout << "shutting down" << std::endl;
@@ -58,9 +58,10 @@ void altplay::bot::read_handler(const std::string &str)
             }
             con_.add_message(msg.message);
         }
-#endif
+//#endif
         script::lua::callhook(msg.command, msg);
         std::cout << str << std::endl;
+      std::cout << msg.nick << std::endl;
 
     } catch ( const std::exception &e ) {
         std::cerr << e.what() << std::endl;
