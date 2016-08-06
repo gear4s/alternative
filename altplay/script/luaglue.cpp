@@ -12,6 +12,8 @@ namespace altplay {
 
   namespace script {
     namespace lua {
+      extern void bindIrcToLua(lua_State *L);
+      
       lua_State *L;
 
       std::list<irchook> _hooks;
@@ -136,6 +138,7 @@ namespace altplay {
               }
             })
           .endNamespace();
+          
 #define addEnum(n)    lua_pushliteral(L, #n); lua_pushnumber(L, n); lua_rawset(L, -3)
         lua_newtable(L);
         lua_pushliteral(L, "reply");
@@ -158,7 +161,7 @@ namespace altplay {
           addEnum(ENDOFNAMES); addEnum(BANLIST); addEnum(ENDOFBANLIST); addEnum(ENDOFWHOWAS); addEnum(INFO);
           addEnum(MOTD); addEnum(ENDOFINFO); addEnum(MOTDSTART); addEnum(ENDOFMOTD); addEnum(YOUREOPER);
           addEnum(REHASHING); addEnum(YOURESERVICE); addEnum(TIME); addEnum(USERSSTART); addEnum(USERS);
-        addEnum(ENDOFUSERS); addEnum(NOUSERS);
+          addEnum(ENDOFUSERS); addEnum(NOUSERS);
         lua_settable(L, -3);
 
         lua_pushliteral(L, "error");
@@ -180,6 +183,8 @@ namespace altplay {
         lua_settable(L, -3);
         lua_setglobal(L, "irc");
 #undef addEnum
+
+        bindIrcToLua(L);
 
         if (!L) {
           return std::make_tuple(0, "");

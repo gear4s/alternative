@@ -1,5 +1,6 @@
 #include "later.h"
 
+#include <iostream>
 namespace altplay {
   namespace script {
     namespace lua {
@@ -94,6 +95,7 @@ namespace altplay {
         void check(unsigned long long now, std::forward_list<latertoken*>& list) {
           while (!list.empty() && list.front()->when <= now) {
             auto l = currentlambda = list.front();
+            std::cout << "lambda done" << std::endl;
             list.pop_front();
             lua_cppcall([l, &list] {
               lua_rawgeti(L, LUA_REGISTRYINDEX, l->lambdaindex);

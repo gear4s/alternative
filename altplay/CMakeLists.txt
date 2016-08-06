@@ -25,6 +25,7 @@ set(SOURCE_FILES
         user_handler.hpp
         ./script/luaglue.cpp
         ./script/luaglue.h
+        ./script/luairccmd.cpp
         ./script/script.cpp
         ./script/script.h
         ./include/lua.h
