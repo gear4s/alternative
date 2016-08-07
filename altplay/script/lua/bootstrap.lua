@@ -17,5 +17,9 @@ bot.hook(396, function(msg)
 end)
 
 bot.hook("PRIVMSG", function(msg)
-  irc.msg("altplay.dev", msg.nick .. " at " .. msg.hostmask .. " on " .. msg.target .. " says " .. msg.message)
+  if msg.message:find("\001") == 1 then -- CTCP
+    irc.msg("altplay.dev", "CTCP request from " .. msg.nick .. ": " .. msg.message:gsub("\001", ""))
+  else
+    irc.msg("altplay.dev", msg.nick .. " at " .. msg.hostmask .. " on " .. msg.target .. " says " .. msg.message)
+  end
 end)
