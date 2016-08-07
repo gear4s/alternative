@@ -15,6 +15,7 @@ connection::connection(asio::io_service &io_service_, bot_read_handler_t rh) : s
     auto iter = resolver.resolve( query );
     connect( socket_, iter );
     do_read( );
+    conWr = std::thread([=]() {while(true) {do_write();}});
 }
 
 // send raw data to the server
@@ -41,7 +42,7 @@ void connection::read_handler(const asio::error_code &ec, size_t /*length*/)
             raw_send( reply );
         } else bot_read_handler_( result_line );
     }
-    do_write( );
+    do_read( );
 }
 
 void connection::do_read( )
@@ -59,12 +60,11 @@ void connection::do_read( )
 
 void connection::do_write( )
 {
-    std::lock_guard<std::mutex > lock( mutex_ );
     if ( !send_queue.empty( ) ) {
         raw_send( send_queue.front( ) );
         send_queue.pop_front( );
     }
-    do_read( );
+    std::this_thread::sleep_for(std::chrono::milliseconds(50)); // not too high delay
 }
 
 void connection::add_message(std::string &message)

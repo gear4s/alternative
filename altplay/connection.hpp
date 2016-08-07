@@ -3,6 +3,7 @@
 #include <mutex>
 #include <regex>
 #include <deque>
+#include <thread>
 
 /*
 A basic connection to an irc server with a keep alive implementation included.
@@ -35,6 +36,7 @@ private:
     std::deque< std::string > send_queue;
     std::smatch match_;
     std::mutex mutex_;
+    std::thread conWr;
     asio::streambuf buffer_;
     asio::ip::tcp::socket socket_;
     bot_read_handler_t bot_read_handler_; // accepts a bot's read handler
