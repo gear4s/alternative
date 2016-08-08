@@ -116,22 +116,22 @@ namespace altplay {
             // implement string.split in core
             .addCFunction("split", +[](lua_State *L) -> int {
               if(lua_gettop(L) == 2) {
-                const char *s = lua_tostring(L,1);
-                const char *token = lua_tostring(L, 2);
+                std::string s = lua_tostring(L,1);
+                std::string dels = lua_tostring(L, 2);
                 
-                int i = 0; 
+                int i = 1;
                 lua_newtable(L);
-                char* pch = strtok(s, token);
-                lua_newtable(L);
-                lua_pushnumber(L,i);
-                lua_pushstring(L,pch);
-                lua_settable(L,-3);
-                while(pch != NULL) {i++;
-                  pch = strtok(NULL,token);
-                  lua_pushnumber(L,i);
-                  lua_pushstring(L,pch);
-                  lua_settable(L,-3);
-                  i++;
+                
+                std::string::size_type lastPos = s.find_first_not_of(dels, 0);
+                std::string::size_type pos     = s.find_first_of(dels, lastPos);
+                while (std::string::npos != pos || std::string::npos != lastPos)
+                {
+                    lua_pushnumber(L,i);
+                    lua_pushstring(L,s.substr(lastPos, pos - lastPos).c_str());
+                    lua_settable(L, -3);
+                    lastPos = s.find_first_not_of(dels, pos);
+                    pos = s.find_first_of(dels, lastPos);
+                    i++;
                 }
                 
                 return 1;

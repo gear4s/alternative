@@ -15,7 +15,7 @@ connection::connection(asio::io_service &io_service_, bot_read_handler_t rh) : s
     auto iter = resolver.resolve( query );
     connect( socket_, iter );
     do_read( );
-    conWr = std::thread([=]() {while((!stop) {do_write();}});
+    conWr = std::thread([=]() {while(!stop) {do_write();}});
 }
 
 // send raw data to the server
