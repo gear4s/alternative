@@ -17,7 +17,7 @@ namespace altplay {
               botinstance->send_raw("PRIVMSG %s :%s", who, msg);
             })
             .addFunction("notice", +[](const char *where, const char *msg) {
-              botinstance->send_raw("PRIVMSG %s :%s", where, msg);
+              botinstance->send_raw("NOTICE %s :%s", where, msg);
             })
             .addFunction("join", +[](const char *chan, const char *passes = "") {
               botinstance->send_raw("JOIN %s %s", chan, passes);
