@@ -17,10 +17,15 @@ bot.hook(396, function(msg)
 end)
 
 bot.hook("PRIVMSG", function(msg)
-  if msg.message:find("\001") == 1 then -- CTCP
-    irc.msg("altplay.dev", "CTCP request from " .. msg.nick .. ": " .. table.concat(msg.message:gsub("\001", ""):split(" "), " ; "))
-    irc.notice(msg.nick, "VERSION AltPlay IRC Bot (C) 2016 AltPlay Community Developers")
-  else
-    irc.msg("altplay.dev", msg.nick .. " at " .. msg.hostmask .. " on " .. msg.target .. " says " .. msg.message)
+  irc.msg("altplay.dev", msg.nick .. " at " .. msg.hostmask .. " on " .. msg.target .. " says " .. msg.message)
+end)
+
+bot.hook("CTCP", function(msg)
+  if msg.message ~= "ACTION" then
+    irc.notice(msg.nick, (setmetatable({
+      VERSION="VERSION AltPlay IRC Bot (C) 2016 AltPlay Community Developers"
+    }, {
+      __index = function(t,k) if not rawget(t, k) then return "Invalid CTCP request" end end
+    }))[msg.message:split(" ")[1]])
   end
 end)

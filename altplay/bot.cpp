@@ -41,8 +41,14 @@ void altplay::bot::read_handler(const std::string &str)
         int t = atoi(msg.command.c_str());
         if (t)
           script::lua::callhook(t, msg);
-        else
+        else {
+          if (msg.command == "PRIVMSG" && msg.message[0] == 0x01 && msg.message[msg.message.length() -1] == 0x01) {
+            msg.command = "CTCP";
+            msg.message.erase(0,1);
+            msg.message.erase(msg.message.end()-1,msg.message.end());
+          }
           script::lua::callhook(msg.command, msg);
+        }
 
         std::cout << str << std::endl;
 
