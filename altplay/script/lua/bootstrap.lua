@@ -27,22 +27,20 @@ bot.hook("CTCP", function(msg)
     irc.notice(msg.nick, (setmetatable({
       prototype={
         VERSION="VERSION AltPlay IRC Bot (C) 2016 AltPlay Community Developers",
-        FINGER=":o MEANIE!",
-        TIME=os.date("%H:%M:%S %a %d %b %Y"),
+        FINGER="FINGER :o MEANIE!",
+        TIME=function() return os.date("%H:%M:%S %a %d %b %Y") end,
         UPTIME=function()
-          local d = os.date("*t", os.difftime(os.time(), startTime))
-          return d.hour .. " hours; " .. d.min .. " minutes; " .. d.sec .. " seconds"
-        end
+          local d = os.date("!*t", os.difftime(os.time(), startTime))
+          return "UPTIME " .. d.hour .. " hours; " .. d.min .. " minutes; " .. d.sec .. " seconds"
+        end,
+        SOURCE="SOURCE http://altplay.net/",
+        SAUCE="SAUCE http://altplay.net/",
+        USERINFO="USERINFO These gosh darn CTCPs",
+        CLIENTINFO="CLIENTINFO CLIENTINFO FINGER SOURCE SAUCE VERSION TIME UPTIME USERINFO"
       }
     }, {
       __index = function(t,k)
-        if not rawget(t,"prototype")[k] then
-          return "Invalid CTCP request"
-        elseif type(rawget(t,"prototype"))[k] == "function" then
-          return rawget(t,"prototype")[k]()
-        else
-          return rawget(t,"prototype")[k]
-        end
+        return "\001" .. (type(rawget(t,"prototype")[k]) == "function" and rawget(t,"prototype")[k]() or rawget(t,"prototype")[k] or "ERRMSG Invalid CTCP request") .. "\001"
       end
     }))[msg.message:split(" ")[1]])
   end
