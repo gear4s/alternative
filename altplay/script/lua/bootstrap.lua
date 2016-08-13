@@ -1,6 +1,8 @@
 --ease require"my.module"
 package.path = "./script/?.lua;" .. package.path
 
+local startTime = os.time()
+
 print(("t f"):split(" ")[1])
 
 print(irc.error.NOSUCHNICK)
@@ -23,9 +25,25 @@ end)
 bot.hook("CTCP", function(msg)
   if msg.message ~= "ACTION" then
     irc.notice(msg.nick, (setmetatable({
-      VERSION="VERSION AltPlay IRC Bot (C) 2016 AltPlay Community Developers"
+      prototype={
+        VERSION="VERSION AltPlay IRC Bot (C) 2016 AltPlay Community Developers",
+        FINGER=":o MEANIE!",
+        TIME=os.date("%H:%M:%S %a %d %b %Y"),
+        UPTIME=function()
+          local d = os.date("*t", os.difftime(os.time(), startTime))
+          return d.hour .. " hours; " .. d.min .. " minutes; " .. d.sec .. " seconds"
+        end
+      }
     }, {
-      __index = function(t,k) if not rawget(t, k) then return "Invalid CTCP request" end end
+      __index = function(t,k)
+        if not rawget(t,"prototype")[k] then
+          return "Invalid CTCP request"
+        elseif type(rawget(t,"prototype"))[k] == "function" then
+          return rawget(t,"prototype")[k]()
+        else
+          return rawget(t,"prototype")[k]
+        end
+      end
     }))[msg.message:split(" ")[1]])
   end
 end)
