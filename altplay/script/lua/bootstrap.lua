@@ -28,7 +28,7 @@ bot.hook("CTCP", function(msg)
       prototype={
         VERSION="VERSION AltPlay IRC Bot (C) 2016 AltPlay Community Developers",
         FINGER="FINGER :o MEANIE!",
-        TIME=function() return os.date("%H:%M:%S %a %d %b %Y") end,
+        TIME=function() return "TIME " .. os.date("%H:%M:%S %a %d %b %Y") end,
         UPTIME=function()
           local d = os.date("!*t", os.difftime(os.time(), startTime))
           return "UPTIME " .. d.hour .. " hours; " .. d.min .. " minutes; " .. d.sec .. " seconds"
