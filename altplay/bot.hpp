@@ -16,7 +16,6 @@ namespace altplay
 		
 		void altplay::bot::quit();
     void send_raw(std::string, ...);
-    const char *strformat(std::string, va_list);
 
 	private:
 		altplay::connection con_;

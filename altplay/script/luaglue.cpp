@@ -79,6 +79,16 @@ namespace altplay {
           .endClass()
 
           .beginNamespace("bot")
+            .addCFunction("listdir", [](lua_State* L) -> int{
+              static std::vector<char*> dirs;
+              if(!listdir(luaL_tolstring(L, 1, 0), true, 0, dirs)) return 0;
+              lua_newtable(L);
+              for(unsigned int i = 0; i<dirs.size(); i++) {
+                lua_pushstring(L, dirs[i]);
+                lua_rawseti(L, -2, i + 1);
+              }
+              return 1;
+            })
             .addCFunction("hook", [](lua_State* L)  -> int {
               int top = lua_gettop(L);
               if (top == 2) {
