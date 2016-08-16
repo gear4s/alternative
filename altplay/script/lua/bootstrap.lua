@@ -41,7 +41,7 @@ bot.hook("CTCP", function(msg)
     }, {
       __index = function(t,k)
         local n = rawget(t, "prototype")[k]
-        return "\001" .. (n ~= nil and (k.." ")) .. (type(n) == "function" and n() or n or "ERRMSG Invalid CTCP request") .. "\001"
+        return "\001" .. (n ~= nil and (k.." ") or "ERRMSG ") .. (type(n) == "function" and n() or n or "Invalid CTCP request") .. "\001"
       end
     }))[msg.message:split(" ")[1]])
   end
