@@ -54,6 +54,7 @@ namespace altplay {
 			}
 #else
 			const char *pathname = strformat(rel ? "./%s" : "%s", dirname);
+			DIR *d = opendir(pathname);
 			if(d) {
 				struct dirent *de;
 				while((de = readdir(d)) != NULL) {
