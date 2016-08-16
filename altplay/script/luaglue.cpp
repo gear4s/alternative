@@ -93,11 +93,9 @@ namespace altplay {
               int top = lua_gettop(L);
               if (top == 2) {
                 if (lua_isnumber(L, 1)) {
-                  printf("it's a %g\n", lua_tonumber(L, 1));
                   hook(lua_tonumber(L, 1), LuaRef(L).fromStack(L, 2));
                 }
                 else if (lua_isstring(L, 1)) {
-                  printf("it's a %s\n", lua_tostring(L, 1));
                   hook(lua_tostring(L, 1), LuaRef(L).fromStack(L, 2));
                 }
                 else luaL_error(L, "first argument for hook invalid; expected string or number.");
