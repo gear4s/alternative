@@ -1,7 +1,8 @@
 --ease require"my.module"
-package.path = "./script/?.lua;" .. package.path
+package.path = "./script/lua/?.lua;" .. package.path
 
 local startTime = os.time()
+local L = require"utils.lambda"
 
 print(("t f"):split(" ")[1])
 
@@ -11,16 +12,13 @@ bot.hook(396, function(msg)
   if msg.is_server_message then
     irc.join("#altplay.dev", "")
     
-    bot.later(5000, function()
-      irc.nick("luaBotTester")
-      irc.msg("altplay.dev", "I am lua_tester :) thanks! im idle now")
-    end)
+    bot.later(5000, L("irc.nick('luaBotTester');irc.msg('altplay.dev', 'I am lua_tester :) thanks! im idle now')"))
   end
 end)
 
-bot.hook("PRIVMSG", function(msg)
-  irc.msg("altplay.dev", msg.nick .. " at " .. msg.hostmask .. " on " .. msg.target .. " says " .. msg.message)
-end)
+bot.hook("PRIVMSG", L([[
+  irc.msg("altplay.dev", _1.nick .. " at " .. _1.hostmask .. " on " .. _1.target .. " says " .. _1.message)
+]]))
 
 bot.hook("CTCP", function(msg)
   if msg.message ~= "ACTION" then
@@ -28,7 +26,7 @@ bot.hook("CTCP", function(msg)
       prototype={
         VERSION="AltPlay IRC Bot (C) 2016 AltPlay Community Developers",
         FINGER=":o MEANIE!",
-        TIME=function() return os.date("%H:%M:%S %a %d %b %Y") end,
+        TIME=L([[os.date("%H:%M:%S %a %d %b %Y")]]),
         UPTIME=function()
           local d = os.date("!*t", os.difftime(os.time(), startTime))
           return d.hour .. " hours; " .. d.min .. " minutes; " .. d.sec .. " seconds"
