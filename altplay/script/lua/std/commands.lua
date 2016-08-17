@@ -29,8 +29,11 @@ end
 
 bot.hook("PRIVMSG", function(info) checkstring(info, "%./") end)
 
-module.add = function(cmdname, cmdcallback, help)
-  cmdhooks.c[cmdname] = {cb=cmdcallback, h=help, scmd={}}
+module.add = function(cmdname, cmdcallback, help, usage)
+  cmdhooks.c[cmdname] = {cb=cmdcallback, h=help, u=usage, scmd={}}
+  cmdhooks.c.help.scmd[cmdname] = {cb=function(info)
+    irc.notice(info.msg.nick, cmdhooks[cmdname].h or "No help for this command.")
+  end}
   return {
     addsubcmd = function(scmdname, scmdcallback, shelp)
       cmdhooks.c[cmdname].scmd[scmdname] = {cb=scmdcallback, h=shelp}
@@ -43,19 +46,14 @@ module.alias = function(cmdname, cmdcallback, help)
 end
 
 module.add("help", function(info)
+  if info.args ~= "" then return irc.notice(info.msg.nick, "Unrecognized command") end
   local lcmd = info.args:lower():match("^([%l%d]*)")
-  if lcmd == "" then
-    local cmds = table.concat(table.sort(map.lp(I, cmdhooks.c)), ", ")
-    irc.notice(info.msg.nick, cmds ~= "" and ("Commands: " .. cmds) or "Unrecognized command")
-    cmds = table.concat(table.sort(map.lp(I, cmdhooks.a)), ", ")
-    if cmds ~= "" then
-      irc.notice(info.msg.nick, "Command Aliases: " .. cmds)
-    end
-    return
+  irc.notice(info.msg.nick, "Commands: " .. table.concat(table.sort(map.lp(I, cmdhooks.c)), ", "))
+  local cmds = table.concat(table.sort(map.lp(I, cmdhooks.a)), ", ")
+  if cmds ~= "" then
+    irc.notice(info.msg.nick, "Command Aliases: " .. cmds)
   end
-  if not cmdhooks[lcmd] then return irc.notice(info.msg.nick, "Unrecognized command") end
-  irc.notice(info.msg.nick, cmdhooks[lcmd].h or "No help for this command.")
-end, "Usage: #help [command]")
+end, "Returns information on commands", "Usage: #help [command]")
 
 module.alias("h", "help")
 
