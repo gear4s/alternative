@@ -21,7 +21,6 @@ namespace altplay {
 				int icommand;
 				luabridge::LuaRef function;
 			};
-			std::list<irchook> _hooks;
 		}
 	}
 }

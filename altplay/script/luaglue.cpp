@@ -15,9 +15,7 @@ namespace altplay {
       extern void bindIrcToLua(lua_State *L);
       
       lua_State *L;
-
       std::list<irchook> _hooks;
-      std::list<irchook> _chooks;
 
       void hook(std::string command, LuaRef function) {
         irchook hook(L);
@@ -44,7 +42,6 @@ namespace altplay {
         for (std::list<irchook>::const_iterator itr = _hooks.begin(); itr != _hooks.end(); ++itr) {
           if (itr->command == reply) {
             (itr->function)(message);
-            break;
           }
         }
       }
@@ -56,7 +53,6 @@ namespace altplay {
         for (std::list<irchook>::const_iterator itr = _hooks.begin(); itr != _hooks.end(); ++itr) {
           if (itr->icommand == reply) {
             (itr->function)(message);
-            break;
           }
         }
       }

@@ -23,5 +23,5 @@ namespace altplay
 		std::string nick_, user_;
 	};
 
-  bool quit;
+  extern bool quit;
 } // end of ns altplay

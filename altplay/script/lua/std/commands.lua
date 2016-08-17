@@ -18,19 +18,25 @@ local function checkstring(info, prefix)
   local full, lcmd = info.message:lower():match("^( *" .. prefix .. "([%l%_%d]+) *)")
   if not full or lcmd == "" then return end
   if not cmdhooks[lcmd] then return irc.notice(info.nick, "Unrecognized command " .. lcmd) end
-  print(cmdhooks[lcmd])
   if cmdhooks[lcmd].a then
     lcmd = cmdhooks[lcmd].cb
   end
   local args = info.message:sub(#full + 1)
-  print(cmdhooks[lcmd])
-  cmdhooks[lcmd].cb({ msg = info, command = lcmd, args = args })
+  local subcmd = args:split(" ")[1]
+  
+  local cb = subcmd and cmdhooks[lcmd].scmd[subcmd].cb or cmdhooks[lcmd].cb
+  cb({ msg = info, command = lcmd, args = args })
 end
 
 bot.hook("PRIVMSG", function(info) checkstring(info, "%./") end)
 
 module.add = function(cmdname, cmdcallback, help)
-  cmdhooks.c[cmdname] = {cb=cmdcallback, h=help}
+  cmdhooks.c[cmdname] = {cb=cmdcallback, h=help, scmd={}}
+  return {
+    addsubcmd = function(scmdname, scmdcallback, shelp)
+      cmdhooks.c[cmdname].scmd[scmdname] = {cb=scmdcallback, h=shelp}
+    end
+  }
 end
 
 module.alias = function(cmdname, cmdcallback, help)
