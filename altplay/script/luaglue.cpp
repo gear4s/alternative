@@ -17,6 +17,7 @@ namespace altplay {
       lua_State *L;
 
       std::list<irchook> _hooks;
+      std::list<irchook> _chooks;
 
       void hook(std::string command, LuaRef function) {
         irchook hook(L);

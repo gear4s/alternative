@@ -1,4 +1,4 @@
-local L, socket = require"utils.lambda", require"ssl.https", require"json"
+local L, socket, command = require"utils.lambda", require"ssl.https", require"std.commands", require"json"
 
 local baseUrl = "https://www.googleapis.com/youtube/v3"
 
@@ -15,3 +15,5 @@ bot.hook("PRIVMSG", function(msg)
     end
   end
 end)
+
+command.add("youtube", L("irc.privmsg(_1.msg.target, 'get yt test')"))
