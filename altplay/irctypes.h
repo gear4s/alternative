@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _IRCTYPES_H_
+#define _IRCTYPES_H_
 // according to RFC 2812
 enum IRCReply {
   WELCOME = 1, YOURHOST, CREATED, MYINFO, BOUNCE,
@@ -66,3 +67,4 @@ enum IRCError {
   NOOPERHOST = 491, UMODEUNKNOWNFLAG = 501, USERSDONTMATCH,
   NUMMSG
 };
+#endif // _IRCTYPES_H_

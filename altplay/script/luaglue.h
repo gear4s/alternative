@@ -1,16 +1,17 @@
-#pragma once
 #include "LuaBridge/LuaBridge.h"
 #include "message.hpp"
 #include <list>
 #include <tuple>
 
+#ifndef _LUAGLUE_H_
+#define _LUAGLUE_H_
 namespace altplay {
 	namespace script {
 		namespace lua {
 			extern lua_State *L;
-      extern std::tuple<int, const char *> init();
-      extern void callhook(std::string, message_struct);
-      extern void callhook(int, message_struct);
+      std::tuple<int, const char *> init();
+      void callhook(std::string, message_struct);
+      void callhook(int, message_struct);
 
 			struct irchook
 			{
@@ -20,7 +21,8 @@ namespace altplay {
 				int icommand;
 				luabridge::LuaRef function;
 			};
-			extern std::list<irchook> _hooks;
+			std::list<irchook> _hooks;
 		}
 	}
 }
+#endif // _LUAGLUE_H_

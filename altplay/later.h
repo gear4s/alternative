@@ -1,4 +1,3 @@
-#pragma once
 #include "LuaBridge/LuaBridge.h"
 #include <forward_list>
 
@@ -11,6 +10,8 @@
 #include <cxxabi.h>
 #endif
 
+#ifndef _LATER_H_
+#define _LATER_H_
 namespace altplay {
   namespace script {
     template<typename T>
@@ -46,3 +47,4 @@ namespace altplay {
     }
   }
 }
+#endif // _LATER_H_
