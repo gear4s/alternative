@@ -22,9 +22,8 @@ local function checkstring(info, prefix)
     lcmd = cmdhooks[lcmd].cb
   end
   local args = info.message:sub(#full + 1)
-  local subcmd = args:split(" ")[1]
-  
-  local cb = subcmd and cmdhooks[lcmd].scmd[subcmd].cb or cmdhooks[lcmd].cb
+  local subcmd = args:split(" ")
+  local cb = subcmd[1] and cmdhooks[lcmd].scmd[subcmd[1]] and cmdhooks[lcmd].scmd[subcmd[1]].cb or cmdhooks[lcmd].cb
   cb({ msg = info, command = lcmd, args = args })
 end
 
@@ -55,7 +54,6 @@ module.add("help", function(info)
     return
   end
   if not cmdhooks[lcmd] then return irc.notice(info.msg.nick, "Unrecognized command") end
-  local cmd = cmdhooks[lcmd].a and cmdhooks[cmds[lcmd].cb ]
   irc.notice(info.msg.nick, cmdhooks[lcmd].h or "No help for this command.")
 end, "Usage: #help [command]")
 
