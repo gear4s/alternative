@@ -1,38 +1,17 @@
-local L = require"utils.lambda"
+local L, socket = require"utils.lambda", require"ssl.https", require"json"
 
-bot.hook(396, function(msg)
-  if msg.is_server_message then
-    irc.join("#altplay.dev", "")
-    
-    bot.later(5000, L("irc.nick('luaBotTester');irc.msg('altplay.dev', 'I am lua_tester :) thanks! im idle now')"))
-  end
-end)
+local baseUrl = "https://www.googleapis.com/youtube/v3"
 
-bot.hook("PRIVMSG", L([[
-  irc.msg("altplay.dev", _1.nick .. " at " .. _1.hostmask .. " on " .. _1.target .. " says " .. _1.message)
-]]))
-
-bot.hook("CTCP", function(msg)
-  if msg.message ~= "ACTION" then
-    irc.notice(msg.nick, (setmetatable({
-      prototype={
-        VERSION="AltPlay IRC Bot (C) 2016 AltPlay Community Developers",
-        FINGER=":o MEANIE!",
-        TIME=L([[os.date("%H:%M:%S %a %d %b %Y")]]),
-        UPTIME=function()
-          local d = os.date("!*t", os.difftime(os.time(), startTime))
-          return d.hour .. " hours; " .. d.min .. " minutes; " .. d.sec .. " seconds"
-        end,
-        SOURCE="http://altplay.net/",
-        SAUCE="http://altplay.net/",
-        USERINFO="These gosh darn CTCPs",
-        CLIENTINFO="CLIENTINFO FINGER SOURCE SAUCE VERSION TIME UPTIME USERINFO"
-      }
-    }, {
-      __index = L([[
-        local n = rawget(_1, "prototype")[_2]
-        return "\001" .. (n ~= nil and (_2.." ") or "ERRMSG ") .. (type(n) == "function" and n() or n or "Invalid CTCP request") .. "\001"
-      ]])
-    }))[msg.message:split(" ")[1]])
+bot.hook("PRIVMSG", function(msg)
+  if msg.message:match("https?%:%/%/w?w?w?%.?(.+)/watch[&?]v=([^&]*)") then
+    local _,_,url,res = msg.message:find("https?%:%/%/w?w?w?%.?(.+)/watch[&?]v=([^&]*)")
+    if url == "youtu.be" or url == "youtube.com" then
+      local content = socket.request(baseUrl.."/videos/?key=AIzaSyDSxs701r4sUQKBAaknupg-9WIvSeuJqpI&id="..res.."&part=snippet,statistics")
+      content = json.decode.decode(content)
+      
+      local str = irc.control.bold .. irc.color.red .. "[ " .. content.items[1].snippet.channelTitle .. " ] \003" .. irc.control.bold .. content.items[1].snippet.localized.title
+      str = str .. " - " .. content.items[1].statistics.likeCount .. " likes, " .. content.items[1].statistics.dislikeCount .. " dislikes"
+      irc.msg("altplay.dev", str)
+    end
   end
 end)

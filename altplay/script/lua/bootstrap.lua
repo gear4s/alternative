@@ -5,6 +5,7 @@ package.path = "./script/lua/?.lua;" .. package.path
 loadstring = loadstring or load
 
 local startTime = os.time()
+local char = string.char
 
 local urandom, entropy = io.open("/dev/urandom"), 0
 if not urandom then entropy = os.time()
@@ -13,7 +14,7 @@ else
   urandom:close()
 end
 math.randomseed(entropy % 0x7FFFFFFF)
---
+
 --simple module loader
 local loadd = {}
 for _, v in ipairs(bot.listdir("script/lua/modules.d")) do
@@ -24,5 +25,35 @@ for _, v in ipairs(bot.listdir("script/lua/modules.d")) do
   end
 end
 
+irc.color = {
+  endwhite        = "\0030",
+  black           = "\0031",
+  darkblue        = "\0032",
+  darkgreen       = "\0033",
+  red             = "\0034",
+  darkred         = "\0035",
+  darkviolet      = "\0036",
+  orange          = "\0037",
+  yellow          = "\0038",
+  lightgreen      = "\0039",
+  cyan            = "\00310",
+  lightcyan       = "\00311",
+  blue            = "\00312",
+  violet          = "\00313",
+  darkgray        = "\00314",
+  lightgray       = "\00315",
+  reset           = "\003"
+}
+irc.control = {
+  bold            = char(2),
+  underline       = char(31)
+}
+
 table.sort(loadd, function(a, b) if a[2] ~= b[2] then return a[2] < b[2] else return a[1] < b[1] end end)
 for _, v in ipairs(loadd) do dofile("script/lua/modules.d/"..v[1]) end
+
+bot.hook(396, function(msg)
+  if msg.is_server_message then
+    irc.join("#altplay.dev", "")
+  end
+end)
