@@ -1,4 +1,5 @@
-local L, socket, command, map = require"utils.lambda", require"ssl.https", require"std.commands", require"utils.fp".map, require"json"
+local L, socket, command, map, msg = require"utils.lambda", require"ssl.https", require"std.commands", require"utils.fp".map, require"std.messages", require"json"
+msg({name = "youtube", color = "${red}", keepers = {prefix = " ${blue}[ ", suffix = " ${blue}] ${reset}"}})
 
 local request = function(to, query)
   return
@@ -17,20 +18,19 @@ local comma_value = function(amount)
   return formatted
 end
 
-bot.hook("PRIVMSG", function(msg)
-  if msg.message:match("https?%:%/%/w?w?w?%.?(.+)/watch[&?]v=([^&]*)") then
-    local _,_,url,res = msg.message:find("https?%:%/%/w?w?w?%.?(.+)/watch[&?]v=([^&]*)")
+bot.hook("PRIVMSG", function(info)
+  if info.message:match("https?%:%/%/w?w?w?%.?(.+)/watch[&?]v=([^&]*)") then
+    local _,_,url,res = info.message:find("https?%:%/%/w?w?w?%.?(.+)/watch[&?]v=([^&]*)")
     if url == "youtu.be" or url == "youtube.com" then
       local content = request("videos", {id=res, part="snippet,statistics"})
       content = json.decode.decode(content)
       
       if content.pageInfo.totalResults ~= 0 then
         content = content.items[1]
-        local str = irc.control.bold .. irc.color.red .. "[ %s ] \003" .. irc.control.bold .. "%s"
-        str = str .. " -" .. irc.color.lightgreen .. " %s likes" .. irc.color.reset.. "," .. irc.color.red .. " %s dislikes" .. irc.color.reset
-        irc.privmsg(msg.target, str:format(content.snippet.channelTitle, content.snippet.localized.title, comma_value(content.statistics.likeCount), comma_value(content.statistics.dislikeCount)))
-      else
-        irc.privmsg(msg.target, "Invalid youtube ID")
+        msg.youtube("${bold}${red}[ ${ctitle} ] ${reset}${bold}${vtitle} - ${lightgreen} ${lcount} likes${reset},${red} ${dcount} dislikes")
+          :format({ctitle = content.snippet.channelTitle, vtitle = content.snippet.localized.title, lcount = comma_value(content.statistics.likeCount), dcount = comma_value(content.statistics.dislikeCount)})
+          :toggle("showname")
+          :send("privmsg", info.target)
       end
     end
   end
@@ -50,13 +50,10 @@ local generateID = function()
   return id;
 end
 
-local sendStr = function(i)
-  return  (
-            irc.control.bold .. irc.color.red .. "[ %s ] \003" .. irc.control.bold .. "%s" .. irc.color.reset ..
-            " - https://youtube.com/watch?v=%s"
-          ):format(
-            i.snippet.channelTitle, i.snippet.title, i.id.videoId
-          )
+local sendStr = function(i, target)
+  msg.youtube("${bold}${red}[ ${ctitle} ] ${reset}${bold}${vtitle}${reset} - https://youtube.com/watch?v=${vid}")
+    :format({ctitle = i.snippet.channelTitle, vtitle = i.snippet.title, vid = i.id.videoId})
+    :send("privmsg", target)
 end
 
 cmd.addsubcmd("search", function(info)
@@ -67,14 +64,14 @@ cmd.addsubcmd("search", function(info)
   local content = request("search", {q=msg, part="id,snippet", type="video"})
   
   for k,v in ipairs(json.decode.decode(content).items) do
-    irc.privmsg(info.msg.target, sendStr(v))
+    sendStr(v, info.msg.target)
   end
 end)
 
 cmd.addsubcmd("random", function(info)
   local content = request("search", {q=generateID(), part="id,snippet", type="video", maxResults=50})
   content = json.decode.decode(content).items
-  irc.privmsg(info.msg.target, sendStr(content[math.floor(math.random() * #content)]))
+  sendStr(content[math.floor(math.random() * #content)], info.msg.target)
 end)
 
 command.alias("yt", "youtube")
