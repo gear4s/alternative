@@ -1,4 +1,4 @@
-local L, msg = require"utils.lambda", require"utils.messages"
+local L, msg = require"utils.lambda", require"std.messages"
 msg({name = "ctcp", showname = false})
 
 bot.hook("CTCP", function(info)

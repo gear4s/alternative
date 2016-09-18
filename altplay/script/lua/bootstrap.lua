@@ -49,6 +49,26 @@ irc.control = {
   underline       = char(31)
 }
 
+--[[
+    overload pcall with function that uses an error function that gives 
+    more informative error messages.
+]]
+
+local function xpcall_error_handler(error_message)
+    if type(error_message) ~= "table" then
+        return {debug.traceback(error_message, 2)}
+    else
+        return error_message
+    end
+end
+
+native_pcall = pcall
+
+pcall = function(func, ...)
+    local outer_arg = {...}
+    return xpcall(function() return func(table.unpack(outer_arg)) end, xpcall_error_handler)
+end
+
 table.sort(loadd, function(a, b) if a[2] ~= b[2] then return a[2] < b[2] else return a[1] < b[1] end end)
 for _, v in ipairs(loadd) do dofile("script/lua/modules.d/"..v[1]) end
 
