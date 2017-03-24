@@ -4,7 +4,7 @@ package.path = "./script/lua/?.lua;" .. package.path
 --lua 5.3 workaround
 loadstring = loadstring or load
 
-local startTime = os.time()
+startTime = os.time()
 local char = string.char
 
 local urandom, entropy = io.open("/dev/urandom"), 0
@@ -69,31 +69,16 @@ pcall = function(func, ...)
     return xpcall(function() return func(table.unpack(outer_arg)) end, xpcall_error_handler)
 end
 
-local opr = print
+require"utils.table"
 
-print = function(...)
-  local t = {...}
-  t[1] = "  " .. t[1]
-  opr((table.unpack or unpack)(t))
-end
 table.sort(loadd, function(a, b) if a[2] ~= b[2] then return a[2] < b[2] else return a[1] < b[1] end end)
 for _, v in ipairs(loadd) do
-  local chunk, error_message = loadfile("script/lua/modules.d/"..v[1])
-  if not chunk then
-      return false, print(os.date("[%a %d %b %X] ", os.time()) .. error_message .. "\n")
-  end
-  
-  local success, control = (function(...) return table.unpack({...}) end)(pcall(chunk))
-  
-  if not success then
-    print(os.date("[%a %d %b %X] ", os.time()) .. (error_message or "") .. "\n")
-  else
-    opr("Loaded module " .. v[1])
-  end
+  print("Loading module " .. v[1])
+  dofile("script/lua/modules.d/"..v[1])
 end
 
 bot.hook(396, function(msg)
   if msg.is_server_message then
-    irc.join("#altplay.dev", "")
+    irc.join("#xrd", "")
   end
 end)

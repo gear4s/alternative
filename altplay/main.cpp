@@ -5,6 +5,7 @@
 #include <thread>
 #include "bot.hpp"
 #include "later.h"
+#include "script/luaglue.h"
 
 using namespace std;
 using asio::ip::tcp;
@@ -22,7 +23,12 @@ int main( )
         altplay::script::lua::later::servermillis += 1;
         altplay::script::lua::later::check();
       }
+      altplay::script::lua::callhook((std::string)"shuttingdown", altplay::message_struct());
     });
+    
+    auto quitter = [](int){ quit = true; };
+    signal(SIGTERM, quitter);
+    signal(SIGINT,  quitter);
 
     try {
         std::setlocale ( LC_ALL, "en_US.UTF-8" );

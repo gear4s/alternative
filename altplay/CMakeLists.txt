@@ -19,13 +19,11 @@ set(SOURCE_FILES
         later.h
         logger.cpp
         logger.hpp
-        user.cpp
-        user.hpp
-        user_handler.cpp
-        user_handler.hpp
         ./script/luaglue.cpp
         ./script/luaglue.h
         ./script/luairccmd.cpp
+        ./script/luapcall.cpp
+        ./script/luapcall.h
         ./script/script.cpp
         ./script/script.h
         ./include/lua.h
@@ -33,7 +31,7 @@ set(SOURCE_FILES
         ./include/luaconf.h
         ./include/lualib.h
         ./include/lauxlib.h
-        ./include/LuaBridge/LuaBridge.h database_handler.cpp database_handler.hpp)
+        ./include/LuaBridge/LuaBridge.h)
 
 include_directories(${altplay_SOURCE_DIR}/ ${altplay_SOURCE_DIR}/include)
 
@@ -45,4 +43,5 @@ add_definitions(-DASIO_STANDALONE -DMYSQLPP_MYSQL_HEADERS_BURIED)
 
 include_directories("$ENV{HOME}/coding/cpp/gsl/include")
 add_executable(altplay ${SOURCE_FILES})
+link_directories(${altplay_SOURCE_DIR}/../lib)
 target_link_libraries(altplay pthread lua mysqlpp)

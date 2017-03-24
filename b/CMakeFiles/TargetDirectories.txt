@@ -1,0 +1,3 @@
+/home/dev/git/altplay/b/CMakeFiles/rebuild_cache.dir
+/home/dev/git/altplay/b/CMakeFiles/edit_cache.dir
+/home/dev/git/altplay/b/CMakeFiles/altplay.dir

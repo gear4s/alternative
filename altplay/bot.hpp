@@ -4,6 +4,7 @@
 #include "parser.hpp"
 #include "logger.hpp"
 
+extern bool quit;
 namespace altplay
 {
 	class bot {
@@ -22,6 +23,4 @@ namespace altplay
 		altplay::logger logger_;
 		std::string nick_, user_;
 	};
-
-  extern bool quit;
 } // end of ns altplay

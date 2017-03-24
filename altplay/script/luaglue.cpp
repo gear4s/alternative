@@ -5,7 +5,9 @@
 #include <iostream>
 #include <sstream>
 #include "later.h"
+#include "luapcall.h"
 
+extern bool quit;
 using namespace luabridge;
 namespace altplay {
   extern  bot *botinstance;
@@ -13,6 +15,7 @@ namespace altplay {
   namespace script {
     namespace lua {
       extern void bindIrcToLua(lua_State *L);
+      extern void bindIniReaderToLua(lua_State *L);
       
       lua_State *L;
       std::list<irchook> _hooks;
@@ -60,22 +63,28 @@ namespace altplay {
       auto init() -> std::tuple<int, const char *> {
         L = luaL_newstate();
         luaL_openlibs(L);
+        get_error_handler(L);
 
         getGlobalNamespace(L)
           .beginClass<message_struct>("message_struct")
 #define Data(n) addData(#n, &message_struct::n)
-          .Data(nick)
-          .Data(hostmask)
-          .Data(ident)
-          .Data(prefix)
-          .Data(params)
-          .Data(target)
-          .Data(message)
-          .Data(is_server_message)
+            .Data(nick)
+            .Data(hostmask)
+            .Data(ident)
+            .Data(prefix)
+            .Data(params)
+            .Data(target)
+            .Data(message)
+            .Data(is_server_message)
 #undef setProp
           .endClass()
 
           .beginNamespace("bot")
+            .addProperty("quit", +[]{ return quit; }, +[](bool v){
+                if(quit && !v) luaL_error(L, "Cannot abort a quit");
+                quit = v;
+            })
+            .addFunction("_Exit", +[](int status){ quit = true; std::_Exit(status); })
             .addCFunction("listdir", [](lua_State* L) -> int{
               static std::vector<char*> dirs;
               if(!listdir(luaL_tolstring(L, 1, 0), true, 0, dirs)) return 0;

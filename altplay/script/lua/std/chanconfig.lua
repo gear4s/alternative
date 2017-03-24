@@ -24,48 +24,39 @@ end
 
 local module = {}
 local channels = {}
+
 module.set = function(info,what,to)
   what = what:split(".")
-  local c = channels[info.msg.target]
+  local c = channels[info.target]
+  print(type(c))
   for k,v in pairs(what) do
     print(v)
-    c = c[v]
+    lv = v
     if type(c[v]) ~= "table" then break end
+    c = c[v]
   end
-  c = to
+  c[lv] = to
 end
 
 module.get = function(target,what)
-  return channels[target][what]
+  
 end
 
-local index = {}
-local updateOnUpdateChannel = function(t,c)
-  local proxy = {}
-  proxy[index] = t
-  return setmetatable(proxy, {
-    __index = function(t,k) print("*access to element " .. tostring(k)); return updateOnUpdateChannel(t[index][k],c) end,
-    __newindex = function(t,k,v) print("*update of element " .. tostring(k) .. " to " .. tostring(v)); rawset(t,k,v); writetofile(c..".json", json.encode(channels[c])) end
-  })
-end
-local chanMt = function(t,c)
-  return setmetatable(t, {
+local chanMt
+chanMt = function(t,f)
+  return setmetatable({__prototype = t}, {
     __index = function(t,k)
-      return updateOnUpdateChannel(rawget(t,"prototype")[k],c) or updateOnUpdateChannel({
-        prefix = "",
-        modules = updateOnUpdateChannel({
-          youtube = updateOnUpdateChannel({
-            enabled = true,
-            search = true,
-            random = true
-          },c)
-        },c)
-      },c)[k]
+      print("get",k)
+      return chanMt(rawget(t, "__prototype")[k])
+    end,
+    __newindex = function(t,k,v)
+      print("set",k,v)
+      rawset(t.__prototype, k, v)
+      writetofile(f, t)
     end
   })
 end
 module.new = function(info)
-  print("got add")
   local newChan = {
     prefix = "",
     modules = {
@@ -76,7 +67,7 @@ module.new = function(info)
       }
     }
   }
-  channels[info.msg.target] = chanMt(newChan)
+  channels[info.msg.target] = chanMt(newChan, info.msg.target .. ".json")
   writetofile(info.msg.target .. ".json", json.encode(newChan))
 end
 
@@ -84,7 +75,7 @@ module.init = function()
   for _, v in ipairs(bot.listdir("script/lua/chanconfig")) do
     local chanfile, c = v:match("^((.+)%.[Jj][Ss][Oo][Nn])$")
     if chanfile then
-      channels[c] = chanMt(json.decode(read_file("script/lua/chanconfig/" .. c .. ".json")))
+      channels[c] = chanMt(json.decode(read_file("script/lua/chanconfig/" .. c .. ".json")), chanfile)
     end
   end
 end
