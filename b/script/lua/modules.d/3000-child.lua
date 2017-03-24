@@ -12,8 +12,8 @@ baseCmd.addsubcmd("add", function(info)
   local args = info.args:split(" ")
   if #args ~= 2 then return end
   
-end, "Adds a child process to the list", "Usage: #child add <name> <channel>")
+end, "Adds a child process to the list", "r:name,channel")
 
 baseCmd.addsubcmd("list", function(info)
   
-end, "Lists all processes that have been started, and which channel they reside in", "Usage: #child list")
+end, "Lists all processes that have been started, and which channel they reside in")

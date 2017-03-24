@@ -2904,3 +2904,260 @@ ERROR: :Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG 
 :Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :what was your poison?
 :Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :"how did he die" "he stopped living"
 :Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :that could be an emo tshirt
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :I jumped off a bridge
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :well shit
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :I was on the way to gym
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :right by a bridge
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :depressed af
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :btw if you wanna see the source for the bot => https://github.com/gear4s/alternative
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :it's C++ and Lua
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :some code stolen from Sauer projects
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :idgaf
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :https://github.com/gear4s/alternative/commit/bdfaa9a2bebba1b5af3dbce94865bf41c33fdde1 <= "last" commit
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :only time anything really changed
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :ugh I accidentally included cmake files
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :looks like fun
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :not really
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :ACTION doesn't code and is happier because of it
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :invalid ctcp. noice
+NOTICE AUTH :*** Looking up your hostname
+NOTICE AUTH :*** Checking Ident
+:Prothid.NY.US.GameSurge.net 433 * altbot :Nickname is already in use.
+NOTICE AUTH :*** Couldn't look up your hostname
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :haha
+NOTICE AUTH :*** No ident response
+ERROR :Closing Link:  by Prothid.NY.US.GameSurge.net (Registration Timeout)
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :only thing I do is code now
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :code and gym
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :wait wtf
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :altbot's still here ..
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :hm
+NOTICE AUTH :*** Looking up your hostname
+NOTICE AUTH :*** Checking Ident
+NOTICE AUTH :*** Couldn't look up your hostname
+NOTICE AUTH :*** No ident response
+:NuclearFallout.WA.US.GameSurge.net 001 altbot :Welcome to the GameSurge IRC Network via NuclearFallout.net, altbot
+:NuclearFallout.WA.US.GameSurge.net 002 altbot :Your host is NuclearFallout.WA.US.GameSurge.net, running version u2.10.12.14(gs1)
+:NuclearFallout.WA.US.GameSurge.net 003 altbot :This server was created Tue Aug 23 2011 at 16:37:40 PDT
+:NuclearFallout.WA.US.GameSurge.net 004 altbot NuclearFallout.WA.US.GameSurge.net u2.10.12.14(gs1) dioswkgxnI biklmnopstvrDRcCz bklov
+:NuclearFallout.WA.US.GameSurge.net 005 altbot WHOX WALLCHOPS WALLVOICES USERIP CPRIVMSG CNOTICE SILENCE=25 MODES=6 MAXCHANNELS=75 MAXBANS=50 NICKLEN=30 :are supported by this server
+:NuclearFallout.WA.US.GameSurge.net 005 altbot MAXNICKLEN=30 TOPICLEN=300 AWAYLEN=200 KICKLEN=300 CHANNELLEN=200 MAXCHANNELLEN=200 CHANTYPES=#& PREFIX=(ov)@+ STATUSMSG=@+ CHANMODES=b,k,l,imnpstrDdRcC CASEMAPPING=rfc1459 NETWORK=GameSurge :are supported by this server
+:NuclearFallout.WA.US.GameSurge.net 251 altbot :There are 10 users and 3810 invisible on 16 servers
+:NuclearFallout.WA.US.GameSurge.net 252 altbot 32 :operator(s) online
+:NuclearFallout.WA.US.GameSurge.net 254 altbot 2840 :channels formed
+:NuclearFallout.WA.US.GameSurge.net 255 altbot :I have 1 clients and 1 servers
+:NuclearFallout.WA.US.GameSurge.net NOTICE altbot :Highest connection count: 2 (1 clients)
+:NuclearFallout.WA.US.GameSurge.net 375 altbot :- NuclearFallout.WA.US.GameSurge.net Message of the Day - 
+:NuclearFallout.WA.US.GameSurge.net 372 altbot :Type /MOTD to read the AUP before continuing using this service.
+:NuclearFallout.WA.US.GameSurge.net 372 altbot :The message of the day was last changed: 2010-3-13 12:27
+:NuclearFallout.WA.US.GameSurge.net 376 altbot :End of /MOTD command.
+:NuclearFallout.WA.US.GameSurge.net NOTICE altbot :on 2 ca 1(10) ft 10(10) tr
+:altbot!~altbot@197.86.176.242 MODE altbot :+iw
+:Global!Global@Services.GameSurge.net NOTICE altbot :------------- MESSAGE(S) OF THE DAY --------------
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from ThiefMaster, posted 01:47 PM, 04/09/2015:
+:Global!Global@Services.GameSurge.net NOTICE altbot :We've just started cloaking the IPs of all users on connect. This should improve your privacy and also lower the risk of being targeted by packet kiddies.
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from GameSurge, posted 08:59 PM, 05/11/2013:
+:Global!Global@Services.GameSurge.net NOTICE altbot :You can now follow GameSurge on Twitter bit.ly/1607zvW and Facebook on.fb.me/10Aq5Dx Please "like" and "follow" us to be kept up-to-date on network news, events, and other items!
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from feigling, posted 08:24 PM, 07/17/2008:
+:Global!Global@Services.GameSurge.net NOTICE altbot :GameSurge provides a new service called SpamServ which moderates your channel. If you are interested in learning more about it read http://www.gamesurge.net/cms/SpamServ
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from GameSurge, posted 12:27 PM, 01/20/2007:
+:Global!Global@Services.GameSurge.net NOTICE altbot :Please be familiar with the GameSurge Acceptable Use Policy. All users on the network are required to abide by it. http://www.gamesurge.net/aup/
+:Global!Global@Services.GameSurge.net NOTICE altbot :---------- END OF MESSAGE(S) OF THE DAY ----------
+:NuclearFallout.WA.US.GameSurge.net 396 altbot ~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 :is now your hidden host
+:altbot!~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 MODE altbot :+x
+:altbot!~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 JOIN #XRD
+:NuclearFallout.WA.US.GameSurge.net 332 altbot #XRD :XRD-Bot's scripting channel || http://xrd.me/ || X-Ray_Dog is badman
+:NuclearFallout.WA.US.GameSurge.net 333 altbot #XRD *.GameSurge.net 1486910589
+:NuclearFallout.WA.US.GameSurge.net 353 altbot = #XRD :altbot +Krystal +Joshy @Narwhaal @X-Ray_Dog @XRD-Bot +Cap0ne @ChanServ
+:NuclearFallout.WA.US.GameSurge.net 366 altbot #XRD :End of /NAMES list.
+:ChanServ!ChanServ@Services.GameSurge.net MODE #XRD +v altbot
+:XRD-Bot!~XRD-Bot@XRD-Bot.user.gamesurge NOTICE altbot :#XRD: Welcome to #XRD, type &Register to get started!
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help
+ERROR: :Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help
+NOTICE AUTH :*** Looking up your hostname
+NOTICE AUTH :*** Checking Ident
+NOTICE AUTH :*** Couldn't look up your hostname
+NOTICE AUTH :*** No ident response
+:NuclearFallout.WA.US.GameSurge.net 001 altbot :Welcome to the GameSurge IRC Network via NuclearFallout.net, altbot
+:NuclearFallout.WA.US.GameSurge.net 002 altbot :Your host is NuclearFallout.WA.US.GameSurge.net, running version u2.10.12.14(gs1)
+:NuclearFallout.WA.US.GameSurge.net 003 altbot :This server was created Tue Aug 23 2011 at 16:37:40 PDT
+:NuclearFallout.WA.US.GameSurge.net 004 altbot NuclearFallout.WA.US.GameSurge.net u2.10.12.14(gs1) dioswkgxnI biklmnopstvrDRcCz bklov
+:NuclearFallout.WA.US.GameSurge.net 005 altbot WHOX WALLCHOPS WALLVOICES USERIP CPRIVMSG CNOTICE SILENCE=25 MODES=6 MAXCHANNELS=75 MAXBANS=50 NICKLEN=30 :are supported by this server
+:NuclearFallout.WA.US.GameSurge.net 005 altbot MAXNICKLEN=30 TOPICLEN=300 AWAYLEN=200 KICKLEN=300 CHANNELLEN=200 MAXCHANNELLEN=200 CHANTYPES=#& PREFIX=(ov)@+ STATUSMSG=@+ CHANMODES=b,k,l,imnpstrDdRcC CASEMAPPING=rfc1459 NETWORK=GameSurge :are supported by this server
+:NuclearFallout.WA.US.GameSurge.net 251 altbot :There are 10 users and 3810 invisible on 16 servers
+:NuclearFallout.WA.US.GameSurge.net 252 altbot 32 :operator(s) online
+:NuclearFallout.WA.US.GameSurge.net 254 altbot 2841 :channels formed
+:NuclearFallout.WA.US.GameSurge.net 255 altbot :I have 1 clients and 1 servers
+:NuclearFallout.WA.US.GameSurge.net NOTICE altbot :Highest connection count: 2 (1 clients)
+:NuclearFallout.WA.US.GameSurge.net 375 altbot :- NuclearFallout.WA.US.GameSurge.net Message of the Day - 
+:NuclearFallout.WA.US.GameSurge.net 372 altbot :Type /MOTD to read the AUP before continuing using this service.
+:NuclearFallout.WA.US.GameSurge.net 372 altbot :The message of the day was last changed: 2010-3-13 12:27
+:NuclearFallout.WA.US.GameSurge.net 376 altbot :End of /MOTD command.
+:NuclearFallout.WA.US.GameSurge.net NOTICE altbot :on 2 ca 1(10) ft 10(10) tr
+:altbot!~altbot@197.86.176.242 MODE altbot :+iw
+:CTCP!CTCP@Services.GameSurge.net PRIVMSG altbot :VERSION
+:Global!Global@Services.GameSurge.net NOTICE altbot :------------- MESSAGE(S) OF THE DAY --------------
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from ThiefMaster, posted 01:47 PM, 04/09/2015:
+:Global!Global@Services.GameSurge.net NOTICE altbot :We've just started cloaking the IPs of all users on connect. This should improve your privacy and also lower the risk of being targeted by packet kiddies.
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from GameSurge, posted 08:59 PM, 05/11/2013:
+:Global!Global@Services.GameSurge.net NOTICE altbot :You can now follow GameSurge on Twitter bit.ly/1607zvW and Facebook on.fb.me/10Aq5Dx Please "like" and "follow" us to be kept up-to-date on network news, events, and other items!
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from feigling, posted 08:24 PM, 07/17/2008:
+:Global!Global@Services.GameSurge.net NOTICE altbot :GameSurge provides a new service called SpamServ which moderates your channel. If you are interested in learning more about it read http://www.gamesurge.net/cms/SpamServ
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from GameSurge, posted 12:27 PM, 01/20/2007:
+:Global!Global@Services.GameSurge.net NOTICE altbot :Please be familiar with the GameSurge Acceptable Use Policy. All users on the network are required to abide by it. http://www.gamesurge.net/aup/
+:Global!Global@Services.GameSurge.net NOTICE altbot :---------- END OF MESSAGE(S) OF THE DAY ----------
+:NuclearFallout.WA.US.GameSurge.net 396 altbot ~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 :is now your hidden host
+:altbot!~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 MODE altbot :+x
+:altbot!~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 JOIN #XRD
+:NuclearFallout.WA.US.GameSurge.net 332 altbot #XRD :XRD-Bot's scripting channel || http://xrd.me/ || X-Ray_Dog is badman
+:NuclearFallout.WA.US.GameSurge.net 333 altbot #XRD *.GameSurge.net 1486910589
+:NuclearFallout.WA.US.GameSurge.net 353 altbot = #XRD :altbot +Krystal +Joshy @Narwhaal @X-Ray_Dog @XRD-Bot +Cap0ne @ChanServ
+:NuclearFallout.WA.US.GameSurge.net 366 altbot #XRD :End of /NAMES list.
+:XRD-Bot!~XRD-Bot@XRD-Bot.user.gamesurge NOTICE altbot :#XRD: Welcome to #XRD, type &Register to get started!
+:ChanServ!ChanServ@Services.GameSurge.net MODE #XRD +v altbot
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help youtube
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help youtube search
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :FUUUUUCK YOU
+NOTICE AUTH :*** Looking up your hostname
+NOTICE AUTH :*** Checking Ident
+NOTICE AUTH :*** Couldn't look up your hostname
+NOTICE AUTH :*** No ident response
+:NuclearFallout.WA.US.GameSurge.net 001 altbot :Welcome to the GameSurge IRC Network via NuclearFallout.net, altbot
+:NuclearFallout.WA.US.GameSurge.net 002 altbot :Your host is NuclearFallout.WA.US.GameSurge.net, running version u2.10.12.14(gs1)
+:NuclearFallout.WA.US.GameSurge.net 003 altbot :This server was created Tue Aug 23 2011 at 16:37:40 PDT
+:NuclearFallout.WA.US.GameSurge.net 004 altbot NuclearFallout.WA.US.GameSurge.net u2.10.12.14(gs1) dioswkgxnI biklmnopstvrDRcCz bklov
+:NuclearFallout.WA.US.GameSurge.net 005 altbot WHOX WALLCHOPS WALLVOICES USERIP CPRIVMSG CNOTICE SILENCE=25 MODES=6 MAXCHANNELS=75 MAXBANS=50 NICKLEN=30 :are supported by this server
+:NuclearFallout.WA.US.GameSurge.net 005 altbot MAXNICKLEN=30 TOPICLEN=300 AWAYLEN=200 KICKLEN=300 CHANNELLEN=200 MAXCHANNELLEN=200 CHANTYPES=#& PREFIX=(ov)@+ STATUSMSG=@+ CHANMODES=b,k,l,imnpstrDdRcC CASEMAPPING=rfc1459 NETWORK=GameSurge :are supported by this server
+:NuclearFallout.WA.US.GameSurge.net 251 altbot :There are 11 users and 3825 invisible on 16 servers
+:NuclearFallout.WA.US.GameSurge.net 252 altbot 32 :operator(s) online
+:NuclearFallout.WA.US.GameSurge.net 253 altbot 1 :unknown connection(s)
+:NuclearFallout.WA.US.GameSurge.net 254 altbot 2848 :channels formed
+:NuclearFallout.WA.US.GameSurge.net 255 altbot :I have 1 clients and 1 servers
+:NuclearFallout.WA.US.GameSurge.net NOTICE altbot :Highest connection count: 2 (1 clients)
+:NuclearFallout.WA.US.GameSurge.net 375 altbot :- NuclearFallout.WA.US.GameSurge.net Message of the Day - 
+:NuclearFallout.WA.US.GameSurge.net 372 altbot :Type /MOTD to read the AUP before continuing using this service.
+:NuclearFallout.WA.US.GameSurge.net 372 altbot :The message of the day was last changed: 2010-3-13 12:27
+:NuclearFallout.WA.US.GameSurge.net 376 altbot :End of /MOTD command.
+:NuclearFallout.WA.US.GameSurge.net NOTICE altbot :on 2 ca 1(10) ft 10(10) tr
+:altbot!~altbot@197.86.176.242 MODE altbot :+iw
+:Global!Global@Services.GameSurge.net NOTICE altbot :------------- MESSAGE(S) OF THE DAY --------------
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from ThiefMaster, posted 01:47 PM, 04/09/2015:
+:Global!Global@Services.GameSurge.net NOTICE altbot :We've just started cloaking the IPs of all users on connect. This should improve your privacy and also lower the risk of being targeted by packet kiddies.
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from GameSurge, posted 08:59 PM, 05/11/2013:
+:Global!Global@Services.GameSurge.net NOTICE altbot :You can now follow GameSurge on Twitter bit.ly/1607zvW and Facebook on.fb.me/10Aq5Dx Please "like" and "follow" us to be kept up-to-date on network news, events, and other items!
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from feigling, posted 08:24 PM, 07/17/2008:
+:Global!Global@Services.GameSurge.net NOTICE altbot :GameSurge provides a new service called SpamServ which moderates your channel. If you are interested in learning more about it read http://www.gamesurge.net/cms/SpamServ
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from GameSurge, posted 12:27 PM, 01/20/2007:
+:Global!Global@Services.GameSurge.net NOTICE altbot :Please be familiar with the GameSurge Acceptable Use Policy. All users on the network are required to abide by it. http://www.gamesurge.net/aup/
+:Global!Global@Services.GameSurge.net NOTICE altbot :---------- END OF MESSAGE(S) OF THE DAY ----------
+:NuclearFallout.WA.US.GameSurge.net 396 altbot ~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 :is now your hidden host
+:altbot!~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 MODE altbot :+x
+:CTCP!CTCP@Services.GameSurge.net PRIVMSG altbot :VERSION
+:altbot!~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 JOIN #XRD
+:NuclearFallout.WA.US.GameSurge.net 332 altbot #XRD :XRD-Bot's scripting channel || http://xrd.me/ || X-Ray_Dog is badman
+:NuclearFallout.WA.US.GameSurge.net 333 altbot #XRD *.GameSurge.net 1486910589
+:NuclearFallout.WA.US.GameSurge.net 353 altbot = #XRD :altbot +Krystal +Joshy @Narwhaal @X-Ray_Dog @XRD-Bot +Cap0ne @ChanServ
+:NuclearFallout.WA.US.GameSurge.net 366 altbot #XRD :End of /NAMES list.
+:ChanServ!ChanServ@Services.GameSurge.net MODE #XRD +v altbot
+:XRD-Bot!~XRD-Bot@XRD-Bot.user.gamesurge NOTICE altbot :#XRD: Welcome to #XRD, type &Register to get started!
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help youtube
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help youtube search
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :???
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :oh I reset 
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :woops
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :ACTION is
+NOTICE AUTH :*** Looking up your hostname
+NOTICE AUTH :*** Checking Ident
+NOTICE AUTH :*** Couldn't look up your hostname
+NOTICE AUTH :*** No ident response
+:TAL.DE.EU.GameSurge.net 001 altbot :Welcome to the GameSurge IRC Network via tal.de, altbot
+:TAL.DE.EU.GameSurge.net 002 altbot :Your host is TAL.DE.EU.GameSurge.net, running version u2.10.12.14(gs1)
+:TAL.DE.EU.GameSurge.net 003 altbot :This server was created Sat Sep 14 2013 at 17:41:29 CEST
+:TAL.DE.EU.GameSurge.net 004 altbot TAL.DE.EU.GameSurge.net u2.10.12.14(gs1) dioswkgxnI biklmnopstvrDRcCz bklov
+:TAL.DE.EU.GameSurge.net 005 altbot WHOX WALLCHOPS WALLVOICES USERIP CPRIVMSG CNOTICE SILENCE=25 MODES=6 MAXCHANNELS=75 MAXBANS=50 NICKLEN=30 :are supported by this server
+:TAL.DE.EU.GameSurge.net 005 altbot MAXNICKLEN=30 TOPICLEN=300 AWAYLEN=200 KICKLEN=300 CHANNELLEN=200 MAXCHANNELLEN=200 CHANTYPES=#& PREFIX=(ov)@+ STATUSMSG=@+ CHANMODES=b,k,l,imnpstrDdRcC CASEMAPPING=rfc1459 NETWORK=GameSurge :are supported by this server
+:TAL.DE.EU.GameSurge.net 251 altbot :There are 11 users and 3833 invisible on 16 servers
+:TAL.DE.EU.GameSurge.net 252 altbot 32 :operator(s) online
+:TAL.DE.EU.GameSurge.net 253 altbot 1 :unknown connection(s)
+:TAL.DE.EU.GameSurge.net 254 altbot 2852 :channels formed
+:TAL.DE.EU.GameSurge.net 255 altbot :I have 1 clients and 1 servers
+:TAL.DE.EU.GameSurge.net NOTICE altbot :Highest connection count: 2 (1 clients)
+:TAL.DE.EU.GameSurge.net 422 altbot :MOTD File is missing
+:TAL.DE.EU.GameSurge.net NOTICE altbot :on 2 ca 1(10) ft 10(10) tr
+:altbot!~altbot@197.86.176.242 MODE altbot :+iw
+:CTCP!CTCP@Services.GameSurge.net PRIVMSG altbot :VERSION
+:Global!Global@Services.GameSurge.net NOTICE altbot :------------- MESSAGE(S) OF THE DAY --------------
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from ThiefMaster, posted 01:47 PM, 04/09/2015:
+:Global!Global@Services.GameSurge.net NOTICE altbot :We've just started cloaking the IPs of all users on connect. This should improve your privacy and also lower the risk of being targeted by packet kiddies.
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from GameSurge, posted 08:59 PM, 05/11/2013:
+:Global!Global@Services.GameSurge.net NOTICE altbot :You can now follow GameSurge on Twitter bit.ly/1607zvW and Facebook on.fb.me/10Aq5Dx Please "like" and "follow" us to be kept up-to-date on network news, events, and other items!
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from feigling, posted 08:24 PM, 07/17/2008:
+:Global!Global@Services.GameSurge.net NOTICE altbot :GameSurge provides a new service called SpamServ which moderates your channel. If you are interested in learning more about it read http://www.gamesurge.net/cms/SpamServ
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from GameSurge, posted 12:27 PM, 01/20/2007:
+:Global!Global@Services.GameSurge.net NOTICE altbot :Please be familiar with the GameSurge Acceptable Use Policy. All users on the network are required to abide by it. http://www.gamesurge.net/aup/
+:Global!Global@Services.GameSurge.net NOTICE altbot :---------- END OF MESSAGE(S) OF THE DAY ----------
+:TAL.DE.EU.GameSurge.net 396 altbot ~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 :is now your hidden host
+:altbot!~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 MODE altbot :+x
+:altbot!~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 JOIN #XRD
+:TAL.DE.EU.GameSurge.net 332 altbot #XRD :XRD-Bot's scripting channel || http://xrd.me/ || X-Ray_Dog is badman
+:TAL.DE.EU.GameSurge.net 333 altbot #XRD *.GameSurge.net 1486910589
+:TAL.DE.EU.GameSurge.net 353 altbot = #XRD :altbot +Krystal +Joshy @Narwhaal @XRD-Bot @X-Ray_Dog +Cap0ne @ChanServ
+:TAL.DE.EU.GameSurge.net 366 altbot #XRD :End of /NAMES list.
+:ChanServ!ChanServ@Services.GameSurge.net MODE #XRD +v altbot
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :suuuure
+:XRD-Bot!~XRD-Bot@XRD-Bot.user.gamesurge NOTICE altbot :#XRD: Welcome to #XRD, type &Register to get started!
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :I am
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :*rolls I's*
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help youtube search
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :fucking finally
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :piece of shite works
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help 
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help child
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help child add
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :now for usage
+NOTICE AUTH :*** Looking up your hostname
+NOTICE AUTH :*** Checking Ident
+NOTICE AUTH :*** Couldn't look up your hostname
+NOTICE AUTH :*** No ident response
+:Portlane.SE.EU.GameSurge.net 001 altbot :Welcome to the GameSurge IRC Network via portlane.se, altbot
+:Portlane.SE.EU.GameSurge.net 002 altbot :Your host is Portlane.SE.EU.GameSurge.net, running version u2.10.12.14(gs1)
+:Portlane.SE.EU.GameSurge.net 003 altbot :This server was created Fri Jun 29 2012 at 18:23:55 CEST
+:Portlane.SE.EU.GameSurge.net 004 altbot Portlane.SE.EU.GameSurge.net u2.10.12.14(gs1) dioswkgxnI biklmnopstvrDRcCz bklov
+:Portlane.SE.EU.GameSurge.net 005 altbot WHOX WALLCHOPS WALLVOICES USERIP CPRIVMSG CNOTICE SILENCE=25 MODES=6 MAXCHANNELS=75 MAXBANS=50 NICKLEN=30 :are supported by this server
+:Portlane.SE.EU.GameSurge.net 005 altbot MAXNICKLEN=30 TOPICLEN=300 AWAYLEN=200 KICKLEN=300 CHANNELLEN=200 MAXCHANNELLEN=200 CHANTYPES=#& PREFIX=(ov)@+ STATUSMSG=@+ CHANMODES=b,k,l,imnpstrDdRcC CASEMAPPING=rfc1459 NETWORK=GameSurge :are supported by this server
+:Portlane.SE.EU.GameSurge.net 251 altbot :There are 10 users and 3832 invisible on 16 servers
+:Portlane.SE.EU.GameSurge.net 252 altbot 32 :operator(s) online
+:Portlane.SE.EU.GameSurge.net 254 altbot 2852 :channels formed
+:Portlane.SE.EU.GameSurge.net 255 altbot :I have 1 clients and 1 servers
+:Portlane.SE.EU.GameSurge.net NOTICE altbot :Highest connection count: 2 (1 clients)
+:Portlane.SE.EU.GameSurge.net 422 altbot :MOTD File is missing
+:Portlane.SE.EU.GameSurge.net NOTICE altbot :on 2 ca 1(10) ft 10(10) tr
+:altbot!~altbot@197.86.176.242 MODE altbot :+iw
+:CTCP!CTCP@Services.GameSurge.net PRIVMSG altbot :VERSION
+:Global!Global@Services.GameSurge.net NOTICE altbot :------------- MESSAGE(S) OF THE DAY --------------
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from ThiefMaster, posted 01:47 PM, 04/09/2015:
+:Global!Global@Services.GameSurge.net NOTICE altbot :We've just started cloaking the IPs of all users on connect. This should improve your privacy and also lower the risk of being targeted by packet kiddies.
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from GameSurge, posted 08:59 PM, 05/11/2013:
+:Global!Global@Services.GameSurge.net NOTICE altbot :You can now follow GameSurge on Twitter bit.ly/1607zvW and Facebook on.fb.me/10Aq5Dx Please "like" and "follow" us to be kept up-to-date on network news, events, and other items!
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from feigling, posted 08:24 PM, 07/17/2008:
+:Global!Global@Services.GameSurge.net NOTICE altbot :GameSurge provides a new service called SpamServ which moderates your channel. If you are interested in learning more about it read http://www.gamesurge.net/cms/SpamServ
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from GameSurge, posted 12:27 PM, 01/20/2007:
+:Global!Global@Services.GameSurge.net NOTICE altbot :Please be familiar with the GameSurge Acceptable Use Policy. All users on the network are required to abide by it. http://www.gamesurge.net/aup/
+:Global!Global@Services.GameSurge.net NOTICE altbot :---------- END OF MESSAGE(S) OF THE DAY ----------
+:Portlane.SE.EU.GameSurge.net 396 altbot ~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 :is now your hidden host
+:altbot!~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 MODE altbot :+x
+:altbot!~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 JOIN #XRD
+:Portlane.SE.EU.GameSurge.net 332 altbot #XRD :XRD-Bot's scripting channel || http://xrd.me/ || X-Ray_Dog is badman
+:Portlane.SE.EU.GameSurge.net 333 altbot #XRD *.GameSurge.net 1486910589
+:Portlane.SE.EU.GameSurge.net 353 altbot = #XRD :altbot +Krystal +Joshy @Narwhaal @XRD-Bot @X-Ray_Dog +Cap0ne @ChanServ
+:Portlane.SE.EU.GameSurge.net 366 altbot #XRD :End of /NAMES list.
+:ChanServ!ChanServ@Services.GameSurge.net MODE #XRD +v altbot
+:XRD-Bot!~XRD-Bot@XRD-Bot.user.gamesurge NOTICE altbot :#XRD: Welcome to #XRD, type &Register to get started!
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help child
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help child add
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :oh fuck yes
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help youtube search
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD ::D
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :fuck YES

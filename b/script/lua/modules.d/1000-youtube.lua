@@ -73,7 +73,7 @@ cmd.addsubcmd("search", function(info)
   for k,v in ipairs(json.decode.decode(content).items) do
     sendStr(v, info.msg.target)
   end
-end, "Searches YouTube, requests the ID and a snippet. 3 results maximum")
+end, "Searches YouTube, requests the ID and a snippet. 3 results maximum", "r:string...")
 
 cmd.addsubcmd("random", function(info)
   local content = request("search", {q=generateID(), part="id,snippet", type="video", maxResults=50})
