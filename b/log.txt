@@ -3161,3 +3161,135 @@ NOTICE AUTH :*** No ident response
 :Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help youtube search
 :Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD ::D
 :Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :fuck YES
+NOTICE AUTH :*** Looking up your hostname
+NOTICE AUTH :*** Checking Ident
+NOTICE AUTH :*** Couldn't look up your hostname
+NOTICE AUTH :*** No ident response
+:TAL.DE.EU.GameSurge.net 001 altbot :Welcome to the GameSurge IRC Network via tal.de, altbot
+:TAL.DE.EU.GameSurge.net 002 altbot :Your host is TAL.DE.EU.GameSurge.net, running version u2.10.12.14(gs1)
+:TAL.DE.EU.GameSurge.net 003 altbot :This server was created Sat Sep 14 2013 at 17:41:29 CEST
+:TAL.DE.EU.GameSurge.net 004 altbot TAL.DE.EU.GameSurge.net u2.10.12.14(gs1) dioswkgxnI biklmnopstvrDRcCz bklov
+:TAL.DE.EU.GameSurge.net 005 altbot WHOX WALLCHOPS WALLVOICES USERIP CPRIVMSG CNOTICE SILENCE=25 MODES=6 MAXCHANNELS=75 MAXBANS=50 NICKLEN=30 :are supported by this server
+:TAL.DE.EU.GameSurge.net 005 altbot MAXNICKLEN=30 TOPICLEN=300 AWAYLEN=200 KICKLEN=300 CHANNELLEN=200 MAXCHANNELLEN=200 CHANTYPES=#& PREFIX=(ov)@+ STATUSMSG=@+ CHANMODES=b,k,l,imnpstrDdRcC CASEMAPPING=rfc1459 NETWORK=GameSurge :are supported by this server
+:TAL.DE.EU.GameSurge.net 251 altbot :There are 10 users and 3817 invisible on 16 servers
+:TAL.DE.EU.GameSurge.net 252 altbot 32 :operator(s) online
+:TAL.DE.EU.GameSurge.net 254 altbot 2847 :channels formed
+:TAL.DE.EU.GameSurge.net 255 altbot :I have 1 clients and 1 servers
+:TAL.DE.EU.GameSurge.net NOTICE altbot :Highest connection count: 2 (1 clients)
+:TAL.DE.EU.GameSurge.net 422 altbot :MOTD File is missing
+:TAL.DE.EU.GameSurge.net NOTICE altbot :on 2 ca 1(10) ft 10(10) tr
+:altbot!~altbot@197.86.176.242 MODE altbot :+iw
+:CTCP!CTCP@Services.GameSurge.net PRIVMSG altbot :VERSION
+:Global!Global@Services.GameSurge.net NOTICE altbot :------------- MESSAGE(S) OF THE DAY --------------
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from ThiefMaster, posted 01:47 PM, 04/09/2015:
+:Global!Global@Services.GameSurge.net NOTICE altbot :We've just started cloaking the IPs of all users on connect. This should improve your privacy and also lower the risk of being targeted by packet kiddies.
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from GameSurge, posted 08:59 PM, 05/11/2013:
+:Global!Global@Services.GameSurge.net NOTICE altbot :You can now follow GameSurge on Twitter bit.ly/1607zvW and Facebook on.fb.me/10Aq5Dx Please "like" and "follow" us to be kept up-to-date on network news, events, and other items!
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from feigling, posted 08:24 PM, 07/17/2008:
+:Global!Global@Services.GameSurge.net NOTICE altbot :GameSurge provides a new service called SpamServ which moderates your channel. If you are interested in learning more about it read http://www.gamesurge.net/cms/SpamServ
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from GameSurge, posted 12:27 PM, 01/20/2007:
+:Global!Global@Services.GameSurge.net NOTICE altbot :Please be familiar with the GameSurge Acceptable Use Policy. All users on the network are required to abide by it. http://www.gamesurge.net/aup/
+:Global!Global@Services.GameSurge.net NOTICE altbot :---------- END OF MESSAGE(S) OF THE DAY ----------
+:TAL.DE.EU.GameSurge.net 396 altbot ~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 :is now your hidden host
+:altbot!~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 MODE altbot :+x
+:altbot!~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 JOIN #XRD
+:TAL.DE.EU.GameSurge.net 332 altbot #XRD :XRD-Bot's scripting channel || http://xrd.me/ || X-Ray_Dog is badman
+:TAL.DE.EU.GameSurge.net 333 altbot #XRD *.GameSurge.net 1486910589
+:TAL.DE.EU.GameSurge.net 353 altbot = #XRD :altbot +Krystal +Joshy @Narwhaal @XRD-Bot @X-Ray_Dog +Cap0ne @ChanServ
+:TAL.DE.EU.GameSurge.net 366 altbot #XRD :End of /NAMES list.
+:ChanServ!ChanServ@Services.GameSurge.net MODE #XRD +v altbot
+:XRD-Bot!~XRD-Bot@XRD-Bot.user.gamesurge NOTICE altbot :#XRD: Welcome to #XRD, type &Register to get started!
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :https://github.com/gear4s/alternative/commit/8988184e6623365a5273871f7fad5969cdb77789
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :yay
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :new usage system
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help help
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :hm
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :odd
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :help. I've fallen and I can't get up.
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :Narwhaal: do you have much experience with g-sync and linux?
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :which linux ?
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :debian
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :nope
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :I use archlinux and gentoo
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :same kernel and nvidia drivers so /me shrug
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :nope :P
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :I'm on newer kernel and drivers
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :update almost every day
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :ACTION isn't using debian repos for nvidia drivers
+NOTICE AUTH :*** Looking up your hostname
+NOTICE AUTH :*** Checking Ident
+NOTICE AUTH :*** Couldn't look up your hostname
+NOTICE AUTH :*** No ident response
+:Prothid.NY.US.GameSurge.net 001 altbot :Welcome to the GameSurge IRC Network via NFOServers.com, altbot
+:Prothid.NY.US.GameSurge.net 002 altbot :Your host is Prothid.NY.US.GameSurge.net, running version u2.10.12.14(gs1.staff)
+:Prothid.NY.US.GameSurge.net 003 altbot :This server was created Sat Jun 13 2015 at 18:37:19 EDT
+:Prothid.NY.US.GameSurge.net 004 altbot Prothid.NY.US.GameSurge.net u2.10.12.14(gs1.staff) diOoswkgxnI biklmnopstvrDdRcCz bklov
+:Prothid.NY.US.GameSurge.net 005 altbot WHOX WALLCHOPS WALLVOICES USERIP CPRIVMSG CNOTICE SILENCE=25 MODES=6 MAXCHANNELS=75 MAXBANS=50 NICKLEN=30 :are supported by this server
+:Prothid.NY.US.GameSurge.net 005 altbot MAXNICKLEN=30 TOPICLEN=300 AWAYLEN=200 KICKLEN=300 CHANNELLEN=200 MAXCHANNELLEN=200 CHANTYPES=#& PREFIX=(ov)@+ STATUSMSG=@+ CHANMODES=b,k,l,imnpstrDdRcC CASEMAPPING=rfc1459 NETWORK=GameSurge :are supported by this server
+:Prothid.NY.US.GameSurge.net 251 altbot :There are 10 users and 3815 invisible on 16 servers
+:Prothid.NY.US.GameSurge.net 252 altbot 32 :operator(s) online
+:Prothid.NY.US.GameSurge.net 254 altbot 2844 :channels formed
+:Prothid.NY.US.GameSurge.net 255 altbot :I have 1 clients and 1 servers
+:Prothid.NY.US.GameSurge.net NOTICE altbot :Highest connection count: 2 (1 clients)
+:Prothid.NY.US.GameSurge.net 422 altbot :MOTD File is missing
+:Prothid.NY.US.GameSurge.net NOTICE altbot :on 2 ca 3(400) ft 10(10) tr
+:altbot!~altbot@197.86.176.242 MODE altbot :+iw
+:CTCP!CTCP@Services.GameSurge.net PRIVMSG altbot :VERSION
+:Global!Global@Services.GameSurge.net NOTICE altbot :------------- MESSAGE(S) OF THE DAY --------------
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from ThiefMaster, posted 01:47 PM, 04/09/2015:
+:Global!Global@Services.GameSurge.net NOTICE altbot :We've just started cloaking the IPs of all users on connect. This should improve your privacy and also lower the risk of being targeted by packet kiddies.
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from GameSurge, posted 08:59 PM, 05/11/2013:
+:Global!Global@Services.GameSurge.net NOTICE altbot :You can now follow GameSurge on Twitter bit.ly/1607zvW and Facebook on.fb.me/10Aq5Dx Please "like" and "follow" us to be kept up-to-date on network news, events, and other items!
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from feigling, posted 08:24 PM, 07/17/2008:
+:Global!Global@Services.GameSurge.net NOTICE altbot :GameSurge provides a new service called SpamServ which moderates your channel. If you are interested in learning more about it read http://www.gamesurge.net/cms/SpamServ
+:Global!Global@Services.GameSurge.net NOTICE altbot :[users] Notice from GameSurge, posted 12:27 PM, 01/20/2007:
+:Global!Global@Services.GameSurge.net NOTICE altbot :Please be familiar with the GameSurge Acceptable Use Policy. All users on the network are required to abide by it. http://www.gamesurge.net/aup/
+:Global!Global@Services.GameSurge.net NOTICE altbot :---------- END OF MESSAGE(S) OF THE DAY ----------
+:Prothid.NY.US.GameSurge.net 396 altbot ~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 :is now your hidden host
+:altbot!~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 MODE altbot :+x
+:altbot!~altbot@1cb7f21c.f2cab244.cceafcdd.IP4 JOIN #XRD
+:Prothid.NY.US.GameSurge.net 332 altbot #XRD :XRD-Bot's scripting channel || http://xrd.me/ || X-Ray_Dog is badman
+:Prothid.NY.US.GameSurge.net 333 altbot #XRD *.GameSurge.net 1486910589
+:Prothid.NY.US.GameSurge.net 353 altbot = #XRD :altbot +Krystal +Joshy @Narwhaal @XRD-Bot @X-Ray_Dog +Cap0ne @ChanServ
+:Prothid.NY.US.GameSurge.net 366 altbot #XRD :End of /NAMES list.
+:ChanServ!ChanServ@Services.GameSurge.net MODE #XRD +v altbot
+:XRD-Bot!~XRD-Bot@XRD-Bot.user.gamesurge NOTICE altbot :#XRD: Welcome to #XRD, type &Register to get started!
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :kernel's still quite different
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :debian 8 ?
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help child
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :9
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :#help help
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :whoa debian 9 ?
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :yup
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :stretch ?
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :indeed
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :I thought it wasn't released yet
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :it isn't
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :o.o
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :you're running testing OS that's been dev-frozen ?
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :seems like it
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :which kernel are you running after apt-get upgrade ?
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :one sec
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :kik
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :kk
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :sudo pacman -Syu apt-suite && sudo apt-get remove --purge pacman
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD ::D
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :ok
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :so 3.16, but I can upgrade to 4.9.2
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :so what's the problem with gsync ?
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :doesn't turn on ._. I was wondering if there was a way to just keep it on permanently
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :uh
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :the monitor doesn't ?
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :I have a new system with a few 4K monitors with gsync .. they all worked fine with 3.16
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :nope. the nvidia software/driver is supposed to detect "fullscreen" and engage then.
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :so I hear
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :did you check opengl settings ?
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :in nvidia X server settings
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :(I myself play dota 2, portal 2, xcom 2, and city: skylines, so I know that it works fine)
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :(and I know I play quality shit too)
+:Krystal!~Krystal@Krystal.gamer-girl.gamesurge PRIVMSG #XRD :I'll have to look there
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :go look now quickly
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :all 4 must be checked
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :vblank, flipping, gsync and indicator
+:Narwhaal!~ge4r@killer_rabbi.told-u-he-was-hardcore-on.gamesurge PRIVMSG #XRD :indicator will show if games is using gsync in corner

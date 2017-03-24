@@ -41,10 +41,30 @@ end
 
 bot.hook("PRIVMSG", function(info) checkstring(info, "%#") end)
 
+
+local usageFormatter = function(usage)
+  local ustr = ""
+  if usage then
+    for k,v in pairs(usage:split(";")) do
+      local t = v:split(":")
+      if t[1] == "r" then
+        for k,v in pairs(t[2]:split(",")) do
+          ustr = ustr .. "<"..v.."> "
+        end
+      elseif t[1] == "o" then
+        for k,v in pairs(t[2]:split(",")) do
+          ustr = ustr .. "["..v.."] "
+        end
+      end
+    end
+  end
+  return ustr
+end
 module.add = function(cmdname, cmdcallback, help, usage)
   cmdhooks.c[cmdname] = {cb=cmdcallback, h=help, u=usage, scmd={}}
   cmdhooks.c.help.scmd[cmdname] = {scmd = {}, cb=function(info, pre)
     irc.notice(info.msg.nick, (pre or "") .. (cmdhooks[cmdname].h or "No help for this command."))
+    irc.notice(info.msg.nick, "Usage: #" .. cmdname .. " " .. usageFormatter(usage))
     if next(cmdhooks.c[cmdname].scmd, nil) and cmdname ~= "help" then
       local subcmds = {}
       for k,v in pairs(cmdhooks.c[cmdname].scmd) do
@@ -59,23 +79,7 @@ module.add = function(cmdname, cmdcallback, help, usage)
       cmdhooks.c.help.scmd[cmdname].scmd[scmdname] = {
         cb = function(info, pre)
           irc.notice(info.msg.nick, (pre or "") .. (shelp or "No help for this command."))
-          local ustr = ""
-          if usage then
-            for k,v in pairs(usage:split(";")) do
-              local t = v:split(":")
-              if t[1] == "r" then
-                for k,v in pairs(t[2]:split(",")) do
-                  ustr = ustr .. "<"..v.."> "
-                end
-              elseif t[1] == "o" then
-                for k,v in pairs(t[2]:split(",")) do
-                  ustr = ustr .. "["..v.."] "
-                end
-              end
-            end
-          end
-            usage = "Usage: #" .. cmdname .. " " .. scmdname .. " " .. ustr
-          irc.notice(info.msg.nick, usage)
+          irc.notice(info.msg.nick, "Usage: #" .. cmdname .. " " .. scmdname .. " " .. usageFormatter(usage))
         end
       }
     end
