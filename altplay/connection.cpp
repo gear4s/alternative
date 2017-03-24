@@ -32,7 +32,6 @@ void connection::read_handler(const asio::error_code &ec, size_t /*length*/)
     if ( !ec ) {
         std::string result_line;
         {
-            std::lock_guard<std::mutex > lock( mutex_ ); // prevent iterator invalidation because of two concurrent reads
             std::istream is( &buffer_ );
             getline( is, result_line );
         }

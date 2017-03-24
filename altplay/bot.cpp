@@ -1,4 +1,9 @@
 #include <iostream>
+<<<<<<< HEAD
+=======
+#include <cstdarg>    // va_start, va_end, std::va_list
+#include <stdlib.h>
+>>>>>>> master
 #include "bot.hpp"
 #include "parser.hpp"
 #include "message.hpp"
@@ -24,7 +29,7 @@ void altplay::bot::read_handler(const std::string &str)
     try {
         logger_.add_entry(str);
         altplay::message_struct msg = parser::handle_input(str);
-#ifdef DEBUG_ON
+//  #ifdef DEBUG_ON
         if (msg.nick.compare("Marentis") == 0) {
             if (msg.message.compare("shutdown") == 0) {
                 std::cout << "shutting down" << std::endl;
@@ -32,8 +37,9 @@ void altplay::bot::read_handler(const std::string &str)
             }
             con_.add_message(msg.message);
         }
-#endif
-        int t = atoi(msg.command.c_str());
+//#endif
+        script::lua::callhook(msg.command, msg);
+        int t = std::atoi(msg.command.c_str());
         if (t)
           script::lua::callhook(t, msg);
         else {
@@ -46,6 +52,7 @@ void altplay::bot::read_handler(const std::string &str)
         }
 
         std::cout << str << std::endl;
+      std::cout << msg.nick << std::endl;
 
     } catch ( const std::exception &e ) {
         std::cerr << e.what() << std::endl;
