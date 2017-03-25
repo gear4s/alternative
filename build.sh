@@ -1,8 +1,6 @@
 #!/bin/bash
 
-if [ ! -d "b" ]; then
-  mkdir b
-fi
+[ ! -d "b" ] & mkdir b
 
 cd b
 cmake ../altplay
