@@ -6,23 +6,24 @@ bot.hook("CTCP", function(info)
     local replies = setmetatable(
       {
         prototype = {
-          VERSION     =" AltPlay IRC Bot (C) 2016 AltPlay Community Developers",
+          VERSION     ="gear4's IRC Bot (C) 2017 Aaron Marais",
           FINGER      = ":o MEANIE!",
-          TIME        = L([[os.date("%H:%M:%S %a %d %b %Y")]]),
+          TIME        = L[[os.date("%H:%M:%S %a %d %b %Y")]],
           UPTIME      = function()
+                          local gett = L[[(_1[_2] ~= 0 or _2 == "sec") and (_1[_2] .. " " .. _2 .. (_1[_2] == 1 and "" or "s") .. (_3 or "")) or ""]]
                           local d = os.date("!*t", os.difftime(os.time(), startTime))
-                          return d.hour .. " hours; " .. d.min .. " minutes; " .. d.sec .. " seconds"
+                          return gett(d, "hour", "; ") .. gett(d, "min", "; ") .. gett(d, "sec")
                         end,
-          SOURCE      = "http://altplay.net/",
-          SAUCE       = "http://altplay.net/",
+          SOURCE      = "https://github.com/",
+          SAUCE       = "https://github.com/",
           USERINFO    = "These gosh darn CTCPs",
           CLIENTINFO  = "CLIENTINFO FINGER SOURCE SAUCE VERSION TIME UPTIME USERINFO"
         }
       }, {
-        __index = L([[
+        __index = L[[
           local n = rawget(_1, "prototype")[_2]
           return "\001" .. (n ~= nil and (_2.." ") or "ERRMSG ") .. (type(n) == "function" and n() or n or "Invalid CTCP request") .. "\001"
-        ]])
+        ]]
       }
     )
     msg.ctcp(replies[info.message:split(" ")[1]]):send("notice", info.nick)

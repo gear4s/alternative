@@ -3,7 +3,7 @@
   from gear4
 ]]
 
-local L = require"utils.lambda", require"utils.table"
+local L = require"utils.lambda"
 local msgd = {
   msg = "",
   name = "",
@@ -53,9 +53,9 @@ local msgd = {
       end)
     end
     
-    local msg =  (self.showname and (proc(self.keepers.prefix))                                            or "")
+    local msg =  (self.showname and (proc(self.keepers.prefix .. "${reset}"))                                            or "")
     msg = msg .. (self.showname and (proc(self.shownamecolor and self.color or "") .. (self.name):upper()) or "")
-    msg = msg .. (self.showname and (proc(self.keepers.suffix))                                            or "")
+    msg = msg .. (self.showname and (proc("${reset}" .. self.keepers.suffix .. "${reset}"))                                            or "")
     msg = msg ..  proc(self.msg)
     
     return msg
@@ -89,5 +89,6 @@ local msgs = setmetatable({}, {
     return rawget(t, k) or L("setmetatable({}, {__index = function(t,k) return t end, __call = function(t) return t end}), print('Module not loaded: " .. k .. "')")
   end
 })
+msgs({name = "error", color = "${darkred}", keepers = {prefix = "", suffix = "${red}! ${reset}"}})
 
 return msgs

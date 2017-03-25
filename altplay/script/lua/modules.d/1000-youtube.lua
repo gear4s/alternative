@@ -2,18 +2,17 @@ local L, socket, command, map, msg = require"utils.lambda", require"ssl.https", 
 msg({name = "youtube", color = "${red}", keepers = {prefix = " ${blue}[ ", suffix = " ${blue}] ${reset}"}})
 
 local request = function(to, query)
-  return
-    socket.request(
+    return socket.request(
       ("https://www.googleapis.com/youtube/v3/%s/?key=AIzaSyDSxs701r4sUQKBAaknupg-9WIvSeuJqpI&%s")
       :format(to, table.concat(map.lp(function(k,v) return k.."="..v end, query), "&"))
     )
 end
 
 local comma_value = function(amount)
-  local formatted = amount
+  local formatted, k = amount
   while true do  
     formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
-    if (k==0) then break end
+    if k == 0 then break end
   end
   return formatted
 end
@@ -36,7 +35,7 @@ bot.hook("PRIVMSG", function(info)
   end
 end)
 
-local cmd = command.add("youtube", function(info) end)
+local cmd = command.add("youtube")
 
 local generateID = function() 
   local id = ""
@@ -56,23 +55,30 @@ local sendStr = function(i, target)
     :send("privmsg", target)
 end
 
+local urlencode = function(str)
+  if (str) then
+    str = string.gsub(str, "\n", "\r\n")
+    str = string.gsub(str, "([^%w ])", L'string.format("%%%02X", string.byte(_1)) end')
+    str = string.gsub(str, " ", "+")
+  end
+  return str    
+end
 cmd.addsubcmd("search", function(info)
   local msg = info.msg.message:split(" ")
   table.remove(msg, 1)
   table.remove(msg, 1)
   msg = table.concat(msg, " ")
-  local content = request("search", {q=msg, part="id,snippet", type="video"})
-  print(content)
+  local content = request("search", {q=urlencode(msg), part="id,snippet", type="video", maxResults=3})
   
-  --[[for k,v in ipairs(json.decode.decode(content).items) do
+  for k,v in ipairs(json.decode.decode(content).items) do
     sendStr(v, info.msg.target)
-  end]]
-end)
+  end
+end, "Searches YouTube, requests the ID and a snippet. 3 results maximum", "r:string...")
 
 cmd.addsubcmd("random", function(info)
   local content = request("search", {q=generateID(), part="id,snippet", type="video", maxResults=50})
   content = json.decode.decode(content).items
   sendStr(content[math.floor(math.random() * #content)], info.msg.target)
-end)
+end, "Requests a random YouTube video using random possible video titles")
 
 command.alias("yt", "youtube")

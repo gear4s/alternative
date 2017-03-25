@@ -16,10 +16,4 @@ x64/Release/**
 *.opendb
 *.idb
 altplay/.idea/**
-altplay/log.txt
-b/CMakeFiles/**
-b/CMakeCache.txt
-b/cmake_install.cmake
-b/altplay
-b/cppcheck.cppcheck
-b/Makefile
+b/*

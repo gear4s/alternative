@@ -25,16 +25,42 @@ local function checkstring(info, prefix)
   end
   local args = info.message:sub(#full + 1)
   local subcmd = args:split(" ")
-  local cb = subcmd[1] and cmdhooks[lcmd].scmd[subcmd[1]] and cmdhooks[lcmd].scmd[subcmd[1]].cb or cmdhooks[lcmd].cb
-  cb({ msg = info, command = lcmd, args = args })
+  local cb
+  if subcmd[1] then
+    cb = cmdhooks[lcmd].scmd[subcmd[1]]
+    if cb.scmd and cb.scmd[subcmd[2]] then
+      cb = cb.scmd[subcmd[2]].cb
+    else
+      cb = cb.cb
+    end
+  end
+  (cb or cmdhooks[lcmd].cb)({ msg = info, command = lcmd, args = args })
 end
+bot.hook("PRIVMSG", function(info) checkstring(info, "%#") end)
 
-bot.hook("PRIVMSG", function(info) checkstring(info, "%!") end)
-
+local usageFormatter = function(usage)
+  local ustr = ""
+  if usage then
+    for k,v in pairs(usage:split(";")) do
+      local t = v:split(":")
+      if t[1] == "r" then
+        for k,v in pairs(t[2]:split(",")) do
+          ustr = ustr .. "<"..v.."> "
+        end
+      elseif t[1] == "o" then
+        for k,v in pairs(t[2]:split(",")) do
+          ustr = ustr .. "["..v.."] "
+        end
+      end
+    end
+  end
+  return ustr
+end
 module.add = function(cmdname, cmdcallback, help, usage)
   cmdhooks.c[cmdname] = {cb=cmdcallback, h=help, u=usage, scmd={}}
-  cmdhooks.c.help.scmd[cmdname] = {cb=function(info, pre)
+  cmdhooks.c.help.scmd[cmdname] = {scmd = {}, cb=function(info, pre)
     irc.notice(info.msg.nick, (pre or "") .. (cmdhooks[cmdname].h or "No help for this command."))
+    irc.notice(info.msg.nick, "Usage: #" .. cmdname .. " " .. usageFormatter(usage))
     if next(cmdhooks.c[cmdname].scmd, nil) and cmdname ~= "help" then
       local subcmds = {}
       for k,v in pairs(cmdhooks.c[cmdname].scmd) do
@@ -44,8 +70,14 @@ module.add = function(cmdname, cmdcallback, help, usage)
     end
   end}
   return {
-    addsubcmd = function(scmdname, scmdcallback, shelp)
-      cmdhooks.c[cmdname].scmd[scmdname] = {cb=scmdcallback, h=shelp}
+    addsubcmd = function(scmdname, scmdcallback, shelp, usage)
+      cmdhooks.c[cmdname].scmd[scmdname] = {cb=scmdcallback}
+      cmdhooks.c.help.scmd[cmdname].scmd[scmdname] = {
+        cb = function(info, pre)
+          irc.notice(info.msg.nick, (pre or "") .. (shelp or "No help for this command."))
+          irc.notice(info.msg.nick, "Usage: #" .. cmdname .. " " .. scmdname .. " " .. usageFormatter(usage))
+        end
+      }
     end
   }
 end
@@ -63,7 +95,7 @@ module.add("help", function(info)
   if cmds ~= "" then
     msg.command("Command Aliases: ${darkgray}${cmds}"):format({cmds = cmds}):send("notice", info.msg.nick)
   end
-end, "Returns information on commands", "Usage: #help [command]")
+end, "Returns information on commands", "o:command")
 
 module.alias("h", "help")
 
