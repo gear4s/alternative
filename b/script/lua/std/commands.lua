@@ -29,18 +29,14 @@ local function checkstring(info, prefix)
   if subcmd[1] then
     cb = cmdhooks[lcmd].scmd[subcmd[1]]
     if cb.scmd and cb.scmd[subcmd[2]] then
-      print(subcmd[2])
       cb = cb.scmd[subcmd[2]].cb
     else
-      print(subcmd[2])
       cb = cb.cb
     end
   end
   (cb or cmdhooks[lcmd].cb)({ msg = info, command = lcmd, args = args })
 end
-
 bot.hook("PRIVMSG", function(info) checkstring(info, "%#") end)
-
 
 local usageFormatter = function(usage)
   local ustr = ""
