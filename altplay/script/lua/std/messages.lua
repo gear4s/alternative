@@ -53,9 +53,9 @@ local msgd = {
       end)
     end
     
-    local msg =  (self.showname and (proc(self.keepers.prefix .. "${reset}"))                                            or "")
+    local msg =  (self.showname and (proc(self.keepers.prefix .. "${reset}")) or "")
     msg = msg .. (self.showname and (proc(self.shownamecolor and self.color or "") .. (self.name):upper()) or "")
-    msg = msg .. (self.showname and (proc("${reset}" .. self.keepers.suffix .. "${reset}"))                                            or "")
+    msg = msg .. (self.showname and (proc("${reset}" .. self.keepers.suffix .. "${reset}")) or "")
     msg = msg ..  proc(self.msg)
     
     return msg
