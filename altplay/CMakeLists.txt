@@ -19,10 +19,6 @@ set(SOURCE_FILES
         later.h
         logger.cpp
         logger.hpp
-        user.cpp
-        user.hpp
-        user_handler.cpp
-        user_handler.hpp
         ./script/luaglue.cpp
         ./script/luaglue.h
         ./script/luairccmd.cpp
@@ -35,7 +31,7 @@ set(SOURCE_FILES
         ./include/luaconf.h
         ./include/lualib.h
         ./include/lauxlib.h
-        ./include/LuaBridge/LuaBridge.h database_handler.cpp database_handler.hpp)
+        ./include/LuaBridge/LuaBridge.h)
 
 include_directories(${altplay_SOURCE_DIR}/ ${altplay_SOURCE_DIR}/include)
 
