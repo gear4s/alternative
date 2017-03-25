@@ -23,18 +23,20 @@ local function checkstring(info, prefix)
   if cmdhooks[lcmd].a then
     lcmd = cmdhooks[lcmd].cb
   end
-  local args = info.message:sub(#full + 1)
-  local subcmd = args:split(" ")
-  local cb
-  if subcmd[1] then
-    cb = cmdhooks[lcmd].scmd[subcmd[1]]
-    if cb.scmd and cb.scmd[subcmd[2]] then
-      cb = cb.scmd[subcmd[2]].cb
+  local args = info.message:sub(#full + 1):split(" ")
+  local cb, extra
+  if args[1] then
+    cb = cmdhooks[lcmd].scmd[args[1]]
+    table.remove(args, 1)
+    if cb.scmd and cb.scmd[args[2]] then
+      cb = cb.scmd[args[2]].cb
+      extra = args[2]
+      table.remove(args, 1)
     else
       cb = cb.cb
     end
   end
-  (cb or cmdhooks[lcmd].cb)({ msg = info, command = lcmd, args = args })
+  (cb or cmdhooks[lcmd].cb or function() msg.command("${red}Unrecognized command: ${cmdname}${extra}"):format({cmdname = lcmd, extra = extra or ""}):send("notice", info.nick) end)({ msg = info, command = lcmd, args = args })
 end
 bot.hook("PRIVMSG", function(info) checkstring(info, "%#") end)
 
